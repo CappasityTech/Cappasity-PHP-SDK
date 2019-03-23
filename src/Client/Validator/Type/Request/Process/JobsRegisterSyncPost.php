@@ -40,7 +40,8 @@ class JobsRegisterSyncPost implements TypeInterface
                                 V::stringType(),
                                 V::sku(),
                             ])
-                        ))
+                        )),
+                        V::attribute('capp', V::oneOf(V::nullType(), V::stringType())),
                     ])
                 ),
             ])->setName('items'))

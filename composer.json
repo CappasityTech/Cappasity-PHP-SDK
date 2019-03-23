@@ -17,7 +17,12 @@
         "squizlabs/php_codesniffer": "3.*"
     },
     "scripts": {
-        "test": "composer run-script test-php56 && composer run-script test-php72",
+        "test": [
+            "@test-php56",
+            "@test-php70",
+            "@test-php71",
+            "@test-php72"
+        ],
         "test-php56": "composer run-script build-php56 && docker run -i --rm --name cappasity-sdk-php56 cappasity-sdk-php56",
         "build-php56": "docker build -t cappasity-sdk-php56 -f ./Dockerfile-php56 .",
         "test-php70": "composer run-script build-php70 && docker run -i --rm --name cappasity-sdk-php70 cappasity-sdk-php70",
