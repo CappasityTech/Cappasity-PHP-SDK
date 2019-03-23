@@ -64,14 +64,11 @@ class JobsRegisterSyncPost implements Client\Model\Request\RequestParamsInterfac
     {
         return new self(
             array_map(function ($item) {
-                if (!array_key_exists('id', $item)
-                    || !array_key_exists('aliases', $item)
-                    || !array_key_exists('capp', $item)
-                ) {
-                    throw new \InvalidArgumentException('Each item must have `id`, `aliases` and `capp` keys');
-                }
-
-                return JobsRegisterSyncPost\SyncItem::fromData($item['id'], $item['aliases'], $item['capp']);
+                return JobsRegisterSyncPost\SyncItem::fromData(
+                    isset($item['id']) ? $item['id'] : null,
+                    isset($item['aliases']) ? $item['aliases'] : null,
+                    isset($item['capp']) ? $item['capp'] : null
+                );
             }, $items),
             $syncType,
             $callbackUrl

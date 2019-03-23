@@ -71,6 +71,19 @@ class ValidatorTypesTest extends \PHPUnit_Framework_TestCase
                         [
                             'id' => 'inner-product-id',
                             'aliases' => ['Bear'],
+                        ],
+                    ],
+                    'push:http',
+                    'http://somewhere.com/over/the/rainbow',
+                ],
+                true
+            ],
+            [
+                [
+                    [
+                        [
+                            'id' => 'inner-product-id',
+                            'aliases' => ['Bear'],
                             'capp' => '38020fdf-5e11-411c-9116-1610339d59cf',
                         ],
                     ],
