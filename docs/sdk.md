@@ -68,7 +68,7 @@ $params = Request\Process\JobsRegisterSyncPost::fromData(
       'capp' => '38020fdf-5e11-411c-9116-1610339d59cf',
     ]
   ],
-  'push:http',
+  'push.http',
   'http://your-callback-url.com/foo/bar'
 );
 
@@ -229,7 +229,7 @@ $response = $client
         'capp' => '38020fdf-5e11-411c-9116-1610339d59cf',
       ]
     ],
-    'push:http',
+    'push.http',
     'http://your-callback-url.com/foo/bar
   ))
   ->getBodyData();

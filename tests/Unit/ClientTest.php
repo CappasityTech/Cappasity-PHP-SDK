@@ -162,7 +162,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                     'capp' => self::STUB_FILE_ID,
                 ],
             ],
-            'push:http',
+            'push.http',
             'http://somewhere.com/over/the/rainbow'
         );
         $mockedResponseData = [
@@ -170,7 +170,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 'id' => '169da70c-9eda-4e80-b45d-efe0475810f6:1',
                 'type' => 'sync',
                 'attributes' => [
-                    'type' => 'push:http',
+                    'type' => 'push.http',
                     'gzip' => true,
                 ],
             ],
@@ -205,7 +205,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                             ],
                         ],
                         'meta' => [
-                            'type' => 'push:http',
+                            'type' => 'push.http',
                             'callback' => 'http://somewhere.com/over/the/rainbow',
                         ],
                     ],
@@ -228,7 +228,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('169da70c-9eda-4e80-b45d-efe0475810f6:1', $actualResponseData->getData()->getId());
         $this->assertEquals('sync', $actualResponseData->getData()->getType());
-        $this->assertEquals('push:http', $actualResponseData->getData()->getAttributes()->getType());
+        $this->assertEquals('push.http', $actualResponseData->getData()->getAttributes()->getType());
         $this->assertEquals(true, $actualResponseData->getData()->getAttributes()->getGzip());
     }
 

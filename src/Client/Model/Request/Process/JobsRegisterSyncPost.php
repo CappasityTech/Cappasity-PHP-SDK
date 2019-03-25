@@ -17,7 +17,7 @@ use CappasitySDK\Client;
 class JobsRegisterSyncPost implements Client\Model\Request\RequestParamsInterface
 {
     const SYNC_TYPE_PULL = 'pull';
-    const SYNC_TYPE_PUSH_HTTP = 'push:http';
+    const SYNC_TYPE_PUSH_HTTP = 'push.http';
 
     /**
      * @var JobsRegisterSyncPost\SyncItem[]
@@ -30,7 +30,7 @@ class JobsRegisterSyncPost implements Client\Model\Request\RequestParamsInterfac
     private $syncType;
 
     /**
-     * Required when sync type is push:http
+     * Required when sync type is push.http
      *
      * @var null|string
      */
