@@ -14,7 +14,7 @@
     + [Collect data](#collect-data)
     + [Limits](#limits)
     + [HTTP Push flow](#http-push-flow)
-      - [Register push:http type sync job](#register-pushhttp-type-sync-job)
+      - [Register push.http type sync job](#register-pushhttp-type-sync-job)
       - [Handle result with callback](#handle-result-with-callback)
     + [HTTP Pull flow](#http-pull-flow)
       - [Register pull type sync job](#register-pull-type-sync-job)
@@ -63,7 +63,7 @@ In order to get Cappasity View IDs you need to match your products SKUs with 3D 
 ### Match products and 3D Views
 In general, to get the matches you should register a synchronization job via our SDK to have 3D images embedded into 
 your website. As your product database could be huge, it could take some time to process it. Our server processes your 
-request and stores the result. You should specify how you want to get the processing result: via push (push:http) or 
+request and stores the result. You should specify how you want to get the processing result: via push (push.http) or 
 pull (pull). In the push case, you should also specify the callback URL on job registration. Once processing is done, 
 our server sends the result to the specified callback URL. In the pull case, you should keep track of the job state and 
 the results by yourself. When you get the result, you should store received matches for further usage.
@@ -116,7 +116,7 @@ least.
 #### HTTP Push flow
 Collect data as described [above](#collect-data) and register a synchronization job.
 
-##### Register push:http type sync job
+##### Register push.http type sync job
 [docs](./sdk.md#http-push-type)
 
 ```php
@@ -125,7 +125,7 @@ use CappasitySDK\Client\Model\Request;
 $registerSyncJobId = $client
   ->registerSyncJob(Request\Process\JobsRegisterSyncPost::fromData(
     $collectedItems,
-    'push:http',
+    'push.http',
     'http://your-callback-url.com/foo/bar
   ))
   ->getBodyData()

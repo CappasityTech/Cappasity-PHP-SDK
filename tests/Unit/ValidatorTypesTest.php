@@ -60,7 +60,7 @@ class ValidatorTypesTest extends \PHPUnit_Framework_TestCase
                             'capp' => '38020fdf-5e11-411c-9116-1610339d59cf',
                         ],
                     ],
-                    'push:http',
+                    'push.http',
                     'http://somewhere.com/over/the/rainbow',
                 ],
                 true
@@ -73,7 +73,7 @@ class ValidatorTypesTest extends \PHPUnit_Framework_TestCase
                             'aliases' => ['Bear'],
                         ],
                     ],
-                    'push:http',
+                    'push.http',
                     'http://somewhere.com/over/the/rainbow',
                 ],
                 true
@@ -100,7 +100,7 @@ class ValidatorTypesTest extends \PHPUnit_Framework_TestCase
                             'capp' => '38020fdf-5e11-411c-9116-1610339d59cf',
                         ],
                     ],
-                    'push:http',
+                    'push.http',
                     'http://somewhere.com/over/the/rainbow',
                 ],
                 false,
@@ -115,7 +115,7 @@ class ValidatorTypesTest extends \PHPUnit_Framework_TestCase
                             'capp' => '38020fdf-5e11-411c-9116-1610339d59cf',
                         ],
                     ],
-                    'push:http',
+                    'push.http',
                     'http://somewhere.com/over/the/rainbow',
                 ],
                 false,
@@ -130,7 +130,7 @@ class ValidatorTypesTest extends \PHPUnit_Framework_TestCase
                             'capp' => '38020fdf-5e11-411c-9116-1610339d59cf',
                         ],
                     ],
-                    'push:http',
+                    'push.http',
                 ],
                 false,
                 // TODO don't like this error message because it does not tell when it must me a URL
@@ -163,7 +163,7 @@ class ValidatorTypesTest extends \PHPUnit_Framework_TestCase
                             'capp' => '38020fdf-5e11-411c-9116-1610339d59cf',
                         ]
                     ),
-                    'push:http',
+                    'push.http',
                     'http://somewhere.com/over/the/rainbow',
                 ],
                 false,
