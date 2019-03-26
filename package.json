@@ -1,0 +1,19 @@
+{
+  "name": "Cappasity-PHP-SDK",
+  "private": true,
+  "repository": "git@github.com:CappasityTech/Cappasity-PHP-SDK.git",
+  "scripts": {
+    "semantic-release": "yarn --frozen-lockfile; semantic-release"
+  },
+  "devDependencies": {
+    "@makeomatic/deploy": "makeomatic/deploy",
+    "@semantic-release/exec": "^3.3.2",
+    "semantic-release": "^15.13.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "./node_modules/@makeomatic/deploy/git-hooks/prepare-commit-msg $HUSKY_GIT_PARAMS"
+    }
+  }
+}
