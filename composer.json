@@ -21,7 +21,8 @@
             "@test-php56",
             "@test-php70",
             "@test-php71",
-            "@test-php72"
+            "@test-php72",
+            "@test-php73"
         ],
         "test-php56": "composer run-script build-php56 && docker run -i --rm --name cappasity-sdk-php56 cappasity-sdk-php56",
         "build-php56": "docker build -t cappasity-sdk-php56 -f ./Dockerfile-php56 .",
