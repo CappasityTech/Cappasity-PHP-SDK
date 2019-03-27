@@ -3,12 +3,6 @@
     "verifyConditions": [
         "@semantic-release/github"
     ],
-    "prepare": [
-        {
-            "path": "@semantic-release/exec",
-            "cmd": "./scripts/prepare.sh ${nextRelease.version}"
-        }
-    ],
     "publish": [
         {
             "path": "@semantic-release/github",
