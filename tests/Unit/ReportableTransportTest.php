@@ -137,7 +137,7 @@ class ReportableTransportTest extends \PHPUnit_Framework_TestCase
      */
     private function makeTransportResponseContainer($code, array $data, $headers = [])
     {
-        $mockedResponseBody = \GuzzleHttp\Stream\Stream::factory(json_encode($data));
+        $mockedResponseBody = \GuzzleHttp\Psr7\stream_for(json_encode($data));
         $mockedOriginalResponse = new \GuzzleHttp\Psr7\Response($code, $headers, $mockedResponseBody);
 
         return new \CappasitySDK\Transport\ResponseContainer($code, $headers, $data, $mockedOriginalResponse);

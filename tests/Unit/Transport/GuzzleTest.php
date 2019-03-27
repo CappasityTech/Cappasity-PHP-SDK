@@ -44,7 +44,7 @@ class GuzzleTest extends \PHPUnit_Framework_TestCase
             ['e' => 'f'],
             \GuzzleHttp\json_encode(['c' => 'd'])
         );
-        $mockedResponseBody = \GuzzleHttp\Stream\Stream::factory(json_encode(['data' => 'foobar']));
+        $mockedResponseBody = \GuzzleHttp\Psr7\stream_for(json_encode(['data' => 'foobar']));
         $mockedResponse = new \GuzzleHttp\Psr7\Response(200, [], $mockedResponseBody);
 
         $this->httpClientMock
@@ -86,7 +86,7 @@ class GuzzleTest extends \PHPUnit_Framework_TestCase
             \GuzzleHttp\json_encode(['c' => 'd'])
         );
 
-        $mockedResponseBody = \GuzzleHttp\Stream\Stream::factory(json_encode([
+        $mockedResponseBody = \GuzzleHttp\Psr7\stream_for(json_encode([
             'statusCode' => 404,
             'error' => 'Not Found',
             'message' => 'job data missing',
