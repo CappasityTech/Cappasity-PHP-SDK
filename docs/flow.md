@@ -165,7 +165,14 @@ Your `/foo/bar` endpoint will receive a POST request with a body:
 
 After decoding it you can transform it to a helper model:
 ```php
-$result = CappasitySDK\Client\Model\Callback\Process\JobsPushResultPost::fromCallbackBody($requestBody);
+use CappasitySDK\Client\Model\Callback\Process\JobsPushResultPost;
+
+/** @var JobsPushResultPost\SyncDataItem[]|JobsPushResultPost $matches */
+$matches = JobsPushResultPost::fromCallbackBody($requestBody);
+
+foreach ($matches as $match) {
+    // Handle sync item
+}
 ```
 
 #### HTTP Pull flow

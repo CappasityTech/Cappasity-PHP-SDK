@@ -14,64 +14,125 @@ namespace CappasitySDK\Client\Model\Callback\Process;
 
 use CappasitySDK\Client\Model\Response;
 
-class JobsPushResultPost implements Response\DataInterface
+class JobsPushResultPost implements Response\DataInterface, \Iterator, \ArrayAccess, \Countable
 {
     /**
-     * @var JobsPushResultPost\Meta
+     * @var int
      */
-    private $meta;
+    private $position = 0;
 
     /**
      * @var JobsPushResultPost\SyncDataItem[]|mixed
      */
-    private $data;
+    private $matches = [];
 
     /**
-     * @param JobsPushResultPost\Meta $meta
-     * @param JobsPushResultPost\SyncDataItem[]|mixed $data
+     * @param JobsPushResultPost\SyncDataItem[] $matches
      */
-    public function __construct(JobsPushResultPost\Meta $meta, $data)
+    public function __construct(array $matches = [])
     {
-        $this->meta = $meta;
-        $this->data = $data;
+        $this->position = 0;
+
+        $className = self::class;
+        array_walk($matches, function ($match) use ($className) {
+            if (!$match instanceof JobsPushResultPost\SyncDataItem) {
+                throw new \LogicException("Every sync item should be an instance of ${className}");
+            }
+        });
+
+        $this->matches = $matches;
     }
 
     /**
-     * @return JobsPushResultPost\Meta
+     * @return void
      */
-    public function getMeta()
+    public function rewind()
     {
-        return $this->meta;
+        $this->position = 0;
     }
 
     /**
-     * @param JobsPushResultPost\Meta $meta
-     * @return $this
+     * @return JobsPushResultPost\SyncDataItem
      */
-    public function setMeta(JobsPushResultPost\Meta $meta)
+    public function current()
     {
-        $this->meta = $meta;
-
-        return $this;
+        return $this->matches[$this->position];
     }
 
     /**
-     * @return JobsPushResultPost\SyncDataItem[]|mixed
+     * @return int
      */
-    public function getData()
+    public function key()
     {
-        return $this->data;
+        return $this->position;
     }
 
     /**
-     * @param JobsPushResultPost\SyncDataItem[]|mixed $data
-     * @return $this
+     * @return void
      */
-    public function setData($data)
+    public function next()
     {
-        $this->data = $data;
+        ++$this->position;
+    }
 
-        return $this;
+    /**
+     * @return bool
+     */
+    public function valid()
+    {
+        return isset($this->matches[$this->position]);
+    }
+
+    /**
+     * @param int $offset
+     * @return bool
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->matches[$offset]);
+    }
+
+    /**
+     * @param int $offset
+     * @return JobsPushResultPost\SyncDataItem|null
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->matches[$offset]) ? $this->matches[$offset] : null;
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->matches);
+    }
+
+    /**
+     * @param int $offset
+     * @param JobsPushResultPost\SyncDataItem $value
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (!$value instanceof JobsPushResultPost\SyncDataItem) {
+            $className = self::class;
+            throw new \LogicException("Every sync item should be an instance of ${className}");
+        }
+
+        if (is_null($offset)) {
+            $this->matches[] = $value;
+        } else {
+            $this->matches[$offset] = $value;
+        }
+    }
+
+    /**
+     * @param int $offset
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->matches[$offset]);
     }
 
     /**
@@ -80,12 +141,6 @@ class JobsPushResultPost implements Response\DataInterface
      */
     public static function fromCallbackBody(array $body)
     {
-        $meta = new JobsPushResultPost\Meta($body['meta']['jobId']);
-
-        if ($body['meta']['jobType'] !== 'sync') {
-            throw new \LogicException('Unhandled job type result to parse');
-        }
-
         $data = array_map(function (array $item) {
             return new JobsPushResultPost\SyncDataItem(
                 $item['id'],
@@ -93,8 +148,8 @@ class JobsPushResultPost implements Response\DataInterface
                 array_key_exists('sku', $item) ? $item['sku'] : null,
                 array_key_exists('capp', $item) ? $item['capp'] : null
             );
-        }, $body['data']);
+        }, $body);
 
-        return new self($meta, $data);
+        return new self($data);
     }
 }
