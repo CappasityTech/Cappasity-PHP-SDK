@@ -23,6 +23,6 @@ class ValidationException extends ClientException
      */
     public static function fromValidatorWrapperValidationException(ValidatorException $e)
     {
-        return new static($e->getCode(), $e->getMessage(), $e->getPrevious());
+        return new static($e->getMessage(), $e->getCode(), $e->getPrevious());
     }
 }
