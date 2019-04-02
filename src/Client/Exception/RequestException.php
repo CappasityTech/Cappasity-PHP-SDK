@@ -15,17 +15,17 @@ namespace CappasitySDK\Client\Exception;
 class RequestException extends ClientException
 {
     /**
-     * @var \GuzzleHttp\Message\RequestInterface
+     * @var \Psr\Http\Message\RequestInterface
      */
     private $request;
 
     /**
-     * @var \GuzzleHttp\Message\ResponseInterface
+     * @var \Psr\Http\Message\ResponseInterface|null
      */
     private $response;
 
     /**
-     * @return \GuzzleHttp\Message\RequestInterface
+     * @return \Psr\Http\Message\RequestInterface
      */
     public function getRequest()
     {
@@ -33,7 +33,7 @@ class RequestException extends ClientException
     }
 
     /**
-     * @param \GuzzleHttp\Message\RequestInterface $request
+     * @param \Psr\Http\Message\RequestInterface $request
      * @return $this
      */
     public function setRequest($request)
@@ -44,7 +44,7 @@ class RequestException extends ClientException
     }
 
     /**
-     * @return \GuzzleHttp\Message\ResponseInterface
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function getResponse()
     {
@@ -52,7 +52,7 @@ class RequestException extends ClientException
     }
 
     /**
-     * @param \GuzzleHttp\Message\ResponseInterface $response
+     * @param \Psr\Http\Message\ResponseInterface $response
      * @return $this
      */
     public function setResponse($response)
