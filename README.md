@@ -3,9 +3,4 @@
 # Cappasity PHP SDK
 [Integration Flow](docs/flow.md) | [SDK Documentation](docs/sdk.md)
 
-## Run tests
-```
-composer install
-composer run-script test
-```
 (c) Copyright 2019, Cappasity Inc. All rights reserved.

@@ -10,6 +10,7 @@ to get a link to an image that fits desired sizes, format, quality, etc.
 
 ## Table of Contents
 
+* [Installation](#installation)
 * [Client](#client)
   * [Basic usage](#basic-usage)
   * [Send error reports](#send-error-reports)
@@ -45,6 +46,12 @@ to get a link to an image that fits desired sizes, format, quality, etc.
     * [Modifiers list](#modifiers-list)
     * [Modifiers examples](#modifiers-examples)
     * [Overlays examples](#overlays-examples)   
+
+# Installation
+Require the package with Composer:
+```sh
+composer require cappasity-tech/cappasity-php-sdk
+```
 
 # Client
 
