@@ -82,9 +82,9 @@ class JobsPullResultGet implements Response\DataInterface
     {
         $meta = new JobsPullResultGet\Meta($response['meta']['jobId']);
 
-        if ($response['meta']['jobType'] !== 'sync') {
-            throw new \LogicException('Unhandled job type result to parse');
-        }
+//        if ($response['meta']['jobType'] !== 'sync') {
+//            throw new \LogicException('Unhandled job type result to parse');
+//        }
 
         $data = array_map(function (array $item) {
             return new JobsPullResultGet\SyncDataItem(

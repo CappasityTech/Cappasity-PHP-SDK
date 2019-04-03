@@ -423,7 +423,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $mockedResponseData = [
             'meta' => [
                 'jobId' => 'a9673347-8f2e-4caa-83e9-4139d7473c2f:A1',
-                'jobType' => 'sync',
+                //'jobType' => 'sync',
             ],
             'data' => [
                 [
