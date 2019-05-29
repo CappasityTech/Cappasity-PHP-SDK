@@ -50,6 +50,7 @@ class Client implements ClientInterface
     const ENDPOINT_PROCESS_JOBS_PULL_ACK_POST = '/api/cp/jobs/pull/ack';
     const ENDPOINT_USERS_ME_GET = '/api/users/me';
     const ENDPOINT_FILES_INFO_GET = '/api/files/info/%s/%s';
+    const ENDPOINT_PAYMENTS_PLANS_PLAN_GET = '/api/payments/plans/%s';
 
     const BASE_URL_API_CAPPASITY = 'https://api.cappasity.com';
 
@@ -65,6 +66,7 @@ class Client implements ClientInterface
             self::ENDPOINT_PROCESS_JOBS_PULL_ACK_POST => 5,
             self::ENDPOINT_USERS_ME_GET => 5,
             self::ENDPOINT_FILES_INFO_GET => 5,
+            self::ENDPOINT_PAYMENTS_PLANS_PLAN_GET => 5,
         ],
     ];
 
@@ -77,6 +79,7 @@ class Client implements ClientInterface
         self::ENDPOINT_PROCESS_JOBS_PULL_RESULT_GET,
         self::ENDPOINT_PROCESS_JOBS_PULL_ACK_POST,
         self::ENDPOINT_USERS_ME_GET,
+        self::ENDPOINT_PAYMENTS_PLANS_PLAN_GET,
     ];
 
     /**
@@ -269,6 +272,24 @@ class Client implements ClientInterface
         );
 
         return $this->getResponseAdapter()->transform($response, Response\Files\InfoGet::class);
+    }
+
+    /**
+     * @param Request\Payments\Plans\PlanGet|null $params
+     *
+     * @return Response\Container
+     */
+    public function getPaymentsPlan(Request\Payments\Plans\PlanGet $params)
+    {
+        $this->assertParams($params, RequestType\Payments\Plans\PlanGet::class);
+
+        $response = $this->makeRequest(
+            'GET',
+            self::ENDPOINT_PAYMENTS_PLANS_PLAN_GET,
+            [$params->getId()]
+        );
+
+        return $this->getResponseAdapter()->transform($response, Response\Payments\Plans\PlanGet::class);
     }
 
     /**

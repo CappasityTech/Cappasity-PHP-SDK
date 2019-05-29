@@ -25,18 +25,19 @@ to get a link to an image that fits desired sizes, format, quality, etc.
       * [RequestException](#requestexception)
     * [Get user](#get-user)
       * [Errors](#errors)
+    * [Get payment plan by ID](#get-payment-plan-by-id)
     * [Get view info](#get-view-info)
-      * [Errors](#errors-1)    
+      * [Errors](#errors-2)    
     * [Register sync job](#register-sync-job)
       * [HTTP Push type](#http-push-type)
       * [HTTP Pull type](#http-pull-type)
-      * [Errors](#errors-2)
-    * [Get pull job list](#get-pull-job-list)
       * [Errors](#errors-3)
-    * [Get pull job result](#get-pull-job-result)
+    * [Get pull job list](#get-pull-job-list)
       * [Errors](#errors-4)
-    * [Acknowledge pull job list](#acknowledge-pull-job-list)
+    * [Get pull job result](#get-pull-job-result)
       * [Errors](#errors-5)
+    * [Acknowledge pull job list](#acknowledge-pull-job-list)
+      * [Errors](#errors-6)
 * [EmbedRenderer](#embedrenderer)
   * [Render embed code](#render-embed-code)
     * [Rendered code example](#rendered-code-example)
@@ -191,6 +192,30 @@ $userAlias = $user->getAlias();
 | Code | Description                   |
 |:----:|-------------------------------|
 | 401  | Authorization error           |
+
+### Get payments plan
+You can get user's plan ID using [`getUser`](#get-user) method.
+```php
+use CappasitySDK\Client\Model\Request;
+use CappasitySDK\Client\Model\Response; 
+
+$userPlanId = 'P-1AS44544Y0488105H5QI6O2I';
+
+/** @var Response\Payments\Plans\PlanGet $response */
+$response = $client
+    ->getUser(Request\Payments\Plans\PlanGet::fromData($userPlan))
+    ->getBodyData();
+
+$plan = $response
+    ->getData()
+    ->getAttributes();
+
+// get plan level
+$plan = $user->getLevel();
+```
+
+#### Errors
+There are no expected errors.
 
 ### Get view info
 ```php

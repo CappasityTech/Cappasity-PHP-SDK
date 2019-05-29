@@ -966,6 +966,82 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testGetPaymentsPlan()
+    {
+        $client = $this->makeClient();
+        $requestParams = Client\Model\Request\Payments\Plans\PlanGet::fromData(
+            'P-1AS44544Y0488105H5QI6O2I'
+        );
+
+        $mockedResponseData = [
+            'meta' => [
+                'id' => 'a3ef1a0a-c04a-444a-b447-c434351bfcf1',
+            ],
+            'data' => [
+                'type' => 'plan',
+                'id' => 'professional',
+                'attributes' => [
+                    'alias' => 'professional',
+                    'level' => 30,
+                ],
+                'links' => [
+                    'self' => 'https://api.cappasity.com/api/payments/plans/P-1AS44544Y0488105H5QI6O2I',
+                ],
+            ],
+        ];
+        $mockedTransportResponse = $this->makeTransportResponseContainer(200, $mockedResponseData);
+        $mockedClientResponse = $this->makeClientResponseContainer(
+            $mockedTransportResponse,
+            Client\Model\Response\Payments\Plans\PlanGet::class
+        );
+        $this->expectResponseTransformed(
+            [$mockedTransportResponse, Client\Model\Response\Payments\Plans\PlanGet::class],
+            $mockedClientResponse
+        );
+
+        $this->expectValidationPerformed(
+            $requestParams,
+            Client\Validator\Type\Request\Payments\Plans\PlanGet::class
+        );
+
+        $this->expectRequestMade(
+            [
+                'GET',
+                'https://api.cappasity.com/api/payments/plans/P-1AS44544Y0488105H5QI6O2I',
+                [
+                    'headers' => [
+                        'authorization' => "Bearer {$this->apiToken}",
+                    ],
+                    'timeout' => 5
+                ]
+            ],
+            $mockedTransportResponse
+        );
+
+        $actualResponse = $client->getPaymentsPlan($requestParams);
+        $this->assertInstanceOf(Client\Model\Response\Container::class, $actualResponse);
+        $this->assertInstanceOf(Client\Model\Response\Payments\Plans\PlanGet::class, $actualResponse->getBodyData());
+        /** @var Client\Model\Response\Payments\Plans\PlanGet $actualResponseData */
+        $actualResponseData = $actualResponse->getBodyData();
+
+        $this->assertEquals('a3ef1a0a-c04a-444a-b447-c434351bfcf1', $actualResponseData->getMeta()->getId());
+        $this->assertEquals('professional', $actualResponseData->getData()->getId());
+        $this->assertEquals('plan', $actualResponseData->getData()->getType());
+        $attributes = $actualResponseData->getData()->getAttributes();
+        $this->assertInstanceOf(Client\Model\Response\Payments\Plans\PlanGet\Data\Attributes::class, $attributes);
+
+        $this->assertEquals('professional', $attributes->getAlias());
+        $this->assertEquals(30, $attributes->getLevel());
+
+
+        $links = $actualResponseData->getData()->getLinks();
+
+        $this->assertEquals(
+            'https://api.cappasity.com/api/payments/plans/P-1AS44544Y0488105H5QI6O2I',
+            $links->getSelf()
+        );
+    }
+
     /**
      * @return Client
      */
