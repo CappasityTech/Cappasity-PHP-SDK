@@ -203,7 +203,7 @@ $userPlanId = 'P-1AS44544Y0488105H5QI6O2I';
 
 /** @var Response\Payments\Plans\PlanGet $response */
 $response = $client
-    ->getUser(Request\Payments\Plans\PlanGet::fromData($userPlan))
+    ->getUser(Request\Payments\Plans\PlanGet::fromData($userPlanId))
     ->getBodyData();
 
 $plan = $response
@@ -211,7 +211,7 @@ $plan = $response
     ->getAttributes();
 
 // get plan level
-$plan = $user->getLevel();
+$level = $plan->getLevel();
 ```
 
 #### Errors
