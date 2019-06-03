@@ -167,7 +167,26 @@ class ValidatorTypesTest extends \PHPUnit_Framework_TestCase
                     'http://somewhere.com/over/the/rainbow',
                 ],
                 false,
-                '- items must have a length between 1 and 500'
+                '- items must be valid' //:(
+            ],
+            [
+                [
+                    [
+                        [
+                            'id' => 'inner-product-id',
+                            'aliases' => array_fill(
+                                0,
+                                501,
+                                'Bear'
+                            ),
+                            'capp' => '38020fdf-5e11-411c-9116-1610339d59cf',
+                        ]
+                    ],
+                    'push.http',
+                    'http://somewhere.com/over/the/rainbow',
+                ],
+                false,
+                '- items must be valid' //:(
             ]
         ];
     }

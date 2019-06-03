@@ -30,7 +30,6 @@ class JobsRegisterSyncPost implements TypeInterface
             ->instance(JobsRegisterSyncPostModel::class)
             ->attribute('items', V::allOf([
                 V::arrayType(),
-                V::length(1, 500, true),
                 V::each(
                     V::allOf([
                         V::instance(SyncItem::class),
@@ -44,6 +43,13 @@ class JobsRegisterSyncPost implements TypeInterface
                         V::attribute('capp', V::oneOf(V::nullType(), V::stringType())),
                     ])
                 ),
+                V::callback(function (array $items) {
+                    $skuCount = array_reduce($items, function ($skuCount, SyncItem $item) {
+                        return $skuCount + count($item->getAliases());
+                    });
+
+                    return $skuCount >= 1 && $skuCount <= 500;
+                }),
             ])->setName('items'))
             ->attribute('syncType', V::in(JobsRegisterSyncPostModel::$syncTypes))
             ->attribute('callbackUrl', V::oneOf(V::nullType(), V::url()))
