@@ -197,7 +197,7 @@ The results are stored for 24 hours or until the acknowledgement.
 ##### Get pull job list
 To track all submitted jobs you can get a list of them, so you could get its IDs and statuses. Call the 
 [getPullJobList()](./sdk.md#get-pull-job-list) method. Job lifecycle goes through three statuses: `queued`, `processing`
- and `success`. Once the job status is `success`, you may get the results.
+ and `success`. Once the job status is `success`, you can request the results.
 
 ##### Get pull job result
 [getPullJobResult()](./sdk.md#get-pull-job-result) returns the result but does not erase it. You should implicitly 
