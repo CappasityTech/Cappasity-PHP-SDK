@@ -168,6 +168,8 @@ try {
 ```
 
 ### Get user
+This method fetches user data, identified by the API token passed to the Client factory.
+
 ```php
 use CappasitySDK\Client\Model\Request;
 use CappasitySDK\Client\Model\Response; 
@@ -194,7 +196,7 @@ $userAlias = $user->getAlias();
 | 401  | Authorization error           |
 
 ### Get payments plan
-You can get user's plan ID using [`getUser`](#get-user) method.
+This method provides payments plan data by plan ID. You can get user's plan ID using [`getUser`](#get-user) method.
 ```php
 use CappasitySDK\Client\Model\Request;
 use CappasitySDK\Client\Model\Response; 
@@ -218,6 +220,7 @@ $level = $plan->getLevel();
 There are no expected errors.
 
 ### Get view info
+This method provides full View data, although in terms of synchronization you may need only its background color value.
 ```php
 use CappasitySDK\Client\Model\Request;
 use CappasitySDK\Client\Model\Response; 
@@ -247,6 +250,7 @@ $backgroundColor = $viewInfo->getBackgroundColor();
 
 ### Register sync job
 #### HTTP Push type
+To initialize matches calculation on the first synchronization or resynchronization, register sync job:
 ```php
 use CappasitySDK\Client\Model\Request;
 use CappasitySDK\Client\Model\Response;
@@ -258,7 +262,6 @@ $response = $client
       [
         'id' => 'inner-product-id',
         'aliases' => ['SkuGoesHere'],
-        'capp' => '38020fdf-5e11-411c-9116-1610339d59cf',
       ]
     ],
     'push.http',
@@ -269,7 +272,35 @@ $response = $client
 $jobId = $response->getData()->getId();
 ```
 
+In case you have already performed the sync, you should know previously matched View ID. Pass it as `capp`:
+```php
+use CappasitySDK\Client\Model\Request;
+use CappasitySDK\Client\Model\Response;
+ 
+/** @var Response\Process\JobsRegisterSyncPost $response */
+$response = $client
+  ->registerSyncJob(Request\Process\JobsRegisterSyncPost::fromData(
+    [
+      [
+        'id' => 'inner-product-id',
+        'aliases' => ['ThisOneIsAlreadySynced'],
+        'capp' => '38020fdf-5e11-411c-9116-1610339d59cf',
+      ],
+      [
+        'id' => 'inner-product-id',
+        'aliases' => ['ThisOneIsNew'],
+      ],
+    ],
+    'push.http',
+    'http://your-callback-url.com/foo/bar
+  ))
+  ->getBodyData();
+  
+$jobId = $response->getData()->getId();
+```
+
 #### HTTP Pull type
+Similarly, to initialize matches calculation on the first synchronization or resynchronization, register sync job:
 ```php
 use CappasitySDK\Client\Model\Request;
 use CappasitySDK\Client\Model\Response;
@@ -281,8 +312,33 @@ $response = $client
       [
         'id' => 'inner-product-id',
         'aliases' => ['SkuGoesHere'],
-        'capp' => '38020fdf-5e11-411c-9116-1610339d59cf',
       ]
+    ],
+    'pull'
+  ))
+  ->getBodyData();
+  
+$jobId = $response->getData()->getId();
+```
+
+In case you have already performed the sync, you should know previously matched View ID. Pass it as `capp`:
+```php
+use CappasitySDK\Client\Model\Request;
+use CappasitySDK\Client\Model\Response;
+
+/** @var Response\Process\JobsRegisterSyncPost $response */
+$response = $client
+  ->registerSyncJob(Request\Process\JobsRegisterSyncPost::fromData(
+    [
+      [
+        'id' => 'inner-product-id',
+        'aliases' => ['ThisOneIsAlreadySynced'],
+        'capp' => '38020fdf-5e11-411c-9116-1610339d59cf',
+      ],
+      [
+        'id' => 'inner-product-id',
+        'aliases' => ['ThisOneIsNew'],
+      ],
     ],
     'pull'
   ))
@@ -299,6 +355,7 @@ $jobId = $response->getData()->getId();
 | 429  | Multiple concurrent requests  |
 
 ### Get pull job list
+To get the list of all registered jobs, its IDs and current status, call this method:
 ```php
 use CappasitySDK\Client\Model\Request;
 use CappasitySDK\Client\Model\Response;
@@ -317,6 +374,7 @@ $jobs = $response->getData();
 | 401  | Authorization error           |
 
 ### Get pull job result
+Once the job status is `success`, you may get its results:
 ```php
 use CappasitySDK\Client\Model\Request;
 use CappasitySDK\Client\Model\Response;
@@ -337,6 +395,8 @@ foreach ($response->getData() as $jobItemResult) {
 | 404  | Job data missing              |
 
 ### Acknowledge pull job list
+When you have already handled pull job result, saved all necessary data, acknowledge the result so the job could be 
+treated as completed and removed from the current jobs list.
 ```php
 use CappasitySDK\Client\Model\Request;
 use CappasitySDK\Client\Model\Response;
@@ -433,7 +493,9 @@ $embedCode = $renderer->render([
 
 ## Generate preview link
 * Set up `PreviewImageSrcGenerator`
-* Provide Cappasity Account user alias and Cappasity 3D View ID (see how to retrieve [user alias](#get-user)) 
+* Provide Cappasity Account user alias and Cappasity 3D View ID (see how to retrieve [user alias](#get-user))
+* Optionally, retrieve [the view data](#get-view-info) in order to get background color, in case your View has been set 
+up with specific background color. 
 * Generate links:
 ```php
 use CappasitySDK\PreviewImageSrcGeneratorFactory as GeneratorFactory;
