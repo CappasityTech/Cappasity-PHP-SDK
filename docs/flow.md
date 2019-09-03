@@ -194,11 +194,14 @@ $registerSyncJobId = $client
 
 The results are stored for 24 hours or until the acknowledgement.
 
+##### Get pull job list
+To track all submitted jobs you can get a list of them, so you could get its IDs and statuses. Call the 
+[getPullJobList()](./sdk.md#get-pull-job-list) method. Job lifecycle goes through three statuses: `queued`, `processing`
+ and `success`. Once the job status is `success`, you should request the results.
+
 ##### Get pull job result
 [getPullJobResult()](./sdk.md#get-pull-job-result) returns the result but does not erase it. You should implicitly 
-acknowledge the result after you handle it 
-successfully.
-If there is no result yet, then 404 will be returned.
+acknowledge the result after you handle it successfully. If there is no result yet, then 404 will be returned.
 
 ##### Handle result
 You can calculate the difference between current state and received results and update changed items. Make sure you store 
@@ -206,21 +209,17 @@ matched View IDs because you will need it [later.](./flow.md#refresh-matches-on-
 
 ##### Acknowledge pull job result
 [acknowledgePullJobList()](./sdk.md#acknowledge-pull-job-list) erases job results. You also can acknowledge multiple jobs
-IDs at the same time
-
-##### Get pull job list
-In case you lose job ID you can list all submitted jobs and their state by calling 
-[getPullJobList()](./sdk.md#get-pull-job-list)
+by IDs at the same time.
 
 ### Refresh matches on demand
-Cappasity stores the matches of your inner product IDs and Cappasity View IDs in order to provide you only those
-items which have changed.
+Cappasity stores the matches of your inner product IDs and Cappasity View IDs in order to provide you only those items 
+which have changed.
 
 When your product database state changes – you have a new product, some product is updated, then you should collect 
 relevant data scope and register the synchronization job again.
-This time you should also provide previously matched Cappasity View IDs. If something has changed – 3D View has been 
-deleted, another 3D View has been assigned to previously matched SKU, or a new one has been uploaded – the job will
-result in a diff.
+This time you should also provide previously matched Cappasity View IDs passing it as `capp` parameter value. If 
+something has changed – 3D View has been deleted, another 3D View has been assigned to previously matched SKU, or a new 
+one has been uploaded – the job will result in a diff.
 
 Collected data example:
 ```
