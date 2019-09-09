@@ -1,0 +1,7 @@
+tests/ export-ignore
+env/ export-ignore
+bin/ export-ignore
+.hooks/ export-ignore
+Dockerfile-* export-ignore
+run-tests.php export-ignore
+phpunit.xml export-ignore

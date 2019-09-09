@@ -6,8 +6,11 @@
     "semantic-release": "yarn --frozen-lockfile; semantic-release"
   },
   "devDependencies": {
-    "@makeomatic/deploy": "makeomatic/deploy",
-    "semantic-release": "^15.13.3"
+    "@makeomatic/deploy": "^8.4.7",
+    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/exec": "^3.3.6",
+    "@semantic-release/git": "^7.0.16",
+    "semantic-release": "^15.13.24"
   },
   "husky": {
     "hooks": {

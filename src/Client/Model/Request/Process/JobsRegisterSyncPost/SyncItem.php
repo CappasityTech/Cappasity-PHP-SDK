@@ -69,6 +69,27 @@ class SyncItem implements CappasitySDK\Client\Model\Request\RequestParamsInterfa
     }
 
     /**
+     * @return mixed serialized json-api compatible format
+     */
+    public function serialize()
+    {
+        $jsonAPIFormat = [
+            'id' => $this->getId(),
+            'type' => 'product',
+            'attributes' => [
+                'aliases' => $this->getAliases(),
+            ],
+        ];
+
+        $capp = $this->getCapp();
+        if ($capp !== null) {
+            $jsonAPIFormat['attributes']['capp'] = $capp;
+        }
+
+        return $jsonAPIFormat;
+    }
+
+    /**
      * @param string|int $id
      * @param string[] $aliases
      * @param string|null $capp

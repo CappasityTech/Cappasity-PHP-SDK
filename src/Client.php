@@ -124,14 +124,7 @@ class Client implements ClientInterface
 
         $requestData = [
             'data' => array_map(function (Request\Process\JobsRegisterSyncPost\SyncItem $item) {
-                return [
-                    'id' => $item->getId(),
-                    'type' => 'product',
-                    'attributes' => [
-                        'aliases' => $item->getAliases(),
-                        'capp' => $item->getCapp(),
-                    ],
-                ];
+                return $item->serialize();
             }, $params->getItems()),
             'meta' => [
                 'type' => $params->getSyncType(),
