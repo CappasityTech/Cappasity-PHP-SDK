@@ -27,7 +27,7 @@ class ClientFactory
             ],
             'options' => [],
         ],
-        'sendReports' => false,
+        'sendReports' => true,
         'reportableClient' => [
             'ravenClient' => [
                 'optionsOrDSN' => ReportableClient::CAPPASITY_DSN,

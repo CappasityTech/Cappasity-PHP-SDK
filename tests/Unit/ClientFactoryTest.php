@@ -18,8 +18,9 @@ class ClientFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $client = \CappasitySDK\ClientFactory::getClientInstance([
             'apiToken' => 'api.token.stub',
+            'sendReports' => false,
             'config' => [
-                'baseUrl' => \CappasitySDK\Client::BASE_URL_API_CAPPASITY
+                'baseUrl' => \CappasitySDK\Client::BASE_URL_API_CAPPASITY,
             ]
         ]);
 
@@ -31,7 +32,6 @@ class ClientFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $client = \CappasitySDK\ClientFactory::getClientInstance([
             'apiToken' => 'api.token.stub',
-            'sendReports' => true,
         ]);
 
         $this->assertEquals(\CappasitySDK\ReportableClient::class, get_class($client));
@@ -41,7 +41,6 @@ class ClientFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $client = \CappasitySDK\ClientFactory::getClientInstance([
             'apiToken' => 'api.token.stub',
-            'sendReports' => true,
             'reportableClient' => [
                 'ravenClient' => [
                     'optionsOrDsn' => 'https://3736a7965d59423c867105ee4ba47de2@sentry.io/137605',

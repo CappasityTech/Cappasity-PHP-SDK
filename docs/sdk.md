@@ -93,30 +93,30 @@ $originalResponse = $response->getOriginalResponse();
 ```
 
 ## Send error reports
-We use Raven to capture errors. Raven is a PHP client for Sentry error tracking system. By default, we send error 
-reports to our private development account.
+We use Raven to capture errors. Raven is a PHP client for Sentry error tracking system. By default, captured errors are 
+sent to the private Cappasity error tracking system. It allows us to help you to troubleshoot development issues as soon 
+as possible.
 
-### Send reports to Cappasity developers 
-Set `sendReports` option to `true`. This setting enables error reporting. Once enabled, captured errors are sent to the 
-private Cappasity error tracking system. It allows us to help you to troubleshoot development issues.
+### Disable sending reports to Cappasity developers 
+Once you are ready to disable error reporting set `sendReports` option to `false`.
 ```php 
 use CappasitySDK\ClientFactory;
 
 $client = ClientFactory::getClientInstance([
     'apiToken' => 'your.api.token',
-    'sendReports' => true,
+    'sendReports' => false,
 ]);
 ```
 
 ### Send reports to your own Sentry account
 Our `ClientFactory` allows you to override `Raven_Client` constructor parameters. Explore `\CappasitySDK\ClientFactory`
-class code for more details. 
+class code for more details. For example, you may configure your own DSN secret in order to send reports to your Sentry
+account:
 ```php 
 use CappasitySDK\ClientFactory;
 
 $client = ClientFactory::getClientInstance([
     'apiToken' => 'your.api.token',
-    'sendReports' => true,
     'reportableClient' => [
         'ravenClient' => [
             'optionsOrDsn' => 'https://3736a7965d59423c867105ee4ba47de2@sentry.io/137605', // Paste your DSN secret
