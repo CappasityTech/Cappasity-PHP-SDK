@@ -37,6 +37,9 @@ class ReportableClientTest extends \PHPUnit_Framework_TestCase
                 'getPullJobList',
                 'ackPullJobList',
                 'getPullJobResult',
+                'getUser',
+                'getViewInfo',
+                'getPaymentsPlan',
             ])
             ->getMock();
 
@@ -144,7 +147,6 @@ class ReportableClientTest extends \PHPUnit_Framework_TestCase
 
         $client->getPullJobResult(Client\Model\Request\Process\JobsPullResultGet::fromData('a9673347-8f2e-4caa-83e9-4139d7473c2f:A1'));
     }
-
 
     /**
      * @expectedException \Exception
