@@ -12,6 +12,9 @@
 
 namespace CappasitySDK\Tests\Unit;
 
+use CappasitySDK\Client;
+use CappasitySDK\ReportableClient;
+
 class ReportableClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -26,7 +29,7 @@ class ReportableClientTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->clientMock = $this->getMockBuilder(\CappasitySDK\Client::class)
+        $this->clientMock = $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
             ->setMethods([
                 'getEmbedCode',
@@ -50,7 +53,7 @@ class ReportableClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegisterSyncJob()
     {
-        $client = new \CappasitySDK\ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
 
         $mockedException = new \Exception();
 
@@ -64,7 +67,7 @@ class ReportableClientTest extends \PHPUnit_Framework_TestCase
             ->method('captureException')
             ->with($mockedException);
 
-        $client->registerSyncJob(\CappasitySDK\Client\Model\Request\Process\JobsRegisterSyncPost::fromData(
+        $client->registerSyncJob(Client\Model\Request\Process\JobsRegisterSyncPost::fromData(
             [
                 [
                     'id' => 'inner-product-id',
@@ -81,7 +84,7 @@ class ReportableClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPullJobList()
     {
-        $client = new \CappasitySDK\ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
 
         $mockedException = new \Exception();
 
@@ -95,7 +98,7 @@ class ReportableClientTest extends \PHPUnit_Framework_TestCase
             ->method('captureException')
             ->with($mockedException);
 
-        $client->getPullJobList(\CappasitySDK\Client\Model\Request\Process\JobsPullListGet::fromData(null, null));
+        $client->getPullJobList(Client\Model\Request\Process\JobsPullListGet::fromData(null, null));
     }
 
     /**
@@ -103,7 +106,7 @@ class ReportableClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testAckPullJobList()
     {
-        $client = new \CappasitySDK\ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
 
         $mockedException = new \Exception();
 
@@ -117,7 +120,7 @@ class ReportableClientTest extends \PHPUnit_Framework_TestCase
             ->method('captureException')
             ->with($mockedException);
 
-        $client->ackPullJobList(\CappasitySDK\Client\Model\Request\Process\JobsPullAckPost::fromData(['a9673347-8f2e-4caa-83e9-4139d7473c2f:A1']));
+        $client->ackPullJobList(Client\Model\Request\Process\JobsPullAckPost::fromData(['a9673347-8f2e-4caa-83e9-4139d7473c2f:A1']));
     }
 
     /**
@@ -125,7 +128,7 @@ class ReportableClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPullJobResult()
     {
-        $client = new \CappasitySDK\ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
 
         $mockedException = new \Exception();
 
@@ -139,16 +142,16 @@ class ReportableClientTest extends \PHPUnit_Framework_TestCase
             ->method('captureException')
             ->with($mockedException);
 
-        $client->getPullJobResult(\CappasitySDK\Client\Model\Request\Process\JobsPullResultGet::fromData('a9673347-8f2e-4caa-83e9-4139d7473c2f:A1'));
+        $client->getPullJobResult(Client\Model\Request\Process\JobsPullResultGet::fromData('a9673347-8f2e-4caa-83e9-4139d7473c2f:A1'));
     }
 
 
     /**
      * @expectedException \Exception
      */
-    public function getUser(Request\Users\MeGet $params)
+    public function testGetUser()
     {
-        $client = new \CappasitySDK\ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
 
         $mockedException = new \Exception();
 
@@ -162,47 +165,55 @@ class ReportableClientTest extends \PHPUnit_Framework_TestCase
             ->method('captureException')
             ->with($mockedException);
 
-        $client->getUser(new \CappasitySDK\Client\Model\Request\Users\MeGet());
-
-        $this->assertAPITokenIsSet();
-
-        $this->assertParams($params, RequestType\Users\MeGet::class);
-
-        $response = $this->makeRequest('GET', static::ENDPOINT_USERS_ME_GET);
-
-        return $this->getResponseAdapter()->transform($response, Response\Users\MeGet::class);
+        $client->getUser(new Client\Model\Request\Users\MeGet());
     }
 
     /**
      * @expectedException \Exception
      */
-    public function getViewInfo(Request\Files\InfoGet $params)
+    public function testGetViewInfo()
     {
-        $this->assertAPITokenIsSet();
-        $this->assertParams($params, RequestType\Files\InfoGet::class);
+        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
 
-        $response = $this->makeRequest(
-            'GET',
-            self::ENDPOINT_FILES_INFO_GET,
-            [$params->getUserAlias(), $params->getViewId()]
-        );
+        $mockedException = new \Exception();
 
-        return $this->getResponseAdapter()->transform($response, Response\Files\InfoGet::class);
+        $this->clientMock
+            ->expects($this->once())
+            ->method('getViewInfo')
+            ->willThrowException($mockedException);
+
+        $this->ravenClientMock
+            ->expects($this->once())
+            ->method('captureException')
+            ->with($mockedException);
+
+        $client->getViewInfo(Client\Model\Request\Files\InfoGet::fromData(
+            'alice',
+            'dd596de4-ae2b-4d66-a023-242ca7d86b51'
+        ));
     }
 
     /**
      * @expectedException \Exception
      */
-    public function getPaymentsPlan(Request\Payments\Plans\PlanGet $params)
+    public function testGetPaymentsPlan()
     {
-        $this->assertParams($params, RequestType\Payments\Plans\PlanGet::class);
+        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
 
-        $response = $this->makeRequest(
-            'GET',
-            self::ENDPOINT_PAYMENTS_PLANS_PLAN_GET,
-            [$params->getId()]
-        );
+        $mockedException = new \Exception();
 
-        return $this->getResponseAdapter()->transform($response, Response\Payments\Plans\PlanGet::class);
+        $this->clientMock
+            ->expects($this->once())
+            ->method('getPaymentsPlan')
+            ->willThrowException($mockedException);
+
+        $this->ravenClientMock
+            ->expects($this->once())
+            ->method('captureException')
+            ->with($mockedException);
+
+        $client->getPaymentsPlan(Client\Model\Request\Payments\Plans\PlanGet::fromData(
+            'P-1AS44544Y0488105H5QI6O2I'
+        ));
     }
 }
