@@ -40,4 +40,22 @@ interface ClientInterface
      * @return Response\Container
      */
     public function getPullJobResult(Request\Process\JobsPullResultGet $params);
+
+    /**
+     * @param Request\Users\MeGet $params
+     * @return Response\Container
+     */
+    public function getUser(Request\Users\MeGet $params);
+
+    /**
+     * @param Request\Files\InfoGet $params
+     * @return Response\Container
+     */
+    public function getViewInfo(Request\Files\InfoGet $params);
+
+    /**
+     * @param Request\Payments\Plans\PlanGet $params
+     * @return Response\Container
+     */
+    public function getPaymentsPlan(Request\Payments\Plans\PlanGet $params);
 }

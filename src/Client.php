@@ -249,7 +249,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @param Request\Files\InfoGet|null $params
+     * @param Request\Files\InfoGet $params
      *
      * @return Response\Container
      */
@@ -268,7 +268,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @param Request\Payments\Plans\PlanGet|null $params
+     * @param Request\Payments\Plans\PlanGet $params
      *
      * @return Response\Container
      */
