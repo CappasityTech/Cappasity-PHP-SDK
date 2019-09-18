@@ -102,4 +102,53 @@ class ReportableClient implements ClientInterface
             throw $e;
         }
     }
+
+
+    /**
+     * @param Request\Users\MeGet $params
+     * @return Response\Container
+     * @throws \Exception
+     */
+    public function getUser(Request\Users\MeGet $params)
+    {
+        try {
+            return $this->client->getUser($params);
+        } catch (\Exception $e) {
+            $this->ravenClient->captureException($e);
+
+            throw $e;
+        }
+    }
+
+    /**
+     * @param Request\Files\InfoGet $params
+     * @return Response\Container
+     * @throws \Exception
+     */
+    public function getViewInfo(Request\Files\InfoGet $params)
+    {
+        try {
+            return $this->client->getViewInfo($params);
+        } catch (\Exception $e) {
+            $this->ravenClient->captureException($e);
+
+            throw $e;
+        }
+    }
+
+    /**
+     * @param Request\Payments\Plans\PlanGet $params
+     * @return Response\Container
+     * @throws \Exception
+     */
+    public function getPaymentsPlan(Request\Payments\Plans\PlanGet $params)
+    {
+        try {
+            return $this->client->getPaymentsPlan($params);
+        } catch (\Exception $e) {
+            $this->ravenClient->captureException($e);
+
+            throw $e;
+        }
+    }
 }

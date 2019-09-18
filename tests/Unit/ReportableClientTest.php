@@ -141,4 +141,68 @@ class ReportableClientTest extends \PHPUnit_Framework_TestCase
 
         $client->getPullJobResult(\CappasitySDK\Client\Model\Request\Process\JobsPullResultGet::fromData('a9673347-8f2e-4caa-83e9-4139d7473c2f:A1'));
     }
+
+
+    /**
+     * @expectedException \Exception
+     */
+    public function getUser(Request\Users\MeGet $params)
+    {
+        $client = new \CappasitySDK\ReportableClient($this->clientMock, $this->ravenClientMock);
+
+        $mockedException = new \Exception();
+
+        $this->clientMock
+            ->expects($this->once())
+            ->method('getUser')
+            ->willThrowException($mockedException);
+
+        $this->ravenClientMock
+            ->expects($this->once())
+            ->method('captureException')
+            ->with($mockedException);
+
+        $client->getUser(new \CappasitySDK\Client\Model\Request\Users\MeGet());
+
+        $this->assertAPITokenIsSet();
+
+        $this->assertParams($params, RequestType\Users\MeGet::class);
+
+        $response = $this->makeRequest('GET', static::ENDPOINT_USERS_ME_GET);
+
+        return $this->getResponseAdapter()->transform($response, Response\Users\MeGet::class);
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function getViewInfo(Request\Files\InfoGet $params)
+    {
+        $this->assertAPITokenIsSet();
+        $this->assertParams($params, RequestType\Files\InfoGet::class);
+
+        $response = $this->makeRequest(
+            'GET',
+            self::ENDPOINT_FILES_INFO_GET,
+            [$params->getUserAlias(), $params->getViewId()]
+        );
+
+        return $this->getResponseAdapter()->transform($response, Response\Files\InfoGet::class);
+    }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function getPaymentsPlan(Request\Payments\Plans\PlanGet $params)
+    {
+        $this->assertParams($params, RequestType\Payments\Plans\PlanGet::class);
+
+        $response = $this->makeRequest(
+            'GET',
+            self::ENDPOINT_PAYMENTS_PLANS_PLAN_GET,
+            [$params->getId()]
+        );
+
+        return $this->getResponseAdapter()->transform($response, Response\Payments\Plans\PlanGet::class);
+    }
 }
