@@ -1,3 +1,12 @@
+## [2.0.1](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v2.0.0...v2.0.1) (2019-09-18)
+
+
+### Bug Fixes
+
+* implement decorator methods ([fe1b4e8](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/fe1b4e8))
+* implement decorator methods ([64f0e0b](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/64f0e0b))
+* implement decorator methods ([acd32b1](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/acd32b1))
+
 # [2.0.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v1.1.4...v2.0.0) (2019-09-13)
 
 
