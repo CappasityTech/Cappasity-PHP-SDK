@@ -40,7 +40,13 @@ class JobsRegisterSyncPost implements TypeInterface
                                 V::sku(),
                             ])
                         )),
-                        V::attribute('capp', V::oneOf(V::nullType(), V::stringType())),
+                        V::attribute('capp', V::oneOf(
+                            V::nullType(),
+                            V::allOf([
+                                V::stringType(),
+                                V::uuid(),
+                            ])
+                        )),
                     ])
                 ),
                 V::callback(function (array $items) {

@@ -187,7 +187,26 @@ class ValidatorTypesTest extends \PHPUnit_Framework_TestCase
                 ],
                 false,
                 '- items must be valid' //:(
-            ]
+            ],
+            [
+                [
+                    [
+                        [
+                            'id' => 'inner-product-id',
+                            'aliases' => ['Bear'],
+                            'capp' => 'invalid capp format',
+                        ],
+                    ],
+                    'push.http',
+                    'http://somewhere.com/over/the/rainbow',
+                ],
+                false,
+                join(PHP_EOL, [
+                    '- At least one of these rules must pass for capp',
+                    '  - capp must be null',
+                    '    - capp must match pattern /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/',
+                ]),
+            ],
         ];
     }
 
