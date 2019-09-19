@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v2.0.1...v2.1.0) (2019-09-19)
+
+
+### Features
+
+* validate capp ([#26](https://github.com/CappasityTech/Cappasity-PHP-SDK/issues/26)) ([4287ef1](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/4287ef1))
+
 ## [2.0.1](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v2.0.0...v2.0.1) (2019-09-18)
 
 
