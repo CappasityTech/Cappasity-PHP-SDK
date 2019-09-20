@@ -29,7 +29,8 @@ class JobsPullAckPost implements TypeInterface
             ->instance(JobsPullAckPostModel::class)
             ->attribute('jobIds', V::allOf([
                 V::arrayType(),
-                V::each(V::stringType())
+                V::each(V::stringType()),
+                V::length(1),
             ]));
     }
 

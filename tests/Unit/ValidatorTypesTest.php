@@ -357,7 +357,9 @@ class ValidatorTypesTest extends \PHPUnit_Framework_TestCase
                 [
                     []
                 ],
-                true,
+                false,
+                // TODO: upgrade respect/validation to make GTE message
+                '- jobIds must have a length greater than 1'
             ],
             [
                 [
