@@ -1,3 +1,18 @@
+# [3.0.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v2.1.0...v3.0.0) (2019-09-25)
+
+
+### Features
+
+* drop old php support ([#28](https://github.com/CappasityTech/Cappasity-PHP-SDK/issues/28)) ([162bbeb](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/162bbeb))
+
+
+### BREAKING CHANGES
+
+* Support for PHP versions 5.6 and 7.0 has ended.
+
+* drop old php support
+* migrate to phpunit 7.5
+
 # [2.1.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v2.0.1...v2.1.0) (2019-09-19)
 
 
