@@ -15,7 +15,7 @@ namespace CappasitySDK\Tests\Unit;
 use CappasitySDK\Client;
 use CappasitySDK\ReportableClient;
 
-class ReportableClientTest extends \PHPUnit_Framework_TestCase
+class ReportableClientTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var \CappasitySDK\Client|\PHPUnit_Framework_MockObject_MockObject

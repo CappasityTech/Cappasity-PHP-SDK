@@ -14,7 +14,7 @@ namespace CappasitySDK\Tests\Unit;
 
 use CappasitySDK\Client;
 
-class ClientTest extends \PHPUnit_Framework_TestCase
+class ClientTest extends \PHPUnit\Framework\TestCase
 {
     const STUB_API_TOKEN = 'api.token.stub';
     const STUB_SKU = 'Bear';

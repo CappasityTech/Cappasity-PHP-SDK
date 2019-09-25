@@ -14,7 +14,7 @@ namespace CappasitySDK\Tests\Unit;
 
 use CappasitySDK\ReportableTransport;
 
-class ReportableTransportTest extends \PHPUnit_Framework_TestCase
+class ReportableTransportTest extends \PHPUnit\Framework\TestCase
 {
     const STUB_IFRAME = '<iframe allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" width="100%" height="600px" frameborder="0" style="border:0;" onmousewheel="" src="https://api.cappasity.com/api/player/9473eb1e-3fa6-4e75-aa34-6c4e01f10ff5/embedded?autorun=0&closebutton=1&logo=1&autorotate=0&autorotatetime=10&autorotatedelay=2&autorotatedir=1&hidefullscreen=1&hideautorotateopt=1&hidesettingsbtn=0"></iframe>';
 

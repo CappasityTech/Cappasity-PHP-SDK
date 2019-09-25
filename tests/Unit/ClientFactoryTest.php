@@ -12,7 +12,7 @@
 
 namespace CappasitySDK\Tests\Unit;
 
-class ClientFactoryTest extends \PHPUnit_Framework_TestCase
+class ClientFactoryTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetClientInstance()
     {

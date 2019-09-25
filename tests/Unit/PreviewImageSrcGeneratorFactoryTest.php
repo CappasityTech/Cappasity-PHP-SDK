@@ -12,7 +12,7 @@
 
 namespace CappasitySDK\Tests\Unit;
 
-class PreviewImageSrcGeneratorFactoryTest extends \PHPUnit_Framework_TestCase
+class PreviewImageSrcGeneratorFactoryTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetClientInstance()
     {

@@ -12,7 +12,7 @@
 
 namespace CappasitySDK\Tests\Unit\Transport;
 
-class GuzzleTest extends \PHPUnit_Framework_TestCase
+class GuzzleTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var \GuzzleHttp\Client|\PHPUnit_Framework_MockObject_MockObject

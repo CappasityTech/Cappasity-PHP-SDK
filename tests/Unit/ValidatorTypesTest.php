@@ -27,7 +27,7 @@ use CappasitySDK\Client\Validator\Type\Request\Process\JobsPullAckPost as JobsPu
 use CappasitySDK\Client\Validator\Type\Request\Files\InfoGet as InfoGetType;
 use CappasitySDK\PreviewImageSrcGenerator\Validator\Type\PreviewImageOptions as PreviewImageOptionsType;
 
-class ValidatorTypesTest extends \PHPUnit_Framework_TestCase
+class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider provideJobsRegisterSyncPostData
@@ -475,9 +475,7 @@ class ValidatorTypesTest extends \PHPUnit_Framework_TestCase
         try {
             $validator->assert($params);
 
-            if ($shouldBeValid === false) {
-                $this->fail('Value should be considered invalid');
-            }
+            $this->assertTrue($shouldBeValid, 'Value should be considered invalid');
         } catch (NestedValidationException $e) {
             $actualError = $e->getFullMessage();
 

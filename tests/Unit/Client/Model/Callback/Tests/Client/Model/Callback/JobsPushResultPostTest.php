@@ -14,7 +14,7 @@ namespace Tests\Client\Model\Callback;
 
 use CappasitySDK\Client\Model\Callback\Process\JobsPushResultPost;
 
-class JobsPushResultPostTest extends \PHPUnit_Framework_TestCase
+class JobsPushResultPostTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider createFromResponseProvider

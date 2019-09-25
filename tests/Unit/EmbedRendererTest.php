@@ -12,7 +12,7 @@
 
 namespace CappasitySDK\Tests\Unit;
 
-class EmbedRendererTest extends \PHPUnit_Framework_TestCase
+class EmbedRendererTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var \CappasitySDK\EmbedRenderer

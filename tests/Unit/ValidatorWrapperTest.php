@@ -12,7 +12,7 @@
 
 namespace CappasitySDK\Tests\Unit;
 
-class ValidatorWrapperTest extends \PHPUnit_Framework_TestCase
+class ValidatorWrapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var \Respect\Validation\Factory|\PHPUnit_Framework_MockObject_MockObject
