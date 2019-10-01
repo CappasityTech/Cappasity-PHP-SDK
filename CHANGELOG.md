@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.0.0...v3.1.0) (2019-10-01)
+
+
+### Features
+
+* validate ack job list length ([2bf45c2](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/2bf45c2))
+
 # [3.0.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v2.1.0...v3.0.0) (2019-09-25)
 
 
