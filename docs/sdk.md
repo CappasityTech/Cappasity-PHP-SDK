@@ -451,6 +451,8 @@ Full params list:
 | `enableImageZoom`   | Enable zoom                                                                               |
 | `zoomQuality`       | Zoom quality (SD is `1`, HD is `2`)                                                       |
 | `hideZoomOpt`       | Hide zoom button                                                                          |
+| `uiPadX`            | Horizontal (left, right) padding for player UI in pixels                                  |
+| `uiPadY`            | Vertical (top, bottom) padding for player UI in pixels                                    |
 
 ```php
 $embedCode = $renderer->render([
@@ -471,6 +473,8 @@ $embedCode = $renderer->render([
   'enableImageZoom' => true,
   'zoomQuality' => 2,
   'hideZoomOpt' => false,
+  'uiPadX' => 10,
+  'uiPadY' => 20,
 ]);
 ```
 
