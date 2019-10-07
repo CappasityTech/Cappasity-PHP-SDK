@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.1.0...v3.2.0) (2019-10-07)
+
+
+### Features
+
+* embed renderer padding ([29e9dae](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/29e9dae))
+
 # [3.1.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.0.0...v3.1.0) (2019-10-01)
 
 
