@@ -23,9 +23,9 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
     private $clientMock;
 
     /**
-     * @var \Raven_Client|\PHPUnit_Framework_MockObject_MockObject
+     * @var \Sentry\Client|\PHPUnit_Framework_MockObject_MockObject
      */
-    private $ravenClientMock;
+    private $sentryClientMock;
 
     public function setUp()
     {
@@ -43,11 +43,11 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ])
             ->getMock();
 
-        $this->ravenClientMock = $this->getMockBuilder(\Raven_Client::class)
+        // ClientInterface is mocked because Sentry\Client class is final so it is not possible
+        $this->sentryClientMock = $this->getMockBuilder(\Sentry\ClientInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods([
-                'captureException',
-            ])
+            // Since we mock an interface we are required to implement all its methods (all except none)
+            ->setMethodsExcept()
             ->getMock();
     }
 
@@ -56,7 +56,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
      */
     public function testRegisterSyncJob()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryClientMock);
 
         $mockedException = new \Exception();
 
@@ -65,7 +65,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('registerSyncJob')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryClientMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);
@@ -87,7 +87,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetPullJobList()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryClientMock);
 
         $mockedException = new \Exception();
 
@@ -96,7 +96,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('getPullJobList')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryClientMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);
@@ -109,7 +109,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
      */
     public function testAckPullJobList()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryClientMock);
 
         $mockedException = new \Exception();
 
@@ -118,7 +118,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('ackPullJobList')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryClientMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);
@@ -131,7 +131,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetPullJobResult()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryClientMock);
 
         $mockedException = new \Exception();
 
@@ -140,7 +140,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('getPullJobResult')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryClientMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);
@@ -153,7 +153,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetUser()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryClientMock);
 
         $mockedException = new \Exception();
 
@@ -162,7 +162,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('getUser')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryClientMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);
@@ -175,7 +175,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetViewInfo()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryClientMock);
 
         $mockedException = new \Exception();
 
@@ -184,7 +184,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('getViewInfo')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryClientMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);
@@ -200,7 +200,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetPaymentsPlan()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryClientMock);
 
         $mockedException = new \Exception();
 
@@ -209,7 +209,7 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('getPaymentsPlan')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryClientMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);

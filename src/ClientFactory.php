@@ -12,6 +12,8 @@
 
 namespace CappasitySDK;
 
+use Sentry\ClientBuilder as SentryClientBuilder;
+
 class ClientFactory
 {
     const GUZZLE_TRANSPORT = 'guzzle';
@@ -29,11 +31,8 @@ class ClientFactory
         ],
         'sendReports' => true,
         'reportableClient' => [
-            'ravenClient' => [
-                'optionsOrDSN' => ReportableClient::CAPPASITY_DSN,
-                'options' => [
-                    'timeout' => 2,
-                ],
+            'sentryHub' => [
+                'dsn' => ReportableClient::CAPPASITY_DSN,
             ]
         ],
         'config' => []
@@ -60,9 +59,12 @@ class ClientFactory
         $client = new Client($transport, $apiToken, $validator, $responseAdapter, $clientConfig);
 
         if ($resolvedOptions['sendReports'] === true) {
-            $ravenOptions = $resolvedOptions['reportableClient']['ravenClient'];
-            $ravenClient = new \Raven_Client($ravenOptions['optionsOrDSN'], $ravenOptions['options']);
-            $client = new ReportableClient($client, $ravenClient);
+            $sentryOptions = $resolvedOptions['reportableClient']['sentryClient'];
+            $sentryClientBuilder = SentryClientBuilder::create($sentryOptions);
+            $sentryClient = $sentryClientBuilder->getClient();
+            $stateScope = new \Sentry\State\Scope();
+            $sentryHub = new \Sentry\State\Hub($sentryClient, $stateScope);
+            $client = new ReportableClient($client, $sentryHub);
         }
 
         return $client;

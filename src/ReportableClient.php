@@ -14,6 +14,7 @@ namespace CappasitySDK;
 
 use CappasitySDK\Client\Model\Request;
 use CappasitySDK\Client\Model\Response;
+use Sentry\State\HubInterface as SentryHubInterface;
 
 class ReportableClient implements ClientInterface
 {
@@ -25,18 +26,18 @@ class ReportableClient implements ClientInterface
     private $client;
 
     /**
-     * @var \Raven_Client
+     * @var SentryHubInterface
      */
-    private $ravenClient;
+    private $sentryHub;
 
     /**
      * @param ClientInterface $client
-     * @param \Raven_Client $ravenClient
+     * @param SentryHubInterface $sentryHub
      */
-    public function __construct(ClientInterface $client, \Raven_Client $ravenClient)
+    public function __construct(ClientInterface $client, SentryHubInterface $sentryHub)
     {
         $this->client = $client;
-        $this->ravenClient = $ravenClient;
+        $this->sentryHub = $sentryHub;
     }
 
     /**
@@ -49,7 +50,7 @@ class ReportableClient implements ClientInterface
         try {
             return $this->client->registerSyncJob($params);
         } catch (\Exception $e) {
-            $this->ravenClient->captureException($e);
+            $this->sentryHub->captureException($e);
 
             throw $e;
         }
@@ -65,7 +66,7 @@ class ReportableClient implements ClientInterface
         try {
             return $this->client->getPullJobList($params);
         } catch (\Exception $e) {
-            $this->ravenClient->captureException($e);
+            $this->sentryHub->captureException($e);
 
             throw $e;
         }
@@ -81,7 +82,7 @@ class ReportableClient implements ClientInterface
         try {
             return $this->client->ackPullJobList($params);
         } catch (\Exception $e) {
-            $this->ravenClient->captureException($e);
+            $this->sentryHub->captureException($e);
 
             throw $e;
         }
@@ -97,7 +98,7 @@ class ReportableClient implements ClientInterface
         try {
             return $this->client->getPullJobResult($params);
         } catch (\Exception $e) {
-            $this->ravenClient->captureException($e);
+            $this->sentryHub->captureException($e);
 
             throw $e;
         }
@@ -114,7 +115,7 @@ class ReportableClient implements ClientInterface
         try {
             return $this->client->getUser($params);
         } catch (\Exception $e) {
-            $this->ravenClient->captureException($e);
+            $this->sentryHub->captureException($e);
 
             throw $e;
         }
@@ -130,7 +131,7 @@ class ReportableClient implements ClientInterface
         try {
             return $this->client->getViewInfo($params);
         } catch (\Exception $e) {
-            $this->ravenClient->captureException($e);
+            $this->sentryHub->captureException($e);
 
             throw $e;
         }
@@ -146,7 +147,7 @@ class ReportableClient implements ClientInterface
         try {
             return $this->client->getPaymentsPlan($params);
         } catch (\Exception $e) {
-            $this->ravenClient->captureException($e);
+            $this->sentryHub->captureException($e);
 
             throw $e;
         }
