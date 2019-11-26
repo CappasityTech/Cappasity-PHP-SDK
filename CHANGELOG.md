@@ -1,3 +1,10 @@
+# [3.3.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.2.0...v3.3.0) (2019-11-26)
+
+
+### Features
+
+* embed renderer validation ([#33](https://github.com/CappasityTech/Cappasity-PHP-SDK/issues/33)) ([c63918e](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/c63918e))
+
 # [3.2.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.1.0...v3.2.0) (2019-10-07)
 
 
