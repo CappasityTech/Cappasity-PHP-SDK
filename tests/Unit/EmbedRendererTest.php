@@ -25,7 +25,7 @@ class EmbedRendererTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedExceptionMessage Cappasity 3D View ID is required to render template
+     * @expectedExceptionMessage - Key viewId must be present
      * @expectedException \CappasitySDK\EmbedRenderer\Exception\InvalidParamsException
      */
     public function testFailOnRenderingWithoutViewId()

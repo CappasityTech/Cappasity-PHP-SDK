@@ -21,8 +21,9 @@ use CappasitySDK\ValidatorWrapper\Exception\ValidationException;
 class ValidatorWrapper
 {
     private static $rulePrefixesToAppend = [
-        'CappasitySDK\\Client\\Validator\\Rules',
+        'CappasitySDK\\Common\\Validator\\Rules',
         'CappasitySDK\\PreviewImageSrcGenerator\\Validator\\Rules',
+        'CappasitySDK\\EmbedRenderer\\Validator\\Rules'
     ];
 
     /**
@@ -52,8 +53,11 @@ class ValidatorWrapper
             throw new \LogicException('Type class must have method getRequiredRuleNamespaces()');
         }
 
-        if (count(array_diff($typeClassName::getRequiredRuleNamespaces(), $this->factory->getRulePrefixes())) > 0) {
-            throw new \LogicException('Not all required rule namespaces were appended to the factory, check the diff');
+        $namespacesDiff = array_diff($typeClassName::getRequiredRuleNamespaces(), $this->factory->getRulePrefixes());
+        if (count($namespacesDiff) > 0) {
+            $diffAsString = join(', ', $namespacesDiff);
+
+            throw new \LogicException("Not all required rule namespaces were appended to the factory, check out the diff: ${diffAsString}");
         }
 
         Validator::setFactory($this->factory);

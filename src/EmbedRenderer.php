@@ -14,6 +14,7 @@ namespace CappasitySDK;
 
 use Twig_Error;
 use Twig_Environment;
+use CappasitySDK\EmbedRenderer\Validator\Type\Render;
 
 class EmbedRenderer
 {
@@ -23,11 +24,18 @@ class EmbedRenderer
     private $twig;
 
     /**
-     * @param Twig_Environment $twig
+     * @var ValidatorWrapper
      */
-    public function __construct(Twig_Environment $twig)
+    private $validator;
+
+    /**
+     * @param Twig_Environment $twig
+     * @param ValidatorWrapper $validator
+     */
+    public function __construct(Twig_Environment $twig, ValidatorWrapper $validator)
     {
         $this->twig = $twig;
+        $this->validator = $validator;
     }
 
     /**
@@ -37,16 +45,21 @@ class EmbedRenderer
      */
     public function render(array $params)
     {
-        if (!array_key_exists('viewId', $params) || !is_string($params['viewId']) || $params['viewId'] === '') {
-            throw new EmbedRenderer\Exception\InvalidParamsException(
-                'Cappasity 3D View ID is required to render template'
-            );
-        }
+        $this->validateParams($params);
 
         try {
             return $this->twig->render('embed.html.twig', $params);
         } catch (Twig_Error $e) {
             throw new EmbedRenderer\Exception\RenderException('Error occurred while rendering embed code template', 0, $e);
+        }
+    }
+
+    private function validateParams(array $params)
+    {
+        try {
+            $this->validator->assert($params, $this->validator->buildByType(Render::class));
+        } catch (ValidatorWrapper\Exception\ValidationException $e) {
+            throw new EmbedRenderer\Exception\InvalidParamsException($e->getMessage());
         }
     }
 }

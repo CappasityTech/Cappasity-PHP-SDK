@@ -10,18 +10,20 @@
  * @copyright 2019 Cappasity Inc.
  */
 
-namespace CappasitySDK\Client\Validator\Exceptions;
+namespace CappasitySDK\EmbedRenderer\Validator\Exceptions;
 
 use Respect\Validation\Exceptions\ValidationException;
 
-class SkuException extends ValidationException
+class DimensionSizeException extends ValidationException
 {
+    const ERROR_TEMPLATE = '{{name}} must be defined in pixels or in % of the containing element. The percentage must be between 0 and 100. Examples of valid dimension size values: \'210\', \'80%\'';
+
     public static $defaultTemplates = [
         self::MODE_DEFAULT => [
-            self::STANDARD => '{{name}} must match pattern /^[0-9A-Za-z_\-.]{1,50}$/',
+            self::STANDARD => self::ERROR_TEMPLATE,
         ],
         self::MODE_NEGATIVE => [
-            self::STANDARD => '{{name}} must match pattern /^[0-9A-Za-z_\-.]{1,50}$/',
+            self::STANDARD => self::ERROR_TEMPLATE,
         ],
     ];
 }

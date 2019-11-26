@@ -79,7 +79,7 @@ class JobsRegisterSyncPost implements TypeInterface
     public static function getRequiredRuleNamespaces()
     {
         return [
-            'CappasitySDK\\Client\\Validator\\Rules\\',
+            'CappasitySDK\\Common\\Validator\\Rules\\',
         ];
     }
 }

@@ -26,6 +26,7 @@ use CappasitySDK\Client\Validator\Type\Request\Process\JobsPullResultGet as Jobs
 use CappasitySDK\Client\Validator\Type\Request\Process\JobsPullAckPost as JobsPullAckPostType;
 use CappasitySDK\Client\Validator\Type\Request\Files\InfoGet as InfoGetType;
 use CappasitySDK\PreviewImageSrcGenerator\Validator\Type\PreviewImageOptions as PreviewImageOptionsType;
+use CappasitySDK\EmbedRenderer\Validator\Type\Render as RenderType;
 
 class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
 {
@@ -204,7 +205,7 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                 join(PHP_EOL, [
                     '- At least one of these rules must pass for capp',
                     '  - capp must be null',
-                    '    - capp must match pattern /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/',
+                    '    - capp must be a valid UUID and therefore match pattern /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/',
                 ]),
             ],
         ];
@@ -469,6 +470,114 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     '  - viewId must be a string',
                 ]),
             ],
+        ];
+    }
+
+
+    /**
+     * @dataProvider provideRenderData
+     * @param [] $fromDataArgs
+     * @param bool $shouldBeValid
+     * @param null|string $expectedError
+     */
+    public function testValidateRender(array $fromDataArgs, $shouldBeValid, $expectedError = null)
+    {
+        $params = $fromDataArgs;
+
+        foreach (RenderType::getRequiredRuleNamespaces() as $namespace) {
+            v::with($namespace);
+        }
+
+        $validator = RenderType::configureValidator();
+
+        $this->assertValidator($validator, $params, $shouldBeValid, $expectedError);
+    }
+
+    public function provideRenderData()
+    {
+        return [
+            [
+                [],
+                false,
+                '- Key viewId must be present'
+            ],
+            [
+                ['viewId' => 'i am not uuid'],
+                false,
+                '- viewId must be a valid UUID and therefore match pattern /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/'
+            ],
+            [
+                [
+                    'viewId' => '38020fdf-5e11-411c-9116-1610339d59cf!',
+                    'width' => '100%%',
+                    'height' => '-600',
+                    'autoRun' => 1,
+                    'closeButton' => 0,
+                    'logo' => 1,
+                    'autoRotate' => 0,
+                    'autoRotateTime' => 70,
+                    'autoRotateDelay' => 11,
+                    'autoRotateDir' => 2,
+                    'hideFullScreen' => 1,
+                    'hideAutoRotateOpt' => 1,
+                    'hideSettingsBtn' => 0,
+                    'enableImageZoom' => 1,
+                    'zoomQuality' => 3,
+                    'hideZoomOpt' => 0,
+                    'analytics' => 1,
+                    'uiPadX' => '10',
+                    'uiPadY' => '20',
+                ],
+                false,
+                join(PHP_EOL, [
+                    '- These rules must pass for Render',
+                    '  - viewId must be a valid UUID and therefore match pattern /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/',
+                    '  - height must be defined in pixels or in % of the containing element. The percentage must be between 0 and 100. Examples of valid dimension size values: \'210\', \'80%\'',
+                    '  - autoRun must be a boolean',
+                    '  - closeButton must be a boolean',
+                    '  - logo must be a boolean',
+                    '  - analytics must be a boolean',
+                    '  - autoRotate must be a boolean',
+                    '  - autoRotateTime must be less than or equal to 60',
+                    '  - autoRotateDir must be in { 1, -1 }',
+                    '  - hideFullScreen must be a boolean',
+                    '  - hideAutoRotateOpt must be a boolean',
+                    '  - hideSettingsBtn must be a boolean',
+                    '  - enableImageZoom must be a boolean',
+                    '  - zoomQuality must be in { 1, 2 }',
+                    '  - hideZoomOpt must be a boolean',
+                    '  - uiPadX must be of the type integer',
+                    '  - uiPadY must be of the type integer',
+                ]),
+            ],
+            [
+                ['viewId' => 'a9673347-8f2e-4caa-83e9-4139d7473c2f'],
+                true,
+            ],
+            [
+                [
+                    'viewId' => '38020fdf-5e11-411c-9116-1610339d59cf',
+                    'width' => '100%',
+                    'height' => '600',
+                    'autoRun' => true,
+                    'closeButton' => false,
+                    'logo' => true,
+                    'autoRotate' => false,
+                    'autoRotateTime' => 10,
+                    'autoRotateDelay' => 2,
+                    'autoRotateDir' => 1,
+                    'hideFullScreen' => true,
+                    'hideAutoRotateOpt' => true,
+                    'hideSettingsBtn' => false,
+                    'enableImageZoom' => true,
+                    'zoomQuality' => 2,
+                    'hideZoomOpt' => false,
+                    'analytics' => true,
+                    'uiPadX' => 10,
+                    'uiPadY' => 20,
+                ],
+                true
+            ]
         ];
     }
 

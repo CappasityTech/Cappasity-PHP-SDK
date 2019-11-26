@@ -10,11 +10,11 @@
  * @copyright 2019 Cappasity Inc.
  */
 
-namespace CappasitySDK\Client\Validator\Rules;
+namespace CappasitySDK\Common\Validator\Rules;
 
 trait SkuTrait
 {
-    public static $skuRegex = '/^[0-9A-Za-z_\-.]{1,50}$/';
+    private static $skuRegex = '/^[0-9A-Za-z_\-.]{1,50}$/';
 
     /**
      * @param $sku

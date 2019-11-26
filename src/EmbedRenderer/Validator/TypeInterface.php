@@ -10,16 +10,11 @@
  * @copyright 2019 Cappasity Inc.
  */
 
-namespace CappasitySDK\Client\Validator\Rules;
+namespace CappasitySDK\EmbedRenderer\Validator;
 
-use Respect\Validation\Rules\AbstractRule;
+use CappasitySDK\ValidatorTypeInterface;
 
-class Sku extends AbstractRule
+interface TypeInterface extends ValidatorTypeInterface
 {
-    use SkuTrait;
 
-    public function validate($input)
-    {
-        return $this->isValidSku($input);
-    }
 }

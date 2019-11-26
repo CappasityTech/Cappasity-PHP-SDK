@@ -10,18 +10,18 @@
  * @copyright 2019 Cappasity Inc.
  */
 
-namespace CappasitySDK\Client\Validator\Exceptions;
+namespace CappasitySDK\Common\Validator\Exceptions;
 
 use Respect\Validation\Exceptions\ValidationException;
 
-class UuidException extends ValidationException
+class SkuException extends ValidationException
 {
     public static $defaultTemplates = [
         self::MODE_DEFAULT => [
-            self::STANDARD => '{{name}} must match pattern /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/',
+            self::STANDARD => '{{name}} must match pattern /^[0-9A-Za-z_\-.]{1,50}$/',
         ],
         self::MODE_NEGATIVE => [
-            self::STANDARD => '{{name}} must match pattern /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/',
+            self::STANDARD => '{{name}} must match pattern /^[0-9A-Za-z_\-.]{1,50}$/',
         ],
     ];
 }

@@ -10,16 +10,16 @@
  * @copyright 2019 Cappasity Inc.
  */
 
-namespace CappasitySDK\Client\Validator\Rules;
+namespace CappasitySDK\Common\Validator\Rules;
 
-use \Respect\Validation\Rules\AbstractRule;
+use Respect\Validation\Rules\AbstractRule;
 
-class Uuid extends AbstractRule
+class Sku extends AbstractRule
 {
-    use UuidTrait;
+    use SkuTrait;
 
     public function validate($input)
     {
-        return $this->isValidUuid($input);
+        return $this->isValidSku($input);
     }
 }

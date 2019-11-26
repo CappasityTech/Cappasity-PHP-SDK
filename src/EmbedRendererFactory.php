@@ -32,7 +32,8 @@ class EmbedRendererFactory
     {
         $loader = new Twig_Loader_Filesystem(['templates'], __DIR__.'/..');
         $twig = new Twig_Environment($loader, $engineOptions);
+        $validator = ValidatorWrapper::setUpInstance();
 
-        return new EmbedRenderer($twig);
+        return new EmbedRenderer($twig, $validator);
     }
 }
