@@ -44,7 +44,7 @@ class ReportableClient implements ClientInterface
      * @return Response\Container
      * @throws \Exception
      */
-    public function registerSyncJob(Request\Process\JobsRegisterSyncPost $params)
+    public function registerSyncJob(Request\Process\JobsRegisterSyncPost $params): Response\Container
     {
         try {
             return $this->client->registerSyncJob($params);
@@ -60,7 +60,7 @@ class ReportableClient implements ClientInterface
      * @return Response\Container
      * @throws \Exception
      */
-    public function getPullJobList(Request\Process\JobsPullListGet $params)
+    public function getPullJobList(Request\Process\JobsPullListGet $params): Response\Container
     {
         try {
             return $this->client->getPullJobList($params);
@@ -76,7 +76,7 @@ class ReportableClient implements ClientInterface
      * @return Response\Container
      * @throws \Exception
      */
-    public function ackPullJobList(Request\Process\JobsPullAckPost $params)
+    public function ackPullJobList(Request\Process\JobsPullAckPost $params): Response\Container
     {
         try {
             return $this->client->ackPullJobList($params);
@@ -92,7 +92,7 @@ class ReportableClient implements ClientInterface
      * @return Response\Container
      * @throws \Exception
      */
-    public function getPullJobResult(Request\Process\JobsPullResultGet $params)
+    public function getPullJobResult(Request\Process\JobsPullResultGet $params): Response\Container
     {
         try {
             return $this->client->getPullJobResult($params);
@@ -109,7 +109,7 @@ class ReportableClient implements ClientInterface
      * @return Response\Container
      * @throws \Exception
      */
-    public function getUser(Request\Users\MeGet $params)
+    public function getUser(Request\Users\MeGet $params): Response\Container
     {
         try {
             return $this->client->getUser($params);
@@ -120,12 +120,24 @@ class ReportableClient implements ClientInterface
         }
     }
 
+    public function getViewList(Request\Files\ListGet $params): Response\Container
+    {
+        try {
+            return $this->client->getViewList($params);
+        } catch (\Exception $e) {
+            $this->ravenClient->captureException($e);
+
+            throw $e;
+        }
+    }
+
+
     /**
      * @param Request\Files\InfoGet $params
      * @return Response\Container
      * @throws \Exception
      */
-    public function getViewInfo(Request\Files\InfoGet $params)
+    public function getViewInfo(Request\Files\InfoGet $params): Response\Container
     {
         try {
             return $this->client->getViewInfo($params);
@@ -141,7 +153,7 @@ class ReportableClient implements ClientInterface
      * @return Response\Container
      * @throws \Exception
      */
-    public function getPaymentsPlan(Request\Payments\Plans\PlanGet $params)
+    public function getPaymentsPlan(Request\Payments\Plans\PlanGet $params): Response\Container
     {
         try {
             return $this->client->getPaymentsPlan($params);

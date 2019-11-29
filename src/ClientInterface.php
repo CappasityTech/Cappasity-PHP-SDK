@@ -21,41 +21,47 @@ interface ClientInterface
      * @param Request\Process\JobsRegisterSyncPost $params
      * @return Response\Container
      */
-    public function registerSyncJob(Request\Process\JobsRegisterSyncPost $params);
+    public function registerSyncJob(Request\Process\JobsRegisterSyncPost $params): Response\Container;
 
     /**
      * @param Request\Process\JobsPullListGet $params
      * @return Response\Container
      */
-    public function getPullJobList(Request\Process\JobsPullListGet $params);
+    public function getPullJobList(Request\Process\JobsPullListGet $params): Response\Container;
 
     /**
      * @param Request\Process\JobsPullAckPost $params
      * @return Response\Container
      */
-    public function ackPullJobList(Request\Process\JobsPullAckPost $params);
+    public function ackPullJobList(Request\Process\JobsPullAckPost $params): Response\Container;
 
     /**
      * @param Request\Process\JobsPullResultGet $params
      * @return Response\Container
      */
-    public function getPullJobResult(Request\Process\JobsPullResultGet $params);
+    public function getPullJobResult(Request\Process\JobsPullResultGet $params): Response\Container;
 
     /**
      * @param Request\Users\MeGet $params
      * @return Response\Container
      */
-    public function getUser(Request\Users\MeGet $params);
+    public function getUser(Request\Users\MeGet $params): Response\Container;
+
+    /**
+     * @param Request\Files\ListGet $params
+     * @return Response\Container
+     */
+    public function getViewList(Request\Files\ListGet $params): Response\Container;
 
     /**
      * @param Request\Files\InfoGet $params
      * @return Response\Container
      */
-    public function getViewInfo(Request\Files\InfoGet $params);
+    public function getViewInfo(Request\Files\InfoGet $params): Response\Container;
 
     /**
      * @param Request\Payments\Plans\PlanGet $params
      * @return Response\Container
      */
-    public function getPaymentsPlan(Request\Payments\Plans\PlanGet $params);
+    public function getPaymentsPlan(Request\Payments\Plans\PlanGet $params): Response\Container;
 }

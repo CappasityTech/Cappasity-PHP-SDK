@@ -50,6 +50,7 @@ class Client implements ClientInterface
     const ENDPOINT_PROCESS_JOBS_PULL_ACK_POST = '/api/cp/jobs/pull/ack';
     const ENDPOINT_USERS_ME_GET = '/api/users/me';
     const ENDPOINT_FILES_INFO_GET = '/api/files/info/%s/%s';
+    const ENDPOINT_FILES_LIST_GET = '/api/files';
     const ENDPOINT_PAYMENTS_PLANS_PLAN_GET = '/api/payments/plans/%s';
 
     const BASE_URL_API_CAPPASITY = 'https://api.cappasity.com';
@@ -117,7 +118,7 @@ class Client implements ClientInterface
      *
      * @return Response\Container
      */
-    public function registerSyncJob(Request\Process\JobsRegisterSyncPost $params)
+    public function registerSyncJob(Request\Process\JobsRegisterSyncPost $params): Response\Container
     {
         $this->assertAPITokenIsSet();
         $this->assertParams($params, RequestType\Process\JobsRegisterSyncPost::class);
@@ -152,7 +153,7 @@ class Client implements ClientInterface
      *
      * @return Response\Container
      */
-    public function getPullJobList(Request\Process\JobsPullListGet $params)
+    public function getPullJobList(Request\Process\JobsPullListGet $params): Response\Container
     {
         $this->assertAPITokenIsSet();
         $this->assertParams($params, RequestType\Process\JobsPullListGet::class);
@@ -184,7 +185,7 @@ class Client implements ClientInterface
      *
      * @return Response\Container
      */
-    public function ackPullJobList(Request\Process\JobsPullAckPost $params)
+    public function ackPullJobList(Request\Process\JobsPullAckPost $params): Response\Container
     {
         $this->assertAPITokenIsSet();
         $this->assertParams($params, RequestType\Process\JobsPullAckPost::class);
@@ -213,7 +214,7 @@ class Client implements ClientInterface
      *
      * @return Response\Container
      */
-    public function getPullJobResult(Request\Process\JobsPullResultGet $params)
+    public function getPullJobResult(Request\Process\JobsPullResultGet $params): Response\Container
     {
         $this->assertAPITokenIsSet();
         $this->assertParams($params, RequestType\Process\JobsPullResultGet::class);
@@ -237,7 +238,7 @@ class Client implements ClientInterface
      *
      * @return Response\Container
      */
-    public function getUser(Request\Users\MeGet $params)
+    public function getUser(Request\Users\MeGet $params): Response\Container
     {
         $this->assertAPITokenIsSet();
 
@@ -248,12 +249,52 @@ class Client implements ClientInterface
         return $this->getResponseAdapter()->transform($response, Response\Users\MeGet::class);
     }
 
+    public function getViewList(Request\Files\ListGet $params): Response\Container
+    {
+        $this->assertAPITokenIsSet();
+        $this->assertParams($params, RequestType\Files\ListGet::class);
+
+        $query = [];
+
+        if ($params->getOffset()) {
+            $query['offset'] = $params->getOffset();
+        }
+
+        if ($params->getLimit()) {
+            $query['limit'] = $params->getLimit();
+        }
+
+        if ($params->getSortBy()) {
+            $query['sortBy'] = $params->getSortBy();
+        }
+
+        if ($params->getOrder()) {
+            $query['order'] = $params->getOrder();
+        }
+
+        $response = $this->makeRequest(
+            'GET',
+            self::ENDPOINT_FILES_LIST_GET,
+            [],
+            [
+                'query' => [
+                    'offset' => $params->getOffset(),
+                    'limit' => $params->getLimit(),
+                    'sortBy' => rawurlencode($params->getSortBy()),
+                    'order' => $params->getOrder(),
+                ]
+            ]
+        );
+
+        return $this->getResponseAdapter()->transform($response, Response\Files\ListGet::class);
+    }
+    
     /**
      * @param Request\Files\InfoGet $params
      *
      * @return Response\Container
      */
-    public function getViewInfo(Request\Files\InfoGet $params)
+    public function getViewInfo(Request\Files\InfoGet $params): Response\Container
     {
         $this->assertAPITokenIsSet();
         $this->assertParams($params, RequestType\Files\InfoGet::class);
@@ -272,7 +313,7 @@ class Client implements ClientInterface
      *
      * @return Response\Container
      */
-    public function getPaymentsPlan(Request\Payments\Plans\PlanGet $params)
+    public function getPaymentsPlan(Request\Payments\Plans\PlanGet $params): Response\Container
     {
         $this->assertParams($params, RequestType\Payments\Plans\PlanGet::class);
 
