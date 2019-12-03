@@ -10,11 +10,11 @@
  * @copyright 2019 Cappasity Inc.
  */
 
-namespace CappasitySDK\Client\Model\Response\Files\InfoGet;
+namespace CappasitySDK\Client\ResponseModelAdapter\Exception;
 
-use CappasitySDK\Client\Model\Response\Files\Common;
+use CappasitySDK\Client\Exception\ClientException;
 
-class Data extends Common\File
+class AdapterException extends ClientException
 {
 
 }

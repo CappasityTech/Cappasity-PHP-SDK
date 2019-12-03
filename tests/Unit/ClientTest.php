@@ -874,96 +874,18 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(Client\Model\Response\Files\InfoGet::class, $actualResponse->getBodyData());
         /** @var Client\Model\Response\Files\InfoGet $actualResponseData */
         $actualResponseData = $actualResponse->getBodyData();
-
-        $this->assertEquals('0b29e0dd-0e93-4acb-ab64-dc1a9ca20f03', $actualResponseData->getMeta()->getId());
-        $this->assertEquals('dd596de4-ae2b-4d66-a023-242ca7d86b51', $actualResponseData->getData()->getId());
-        $this->assertEquals('file', $actualResponseData->getData()->getType());
         $attributes = $actualResponseData->getData()->getAttributes();
-        $this->assertInstanceOf(Client\Model\Response\Files\InfoGet\Data\Attributes::class, $attributes);
-
-        $this->assertEquals('pinkclutch', $attributes->getAlias());
-        $this->assertEquals('#FFFFFF', $attributes->getBackgroundColor());
-        $this->assertEquals('', $attributes->getBackgroundImage());
-        $this->assertEquals('cdn.cappasity.com', $attributes->getBucket());
-        $this->assertEquals('4.1.0', $attributes->getCVer());
-        $this->assertEquals(10874630, $attributes->getContentLength());
-        $this->assertEquals('Goddess Pink Clutch', $attributes->getName());
-        $this->assertEquals('alice', $attributes->getOwner());
-        $this->assertEquals('1', $attributes->getPacked());
-        $this->assertEquals(4, $attributes->getParts());
-        $this->assertEquals(
-            '4b528066036d2c07e6b9b53784509913/dd596de4-ae2b-4d66-a023-242ca7d86b51/7d001be0-4506-41d3-8bdb-66fd6fecae65.jpeg',
-            $attributes->getPreview()
-        );
-        $this->assertEquals('1', $attributes->getPublic());
-        $this->assertEquals(
-            '4b528066036d2c07e6b9b53784509913/dd596de4-ae2b-4d66-a023-242ca7d86b51/f989e877-63e4-4307-9b39-f76837b5407d.pack',
-            $attributes->getSimple()
-        );
-        $this->assertEquals(1525282009671, $attributes->getStartedAt());
-        $this->assertEquals('processed', $attributes->getStatus());
-        $this->assertEquals('object', $attributes->getType());
-        $this->assertEquals('dd596de4-ae2b-4d66-a023-242ca7d86b51', $attributes->getUploadId());
-        $this->assertEquals('simple', $attributes->getUploadType());
-        $this->assertEquals(4, $attributes->getUploaded());
-        $this->assertEquals(1525282016275, $attributes->getUploadedAt());
-
+        $this->assertInstanceOf(Client\Model\Response\Files\Common\File\Attributes::class, $attributes);
         $embed = $attributes->getEmbed();
-        $this->assertInstanceOf(Client\Model\Response\Files\InfoGet\Data\Attributes\Embed::class, $embed);
-        $this->assertEquals(
-            '<iframe allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" width="{{ width }}" height="{{ height }}" frameborder="0" style="border:0;" src="https://api.cappasity.com/api/player/dd596de4-ae2b-4d66-a023-242ca7d86b51/embedded?autorun={{ autorun }}&closebutton={{ closebutton }}&logo={{ logo }}&autorotate={{ autorotate }}&autorotatetime={{ autorotatetime }}&autorotatedelay={{ autorotatedelay }}&autorotatedir={{ autorotatedir }}&hidefullscreen={{ hidefullscreen }}&hideautorotateopt={{ hideautorotateopt }}&hidesettingsbtn={{ hidesettingsbtn }}&enableimagezoom={{ enableimagezoom }}&zoomquality={{ zoomquality }}&hidezoomopt={{ hidezoomopt }}"></iframe>',
-            $embed->getCode()
-        );
-
+        $this->assertInstanceOf(Client\Model\Response\Files\Common\File\Attributes\Embed::class, $embed);
         $embedParams = $embed->getParams();
-        $this->assertEquals('Auto-start player', $embedParams->getAutoRun()->getDescription());
-        $this->assertEquals('Close button', $embedParams->getCloseButton()->getDescription());
-        $this->assertEquals('Show logo', $embedParams->getLogo()->getDescription());
-        $this->assertEquals('Autorotate', $embedParams->getAutorotate()->getDescription());
-        $this->assertEquals('Autorotate time, seconds', $embedParams->getAutorotateTime()->getDescription());
-        $this->assertEquals('Autorotate delay, seconds', $embedParams->getAutorotateDelay()->getDescription());
-        $this->assertEquals('Autorotate direction', $embedParams->getAutorotateDir()->getDescription());
-        $this->assertEquals('Hide fullscreen', $embedParams->getHideFullScreen()->getDescription());
-        $this->assertEquals('Autorotate button', $embedParams->getHideAutorotateOpt()->getDescription());
-        $this->assertEquals('Settings button', $embedParams->getHideSettingsBtn()->getDescription());
-        $this->assertEquals('Enable zoom', $embedParams->getEnableImageZoom()->getDescription());
-        $this->assertEquals('Zoom quality', $embedParams->getZoomQuality()->getDescription());
-        $this->assertEquals('Zoom button', $embedParams->getHideZoomOpt()->getDescription());
-        $this->assertEquals('Width of embedded window (px or %)', $embedParams->getWidth()->getDescription());
-        $this->assertEquals('Height of embedded window (px or %)', $embedParams->getHeight()->getDescription());
-
+        $this->assertInstanceOf(Client\Model\Response\Files\Common\File\Attributes\Embed\Params::class, $embedParams);
         $files = $attributes->getFiles();
         $this->assertCount(4, $files);
         $firstFile = $files[0];
-        $this->assertInstanceOf(Client\Model\Response\Files\InfoGet\Data\Attributes\File::class, $firstFile);
-        $this->assertEquals(30621, $firstFile->getContentLength());
-        $this->assertEquals('image/jpeg', $firstFile->getContentType());
-        $this->assertEquals('s4gKmXq1WC7ItJAf4ERhqA==', $firstFile->getMd5Hash());
-        $this->assertEquals('cdn.cappasity.com', $firstFile->getBucket());
-        $this->assertEquals('c-preview', $firstFile->getType());
-        $this->assertEquals(
-            '4b528066036d2c07e6b9b53784509913/dd596de4-ae2b-4d66-a023-242ca7d86b51/7d001be0-4506-41d3-8bdb-66fd6fecae65.jpeg',
-            $firstFile->getFilename()
-        );
-
+        $this->assertInstanceOf(Client\Model\Response\Files\Common\File\Attributes\File::class, $firstFile);
         $links = $actualResponseData->getData()->getLinks();
-
-        $this->assertEquals(
-            'https://api.cappasity.com/api/files/dd596de4-ae2b-4d66-a023-242ca7d86b51',
-            $links->getSelf()
-        );
-        $this->assertEquals(
-            'https://api.cappasity.com/api/users/alice',
-            $links->getOwner()
-        );
-        $this->assertEquals(
-            'https://3d.cappasity.com/u/alice/dd596de4-ae2b-4d66-a023-242ca7d86b51',
-            $links->getPlayer()
-        );
-        $this->assertEquals(
-            'https://3d.cappasity.com/u/alice',
-            $links->getUser()
-        );
+        $this->assertInstanceOf(Client\Model\Response\Files\Common\File\Links::class, $links);
     }
 
     public function testGetPaymentsPlan()
@@ -1040,6 +962,298 @@ class ClientTest extends \PHPUnit\Framework\TestCase
             'https://api.cappasity.com/api/payments/plans/P-1AS44544Y0488105H5QI6O2I',
             $links->getSelf()
         );
+    }
+
+    public function testGetViewList()
+    {
+        $client = $this->makeClient();
+        $requestParams = Client\Model\Request\Files\ListGet::fromData(1);
+        $mockedResponseData = [
+            'meta' => [
+                'id' => '698c86d4-e68e-4bc0-80b0-a58e57e59a5b',
+                'page' => 1,
+                'pages' => 410,
+                'cursor' => 1,
+                'timers' =>
+                    [
+                        'list:pre-parse' => 0.144045,
+                        'list:validate' => 0.082124,
+                        'list:ms-files' => 60.096107,
+                        'list:qs' => 0.13568,
+                        'list:serialized' => 0.19285,
+                        'list:$' => '60.66',
+                    ],
+            ],
+            'links' => [
+                'self' => 'https://api.cappasity3d.com/api/files?order=DESC&limit=1&filter=%257B%257D&pub=1&owner=cappasity',
+                'next' => 'https://api.cappasity3d.com/api/files?order=DESC&limit=1&filter=%257B%257D&pub=1&owner=cappasity&offset=1',
+            ],
+            'data' => [
+                [
+                    'type' => 'file',
+                    'id' => 'ffd3edb7-cfbc-4880-8287-a6dc7ca84579',
+                    'attributes' =>
+                        [
+                            'public' => '1',
+                            'contentLength' => 28010036,
+                            'name' => 'danya_08',
+                            'files' => [
+                                [
+                                    'contentLength' => 31347,
+                                    'contentType' => 'image/jpeg',
+                                    'md5Hash' => 'BdqzIQNCTuqnrJWncVJRLg==',
+                                    'bucket' => 'cdn.cappasity3d.com',
+                                    'type' => 'c-preview',
+                                    'filename' => 'c8b9c4579fc2c11a795785393c9aaf65/ffd3edb7-cfbc-4880-8287-a6dc7ca84579/7f0fdc79-9ef1-45fb-ac3f-6cabe6e0385c.jpeg',
+                                ],
+                                [
+                                    'contentLength' => 42696,
+                                    'contentType' => 'image/vnd.cappasity',
+                                    'md5Hash' => 'gmgAupRdc8kk5NllyHpWqA==',
+                                    'bucket' => 'cdn.cappasity3d.com',
+                                    'type' => 'c-pack',
+                                    'filename' => 'c8b9c4579fc2c11a795785393c9aaf65/ffd3edb7-cfbc-4880-8287-a6dc7ca84579/a6681d99-e2cf-4042-9094-7a9416a7c2c4.pack',
+                                ],
+                                [
+                                    'contentLength' => 6832050,
+                                    'contentType' => 'image/vnd.cappasity',
+                                    'md5Hash' => '2SuRRCzCqmZI17/qhSVyHg==',
+                                    'bucket' => 'cdn.cappasity3d.com',
+                                    'type' => 'c-pack',
+                                    'filename' => 'c8b9c4579fc2c11a795785393c9aaf65/ffd3edb7-cfbc-4880-8287-a6dc7ca84579/e65f1bd1-2676-4b4a-9209-c6bd158c57b1.pack',
+                                ],
+                                [
+                                    'contentLength' => 10411179,
+                                    'contentType' => 'image/vnd.cappasity',
+                                    'md5Hash' => 'c+YlOMWuKAF+PNgfzzpBew==',
+                                    'bucket' => 'cdn.cappasity3d.com',
+                                    'type' => 'c-pack',
+                                    'filename' => 'c8b9c4579fc2c11a795785393c9aaf65/ffd3edb7-cfbc-4880-8287-a6dc7ca84579/84b0abc8-2545-4ee9-a734-4053cdea7438.pack',
+                                ],
+                                [
+                                    'contentLength' => 10408574,
+                                    'contentType' => 'image/vnd.cappasity',
+                                    'md5Hash' => '5kkFhtQKTnswGd9DrP3azA==',
+                                    'bucket' => 'cdn.cappasity3d.com',
+                                    'type' => 'c-pack',
+                                    'filename' => 'c8b9c4579fc2c11a795785393c9aaf65/ffd3edb7-cfbc-4880-8287-a6dc7ca84579/1832375c-9427-4e7a-807e-acb3ecc95b05.pack',
+                                ],
+                                [
+                                    'contentLength' => 284190,
+                                    'contentType' => 'image/vnd.cappasity',
+                                    'md5Hash' => 'Btn5eFYLUZoTJo5X6dIpaw==',
+                                    'bucket' => 'cdn.cappasity3d.com',
+                                    'type' => 'c-pack',
+                                    'filename' => 'c8b9c4579fc2c11a795785393c9aaf65/ffd3edb7-cfbc-4880-8287-a6dc7ca84579/f0e5d3a3-aeba-4744-ab79-26d56cca0f7f.pack',
+                                ],
+                            ],
+                            'parts' => 6,
+                            'tags' =>
+                                [
+                                    0 => 'Clothing',
+                                    1 => 'Undergarment',
+                                    2 => 'Briefs',
+                                    3 => 'Photo shoot',
+                                    4 => 'Fashion model',
+                                    5 => 'Lingerie top',
+                                    6 => 'Swimwear',
+                                ],
+                            'type' => 'object',
+                            'uploadedAt' => 1551090243029,
+                            'embed' => [
+                                'code' => '<iframe allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" width="{{ width }}" height="{{ height }}" frameborder="0" style="border:0;" src="https://api.cappasity.com/api/player/ffd3edb7-cfbc-4880-8287-a6dc7ca84579/embedded?autorun={{ autorun }}&closebutton={{ closebutton }}&logo={{ logo }}&analytics={{ analytics }}&uipadx={{ uipadx }}&uipady={{ uipady }}&autorotate={{ autorotate }}&autorotatetime={{ autorotatetime }}&autorotatedelay={{ autorotatedelay }}&autorotatedir={{ autorotatedir }}&hidefullscreen={{ hidefullscreen }}&hideautorotateopt={{ hideautorotateopt }}&hidesettingsbtn={{ hidesettingsbtn }}&enableimagezoom={{ enableimagezoom }}&zoomquality={{ zoomquality }}&hidezoomopt={{ hidezoomopt }}"></iframe>',
+                                'params' => [
+                                    'autorun' => [
+                                        'type' => 'boolean',
+                                        'default' => 0,
+                                        'description' => 'Auto-start player',
+                                    ],
+                                    'closebutton' => [
+                                        'type' => 'boolean',
+                                        'default' => 1,
+                                        'description' => 'Close button',
+                                    ],
+                                    'logo' => [
+                                        'type' => 'boolean',
+                                        'own' => 0,
+                                        'default' => 1,
+                                        'description' => 'Show logo',
+                                        'paid' => true,
+                                        'reqPlanLevel' => 20,
+                                    ],
+                                    'analytics' => [
+                                        'type' => 'boolean',
+                                        'default' => 1,
+                                        'description' => 'Enable analytics',
+                                    ],
+                                    'uipadx' => [
+                                        'type' => 'integer',
+                                        'default' => 0,
+                                        'description' => 'Horizontal (left, right) UI padding in pixels',
+                                    ],
+                                    'uipady' => [
+                                        'type' => 'integer',
+                                        'default' => 0,
+                                        'description' => 'Vertical (top, bottom) UI padding in pixels',
+                                    ],
+                                    'autorotate' => [
+                                        'type' => 'boolean',
+                                        'default' => 0,
+                                        'description' => 'Autorotate',
+                                        'paid' => true,
+                                        'reqPlanLevel' => 30,
+                                    ],
+                                    'autorotatetime' => [
+                                        'type' => 'float',
+                                        'default' => 10,
+                                        'description' => 'Autorotate time, seconds',
+                                        'min' => 2,
+                                        'max' => 60,
+                                        'paid' => true,
+                                        'reqPlanLevel' => 30,
+                                    ],
+                                    'autorotatedelay' => [
+                                        'type' => 'float',
+                                        'default' => 2,
+                                        'description' => 'Autorotate delay, seconds',
+                                        'min' => 1,
+                                        'max' => 10,
+                                        'paid' => true,
+                                        'reqPlanLevel' => 30,
+                                    ],
+                                    'autorotatedir' => [
+                                        'type' => 'integer',
+                                        'default' => 1,
+                                        'description' => 'Autorotate direction',
+                                        'enum' =>
+                                            [
+                                                'clockwise' => 1,
+                                                'counter-clockwise' => -1,
+                                            ],
+                                        'paid' => true,
+                                        'reqPlanLevel' => 30,
+                                    ],
+                                    'hidefullscreen' => [
+                                        'type' => 'boolean',
+                                        'description' => 'Hide fullscreen',
+                                        'default' => 1,
+                                        'paid' => true,
+                                        'reqPlanLevel' => 30,
+                                    ],
+                                    'hideautorotateopt' => [
+                                        'type' => 'boolean',
+                                        'own' => 0,
+                                        'default' => 1,
+                                        'invert' => true,
+                                        'description' => 'Autorotate button',
+                                        'paid' => true,
+                                        'reqPlanLevel' => 30,
+                                    ],
+                                    'hidesettingsbtn' => [
+                                        'type' => 'boolean',
+                                        'default' => 0,
+                                        'description' => 'Settings button',
+                                        'invert' => true,
+                                        'paid' => true,
+                                        'reqPlanLevel' => 30,
+                                    ],
+                                    'enableimagezoom' => [
+                                        'type' => 'boolean',
+                                        'default' => 1,
+                                        'description' => 'Enable zoom',
+                                        'paid' => true,
+                                        'reqPlanLevel' => 30,
+                                    ],
+                                    'zoomquality' => [
+                                        'type' => 'integer',
+                                        'default' => 1,
+                                        'enum' => [
+                                            'SD' => 1,
+                                            'HD' => 2,
+                                        ],
+                                        'description' => 'Zoom quality',
+                                        'paid' => true,
+                                        'reqPlanLevel' => 30,
+                                    ],
+                                    'hidezoomopt' => [
+                                        'type' => 'boolean',
+                                        'default' => 0,
+                                        'description' => 'Zoom button',
+                                        'paid' => true,
+                                        'invert' => true,
+                                        'reqPlanLevel' => 30,
+                                    ],
+                                    'width' => [
+                                        'type' => 'string',
+                                        'default' => '100%',
+                                        'description' => 'Width of embedded window (px or %)',
+                                    ],
+                                    'height' => [
+                                        'type' => 'string',
+                                        'default' => '600px',
+                                        'description' => 'Height of embedded window (px or %)',
+                                    ],
+                                ],
+                            ],
+                            'bucket' => 'cdn.cappasity3d.com',
+                            'uploadType' => 'simple',
+                            'backgroundColor' => '#FFFFFF',
+                            'packed' => '1',
+                            'c_ver' => '4.1.0',
+                            'owner' => 'cappasity',
+                        ],
+                    'links' => [
+                        'self' => 'https://api.cappasity.com/api/files/ffd3edb7-cfbc-4880-8287-a6dc7ca84579',
+                        'owner' => 'https://api.cappasity.com/api/users/cappasity',
+                        'player' => 'https://3d.cappasity.com/u/cappasity/ffd3edb7-cfbc-4880-8287-a6dc7ca84579',
+                        'user' => 'https://3d.cappasity.com/u/cappasity',
+                    ],
+                ],
+            ],
+        ];
+        $mockedTransportResponse = $this->makeTransportResponseContainer(200, $mockedResponseData);
+        $mockedClientResponse = $this->makeClientResponseContainer(
+            $mockedTransportResponse,
+            Client\Model\Response\Files\ListGet::class
+        );
+        $this->expectResponseTransformed(
+            [$mockedTransportResponse, Client\Model\Response\Files\ListGet::class],
+            $mockedClientResponse
+        );
+
+        $this->expectValidationPerformed(
+            $requestParams,
+            Client\Validator\Type\Request\Files\ListGet::class
+        );
+
+        $this->expectRequestMade(
+            [
+                'GET',
+                'https://api.cappasity.com/api/files',
+                [
+                    'headers' => [
+                        'authorization' => "Bearer {$this->apiToken}",
+                    ],
+                    'timeout' => 5,
+                    'query' => [
+                        'limit' => 1,
+                    ]
+                ]
+            ],
+            $mockedTransportResponse
+        );
+
+        $actualResponse = $client->getViewList($requestParams);
+        $this->assertInstanceOf(Client\Model\Response\Container::class, $actualResponse);
+        $this->assertInstanceOf(Client\Model\Response\Files\ListGet::class, $actualResponse->getBodyData());
+        /** @var Client\Model\Response\Files\ListGet $actualResponseData */
+        $actualResponseData = $actualResponse->getBodyData();
+        $file = $actualResponseData->getData()[0];
+        $this->assertInstanceOf(Client\Model\Response\Files\Common\File::class, $file);
+        $attributes = $file->getAttributes();
+        $this->assertInstanceOf(Client\Model\Response\Files\Common\File\Attributes::class, $attributes);
+        $files = $attributes->getFiles();
+        $this->assertCount(6, $files);
     }
 
     /**

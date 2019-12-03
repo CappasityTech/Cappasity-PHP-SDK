@@ -68,6 +68,7 @@ class Client implements ClientInterface
             self::ENDPOINT_USERS_ME_GET => 5,
             self::ENDPOINT_FILES_INFO_GET => 5,
             self::ENDPOINT_PAYMENTS_PLANS_PLAN_GET => 5,
+            self::ENDPOINT_FILES_LIST_GET => 5
         ],
     ];
 
@@ -81,6 +82,8 @@ class Client implements ClientInterface
         self::ENDPOINT_PROCESS_JOBS_PULL_ACK_POST,
         self::ENDPOINT_USERS_ME_GET,
         self::ENDPOINT_PAYMENTS_PLANS_PLAN_GET,
+        self::ENDPOINT_FILES_INFO_GET,
+        self::ENDPOINT_FILES_LIST_GET,
     ];
 
     /**
@@ -265,7 +268,7 @@ class Client implements ClientInterface
         }
 
         if ($params->getSortBy()) {
-            $query['sortBy'] = $params->getSortBy();
+            $query['sortBy'] = rawurlencode($params->getSortBy());
         }
 
         if ($params->getOrder()) {
@@ -274,16 +277,9 @@ class Client implements ClientInterface
 
         $response = $this->makeRequest(
             'GET',
-            self::ENDPOINT_FILES_LIST_GET,
+            static::ENDPOINT_FILES_LIST_GET,
             [],
-            [
-                'query' => [
-                    'offset' => $params->getOffset(),
-                    'limit' => $params->getLimit(),
-                    'sortBy' => rawurlencode($params->getSortBy()),
-                    'order' => $params->getOrder(),
-                ]
-            ]
+            ['query' => $query]
         );
 
         return $this->getResponseAdapter()->transform($response, Response\Files\ListGet::class);

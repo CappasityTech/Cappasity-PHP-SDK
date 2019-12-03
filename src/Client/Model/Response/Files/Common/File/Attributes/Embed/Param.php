@@ -10,7 +10,7 @@
  * @copyright 2019 Cappasity Inc.
  */
 
-namespace CappasitySDK\Client\Model\Response\Files\InfoGet\Data\Attributes\Embed;
+namespace CappasitySDK\Client\Model\Response\Files\Common\File\Attributes\Embed;
 
 class Param
 {

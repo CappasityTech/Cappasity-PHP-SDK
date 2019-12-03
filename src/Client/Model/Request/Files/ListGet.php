@@ -43,24 +43,17 @@ class ListGet implements Request\RequestParamsInterface
     private $order;
 
     /**
-     * @var null|string
-     */
-    private $filter;
-
-    /**
      * @param int $offset
      * @param int $limit
      * @param string $sortBy
      * @param string $order
-     * @param string $filter
      */
-    public function __construct($offset, $limit, $sortBy, $order, $filter)
+    public function __construct($limit, $offset, $sortBy, $order)
     {
-        $this->offset = $offset;
         $this->limit = $limit;
+        $this->offset = $offset;
         $this->sortBy = $sortBy;
         $this->order = $order;
-        $this->filter = $filter;
     }
 
     /**
@@ -68,17 +61,15 @@ class ListGet implements Request\RequestParamsInterface
      * @param null|int $limit
      * @param null|string $sortBy
      * @param null|string $order
-     * @param null|string $filter
      * @return ListGet
      */
     public static function fromData(
-        ?int $offset,
-        ?int $limit,
-        ?string $sortBy,
-        ?string $order,
-        ?string $filter
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $sortBy = null,
+        ?string $order = null
     ): ListGet {
-        return new self($offset, $limit, $sortBy, $order, $filter);
+        return new self($limit, $offset, $sortBy, $order);
     }
 
     public function getOffset(): ?int

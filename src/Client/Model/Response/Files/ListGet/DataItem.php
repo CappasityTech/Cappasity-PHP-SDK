@@ -10,11 +10,11 @@
  * @copyright 2019 Cappasity Inc.
  */
 
-namespace CappasitySDK\Client\Model\Response\Files\InfoGet;
+namespace CappasitySDK\Client\Model\Response\Files\ListGet;
 
-use CappasitySDK\Client\Model\Response\Files\Common;
+use CappasitySDK\Client\Model\Response\Files\Common\File;
 
-class Data extends Common\File
+class DataItem extends File
 {
 
 }

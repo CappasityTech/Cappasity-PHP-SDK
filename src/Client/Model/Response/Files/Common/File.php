@@ -10,44 +10,40 @@
  * @copyright 2019 Cappasity Inc.
  */
 
-namespace CappasitySDK\Client\Model\Response\Files\ListGet;
+namespace CappasitySDK\Client\Model\Response\Files\Common;
 
-class Data
+class File
 {
     /**
-     * Response data type - always `file`
-     * @var string
-     */
-    private $type;
-
-    /**
-     * Filename, UUID v4
      * @var string
      */
     private $id;
 
     /**
-     * File attributes
-     * @var Data\Attributes
+     * @var string
+     */
+    private $type;
+
+    /**
+     * @var File\Attributes
      */
     private $attributes;
 
     /**
-     * File links
-     * @var Data\Links
+     * @var File\Links
      */
     private $links;
 
     /**
-     * @param string $type
      * @param string $id
-     * @param Data\Attributes $attributes
-     * @param Data\Links $links
+     * @param string $type
+     * @param File\Attributes $attributes
+     * @param File\Links $links
      */
-    public function __construct($type, $id, Data\Attributes $attributes, Data\Links $links)
+    public function __construct($id, $type, File\Attributes $attributes, File\Links $links)
     {
-        $this->type = $type;
         $this->id = $id;
+        $this->type = $type;
         $this->attributes = $attributes;
         $this->links = $links;
     }
@@ -55,26 +51,7 @@ class Data
     /**
      * @return string
      */
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param string $type
-     * @return $this
-     */
-    public function setType(string $type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getId(): string
+    public function getId()
     {
         return $this->id;
     }
@@ -83,7 +60,7 @@ class Data
      * @param string $id
      * @return $this
      */
-    public function setId(string $id)
+    public function setId($id)
     {
         $this->id = $id;
 
@@ -91,18 +68,37 @@ class Data
     }
 
     /**
-     * @return Data\Attributes
+     * @return string
      */
-    public function getAttributes(): Data\Attributes
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return File\Attributes
+     */
+    public function getAttributes()
     {
         return $this->attributes;
     }
 
     /**
-     * @param Data\Attributes $attributes
+     * @param File\Attributes $attributes
      * @return $this
      */
-    public function setAttributes(Data\Attributes $attributes)
+    public function setAttributes(File\Attributes $attributes)
     {
         $this->attributes = $attributes;
 
@@ -110,18 +106,18 @@ class Data
     }
 
     /**
-     * @return Data\Links
+     * @return File\Links
      */
-    public function getLinks(): Data\Links
+    public function getLinks()
     {
         return $this->links;
     }
 
     /**
-     * @param Data\Links $links
+     * @param File\Links $links
      * @return $this
      */
-    public function setLinks(Data\Links $links)
+    public function setLinks(File\Links $links)
     {
         $this->links = $links;
 

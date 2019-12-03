@@ -1,6 +1,16 @@
 <?php
+/**
+ * NOTICE OF LICENSE
+ *
+ * This file is licensed only to registered users of the Cappasity platform.
+ *
+ * You must not modify, adapt or create derivative works of this source code
+ *
+ * @author    Cappasity Inc <info@cappasity.com>
+ * @copyright 2019 Cappasity Inc.
+ */
 
-namespace CappasitySDK\Client\Model\Response\Files\InfoGet\Data\Attributes\Embed;
+namespace CappasitySDK\Client\Model\Response\Files\Common\File\Attributes\Embed;
 
 class Params
 {
@@ -78,6 +88,21 @@ class Params
      * @var Param
      */
     private $height;
+
+    /**
+     * @var Param
+     */
+    private $analytics;
+
+    /**
+     * @var Param
+     */
+    private $uiPadX;
+
+    /**
+     * @var Param
+     */
+    private $uiPadY;
 
     /**
      * @return Param
@@ -360,6 +385,63 @@ class Params
     public function setHeight($height)
     {
         $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * @return Param
+     */
+    public function getAnalytics(): Param
+    {
+        return $this->analytics;
+    }
+
+    /**
+     * @param Param $analytics
+     * @return $this
+     */
+    public function setAnalytics(Param $analytics)
+    {
+        $this->analytics = $analytics;
+
+        return $this;
+    }
+
+    /**
+     * @return Param
+     */
+    public function getUiPadX(): Param
+    {
+        return $this->uiPadX;
+    }
+
+    /**
+     * @param Param $uiPadX
+     * @return $this
+     */
+    public function setUiPadX(Param $uiPadX)
+    {
+        $this->uiPadX = $uiPadX;
+
+        return $this;
+    }
+
+    /**
+     * @return Param
+     */
+    public function getUiPadY(): Param
+    {
+        return $this->uiPadY;
+    }
+
+    /**
+     * @param Param $uiPadY
+     * @return $this
+     */
+    public function setUiPadY(Param $uiPadY)
+    {
+        $this->uiPadY = $uiPadY;
 
         return $this;
     }

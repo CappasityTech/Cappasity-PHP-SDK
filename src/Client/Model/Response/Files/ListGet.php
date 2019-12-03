@@ -13,6 +13,7 @@
 namespace CappasitySDK\Client\Model\Response\Files;
 
 use CappasitySDK\Client\Model\Response;
+use CappasitySDK\Client\ResponseModelAdapter\File as FileResponseModelAdapter;
 
 class ListGet implements Response\DataInterface
 {
@@ -22,18 +23,25 @@ class ListGet implements Response\DataInterface
     private $meta;
 
     /**
-     * @var ListGet\Data
+     * @var Response\Files\Common\File[]
      */
     private $data;
 
     /**
-     * @param ListGet\Meta $meta
-     * @param ListGet\Data $data
+     * @var ListGet\Links
      */
-    public function __construct(ListGet\Meta $meta, ListGet\Data $data)
+    private $links;
+
+    /**
+     * @param ListGet\Meta $meta
+     * @param Response\Files\Common\File[] $data
+     * @param ListGet\Links $links
+     */
+    public function __construct(ListGet\Meta $meta, array $data, ListGet\Links $links)
     {
         $this->meta = $meta;
         $this->data = $data;
+        $this->links = $links;
     }
 
     /**
@@ -56,7 +64,7 @@ class ListGet implements Response\DataInterface
     }
 
     /**
-     * @return ListGet\Data
+     * @return Response\Files\Common\File[]
      */
     public function getData()
     {
@@ -64,10 +72,10 @@ class ListGet implements Response\DataInterface
     }
 
     /**
-     * @param ListGet\Data $data
+     * @param Response\Files\Common\File[] $data
      * @return $this
      */
-    public function setData(ListGet\Data $data)
+    public function setData(array $data)
     {
         $this->data = $data;
 
@@ -80,51 +88,27 @@ class ListGet implements Response\DataInterface
      */
     public static function fromResponse(array $response)
     {
-        $attributesData = $response['data']['attributes'];
-        $linksData = $response['data']['links'];
-
         $files = array_map(
-            function (array $file) {
-                return (new ListGet\Data\Attributes\File())
-                    ->setType($file['type'])
-                    ->setFilename($file['filename'])
-                    ->setContentLength($file['contentLength'])
-                    ->setContentType($file['contentType'])
-                    ->setContentEncoding($file['contentEncoding'])
-                    ->setMd5Hash($file['md5Hash']);
-            },
-            $attributesData['files']
+            [FileResponseModelAdapter::class, 'transformFile'],
+            $response['data']
         );
 
-        $attributes = (new ListGet\Data\Attributes())
-            ->setName($attributesData['name'])
-            ->setDescription($attributesData['description'])
-            ->setWebsite($attributesData['website'])
-            ->setStartedAt($attributesData['startedAt'])
-            ->setUploadedAt($attributesData['uploadedAt'])
-            ->setStatus($attributesData['status'])
-            ->setOwner($attributesData['owner'])
-            ->setContentLength($attributesData['length'])
-            ->setPublic($attributesData['public'])
-            ->setError($attributesData['error'])
-            ->setFiles($files);
-        ;
+        ['self' => $self, 'next' => $next] = $response['links'];
+        $links = (new ListGet\Links())
+            ->setSelf($self)
+            ->setNext($next);
 
-        $links = (new ListGet\Data\Links())
-            ->setSelf($linksData['self'])
-            ->setOwner($linksData['owner'])
-        ;
-
-        $meta = $response['meta'];
+        [
+            'id' => $id,
+            'page' => $page,
+            'pages' => $pages,
+            'cursor' => $cursor,
+        ] = $response['meta'];
 
         return new self(
-            new ListGet\Meta($meta['id'], $meta['page'], $meta['pages'], $meta['cursor']),
-            new ListGet\Data(
-                $response['data']['id'],
-                $response['data']['type'],
-                $attributes,
-                $links
-            )
+            new ListGet\Meta($id, $page, $pages, $cursor),
+            $files,
+            $links
         );
     }
 }
