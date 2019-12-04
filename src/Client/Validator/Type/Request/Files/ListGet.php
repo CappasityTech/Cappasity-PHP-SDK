@@ -27,10 +27,22 @@ class ListGet implements Validator\TypeInterface
         return V::create()
             ->setName('ListGet')
             ->instance(ListGetModel::class)
-            ->attribute('offset', V::allOf(V::intType(), V::min(0)), false)
-            ->attribute('limit', V::allOf(V::intType(), V::min(1), V::max(100)), false)
-            ->attribute('sortBy', V::stringType(), false)
-            ->attribute('order', V::stringType(), false);
+            ->attribute(
+                'offset',
+                V::oneOf(
+                    V::nullType(),
+                    V::intType()->min(0)
+                )
+            )
+            ->attribute(
+                'limit',
+                V::oneOf(
+                    V::nullType(),
+                    V::intType()->min(1)->max(100)
+                )
+            )
+            ->attribute('sortBy', V::oneOf(V::nullType(), V::stringType()))
+            ->attribute('order', V::oneOf(V::nullType(), V::stringType()));
     }
 
     /**

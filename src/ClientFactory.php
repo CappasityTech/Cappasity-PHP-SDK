@@ -39,6 +39,10 @@ class ClientFactory
         'config' => []
     ];
 
+    /**
+     * @param array $options
+     * @return Client|ReportableClient
+     */
     public static function getClientInstance(array $options)
     {
         $resolvedOptions = array_replace_recursive(self::$defaultOptions, $options);

@@ -26,6 +26,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
                     'public' => '1',
                     'contentLength' => 28010036,
                     'name' => 'danya_08',
+                    'alias' => 'sku-goes-here',
                     'files' => [
                         [
                             'contentLength' => 31347,
@@ -248,6 +249,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(1, $attributes->getPublic());
         $this->assertEquals(28010036, $attributes->getContentLength());
         $this->assertEquals('danya_08', $attributes->getName());
+        $this->assertEquals('sku-goes-here', $attributes->getAlias());
         $files = $attributes->getFiles();
         $this->assertCount(6, $files);
         $fileItem = $files[0];

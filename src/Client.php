@@ -68,7 +68,7 @@ class Client implements ClientInterface
             self::ENDPOINT_USERS_ME_GET => 5,
             self::ENDPOINT_FILES_INFO_GET => 5,
             self::ENDPOINT_PAYMENTS_PLANS_PLAN_GET => 5,
-            self::ENDPOINT_FILES_LIST_GET => 5
+            self::ENDPOINT_FILES_LIST_GET => 7,
         ],
     ];
 
@@ -259,6 +259,7 @@ class Client implements ClientInterface
 
         $query = [];
 
+        var_dump('params offset', $params->getOffset());
         if ($params->getOffset()) {
             $query['offset'] = $params->getOffset();
         }
@@ -283,6 +284,31 @@ class Client implements ClientInterface
         );
 
         return $this->getResponseAdapter()->transform($response, Response\Files\ListGet::class);
+    }
+
+    /**
+     * @param $chunkSize
+     * @param $sortBy
+     * @param $order
+     * @return \Generator|Response\Files\ListGet
+     */
+    public function getViewListIterator($chunkSize, $sortBy = null, $order = null): \Generator
+    {
+        $hasNextPage = true;
+        $offset = 0;
+
+        while ($hasNextPage) {
+            var_dump($offset);
+            $params = new Request\Files\ListGet($chunkSize, $offset, $sortBy, $order);
+            /** @var Response\Files\ListGet $chunk */
+            $chunk = $this->getViewList($params);
+            /** @var Response\Files\ListGet\Meta $meta */
+            $meta = $chunk->getBodyData()->getMeta();
+            $hasNextPage = $meta->getPage() < $meta->getPages();
+            $offset += $chunkSize;
+
+            yield $chunk;
+        }
     }
     
     /**
@@ -401,7 +427,9 @@ class Client implements ClientInterface
     private function assertParams(Client\Model\Request\RequestParamsInterface $params, $validatorType)
     {
         try {
-            $this->validator->assert($params, $this->validator->buildByType($validatorType));
+            $typeValidator = $this->validator->buildByType($validatorType);
+            var_dump('type validator', $typeValidator);
+            $this->validator->assert($params, $typeValidator);
         } catch (ValidatorWrapper\Exception\ValidationException $e) {
             throw Client\Exception\ValidationException::fromValidatorWrapperValidationException($e);
         }

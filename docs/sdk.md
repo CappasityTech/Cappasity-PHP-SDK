@@ -26,18 +26,21 @@ to get a link to an image that fits desired sizes, format, quality, etc.
     * [Get user](#get-user)
       * [Errors](#errors)
     * [Get payment plan by ID](#get-payment-plan-by-id)
+    * [Get view list](#get-view-list)
+      * [Errors](#errors-2)
+      * [Get view list with iterator](#get-view-list-with-iterator)
     * [Get view info](#get-view-info)
-      * [Errors](#errors-2)    
+      * [Errors](#errors-3)    
     * [Register sync job](#register-sync-job)
       * [HTTP Push type](#http-push-type)
       * [HTTP Pull type](#http-pull-type)
-      * [Errors](#errors-3)
-    * [Get pull job list](#get-pull-job-list)
       * [Errors](#errors-4)
-    * [Get pull job result](#get-pull-job-result)
+    * [Get pull job list](#get-pull-job-list)
       * [Errors](#errors-5)
-    * [Acknowledge pull job list](#acknowledge-pull-job-list)
+    * [Get pull job result](#get-pull-job-result)
       * [Errors](#errors-6)
+    * [Acknowledge pull job list](#acknowledge-pull-job-list)
+      * [Errors](#errors-7)
 * [EmbedRenderer](#embedrenderer)
   * [Render embed code](#render-embed-code)
     * [Rendered code example](#rendered-code-example)
@@ -218,6 +221,54 @@ $level = $plan->getLevel();
 
 #### Errors
 There are no expected errors.
+
+### Get view list
+This method provides the list of Views.
+```php
+use CappasitySDK\Client\Model\Request;
+use CappasitySDK\Client\Model\Response;
+
+const LIMIT = 10;
+$params = new Request\Files\ListGet(self::LIMIT);
+/** @var Response\Files\ListGet $response */
+$response = $client->getViewList($params)->getBodyData();
+
+/** @var Response\Files\Common\File */
+$views = $response->getData();
+foreach ($views as $view) {
+    $viewId = $view->getId();
+    $backgroundColor = $view->getAttributes()->getBackgroundColor();     
+}
+```
+You may implement pagination manually, or use `getViewListIterator` helper method.
+
+#### Errors
+| Code | Description                   |
+|:----:|-------------------------------|
+| 401  | Authorization error           |
+
+#### Get view list with iterator
+This method is implemented as a [generator function](https://www.php.net/manual/en/language.generators.overview.php). This method returns an `Generator` instance so you could iterate over the whole View list using a regular `foreach` loop without worrying about pages count. Or you can use the [Iterator interface](https://www.php.net/manual/en/class.iterator.php) methods to work with it directly. 
+Here's an example of how to collect all View IDs using this helper:
+:
+```
+use CappasitySDK\Client\Model\Request;
+use CappasitySDK\Client\Model\Response;
+
+const CHUNK_SIZE = 20;
+
+$viewList = $client->getViewListIterator(self::CHUNK_SIZE);
+$fileIds = [];
+foreach ($viewList as $chunk) {
+    $chunkFileIds = array_map(
+        function(Client\Model\Response\Files\Common\File $file) {
+            return $file->getId();
+        },
+        $chunk->getBodyData()->getData()
+    );
+    array_push($fileIds, ...$chunkFileIds);
+}
+```
 
 ### Get view info
 This method provides full View data, although in terms of synchronization you may need only its background color value.
