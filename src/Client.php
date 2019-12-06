@@ -259,7 +259,6 @@ class Client implements ClientInterface
 
         $query = [];
 
-        var_dump('params offset', $params->getOffset());
         if ($params->getOffset()) {
             $query['offset'] = $params->getOffset();
         }
@@ -287,19 +286,20 @@ class Client implements ClientInterface
     }
 
     /**
-     * @param $chunkSize
-     * @param $sortBy
-     * @param $order
-     * @return \Generator|Response\Files\ListGet
+     * @param Request\Files\ListGet $params
+     * @return \Generator|Response\Container Yielded value is Response\Container instance which holds
+     * Response\Files\ListGet object as body data
+     *
+     * @see Response\Files\ListGet
      */
-    public function getViewListIterator($chunkSize, $sortBy = null, $order = null): \Generator
+    public function getViewListIterator(Request\Files\ListGet $params): \Generator
     {
         $hasNextPage = true;
-        $offset = 0;
+        $offset = $params->getOffset();
+        $chunkSize = $params->getLimit();
 
         while ($hasNextPage) {
-            var_dump($offset);
-            $params = new Request\Files\ListGet($chunkSize, $offset, $sortBy, $order);
+            $params = new Request\Files\ListGet($chunkSize, $offset, $params->getSortBy(), $params->getOrder());
             /** @var Response\Files\ListGet $chunk */
             $chunk = $this->getViewList($params);
             /** @var Response\Files\ListGet\Meta $meta */
@@ -427,9 +427,7 @@ class Client implements ClientInterface
     private function assertParams(Client\Model\Request\RequestParamsInterface $params, $validatorType)
     {
         try {
-            $typeValidator = $this->validator->buildByType($validatorType);
-            var_dump('type validator', $typeValidator);
-            $this->validator->assert($params, $typeValidator);
+            $this->validator->assert($params, $this->validator->buildByType($validatorType));
         } catch (ValidatorWrapper\Exception\ValidationException $e) {
             throw Client\Exception\ValidationException::fromValidatorWrapperValidationException($e);
         }

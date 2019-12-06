@@ -1051,7 +1051,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
             )
             ->willReturn($mockedTransportResponse2);
 
-        $viewList = $client->getViewListIterator(1);
+        $viewList = $client->getViewListIterator(Client\Model\Request\Files\ListGet::fromData(1));
         $fileIds = [];
 
         foreach ($viewList as $chunk) {

@@ -229,7 +229,7 @@ use CappasitySDK\Client\Model\Request;
 use CappasitySDK\Client\Model\Response;
 
 const LIMIT = 10;
-$params = new Request\Files\ListGet(self::LIMIT);
+$params = Request\Files\ListGet::fromData(self::LIMIT);
 /** @var Response\Files\ListGet $response */
 $response = $client->getViewList($params)->getBodyData();
 
@@ -257,7 +257,7 @@ use CappasitySDK\Client\Model\Response;
 
 const CHUNK_SIZE = 20;
 
-$viewList = $client->getViewListIterator(self::CHUNK_SIZE);
+$viewList = $client->getViewListIterator(Request\Files\ListGet::fromData(self::CHUNK_SIZE));
 $fileIds = [];
 foreach ($viewList as $chunk) {
     $chunkFileIds = array_map(

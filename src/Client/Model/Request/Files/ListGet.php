@@ -43,8 +43,8 @@ class ListGet implements Request\RequestParamsInterface
     private $order;
 
     /**
+     * @param int $limit Limit or chunk size
      * @param int $offset
-     * @param int $limit
      * @param string $sortBy
      * @param string $order
      */
@@ -57,8 +57,8 @@ class ListGet implements Request\RequestParamsInterface
     }
 
     /**
-     * @param int $offset
-     * @param null|int $limit
+     * @param null|int $limit Limit or chunk size
+     * @param null|int $offset
      * @param null|string $sortBy
      * @param null|string $order
      * @return ListGet
