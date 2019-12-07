@@ -1,3 +1,13 @@
+# [3.4.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.3.0...v3.4.0) (2019-12-07)
+
+
+### Features
+
+* get files list ([8ec44fc](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/8ec44fc))
+* get view list iterator ([c67ba2f](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/c67ba2f))
+* move file model to common, introduce response model adapter ([f374bf8](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/f374bf8))
+* reuse param object ([94cec8e](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/94cec8e))
+
 # [3.3.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.2.0...v3.3.0) (2019-11-26)
 
 
