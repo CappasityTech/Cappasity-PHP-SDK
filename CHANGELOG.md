@@ -1,3 +1,10 @@
+## [3.4.1](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.4.0...v3.4.1) (2019-12-12)
+
+
+### Bug Fixes
+
+* require phpunit in dev only ([d5c9df7](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/d5c9df7))
+
 # [3.4.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.3.0...v3.4.0) (2019-12-07)
 
 
