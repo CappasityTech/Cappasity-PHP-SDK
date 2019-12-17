@@ -259,7 +259,7 @@ class Client implements ClientInterface
 
         $query = [];
 
-        if ($params->getOffset()) {
+        if (!is_null($params->getOffset())) {
             $query['offset'] = $params->getOffset();
         }
 
@@ -267,12 +267,24 @@ class Client implements ClientInterface
             $query['limit'] = $params->getLimit();
         }
 
-        if ($params->getSortBy()) {
-            $query['sortBy'] = rawurlencode($params->getSortBy());
+        if ($params->getCriteria()) {
+            $query['criteria'] = $params->getCriteria();
         }
 
         if ($params->getOrder()) {
             $query['order'] = $params->getOrder();
+        }
+
+        if ($params->getFilter()) {
+            $query['filter'] = json_encode($params->getFilter());
+        }
+
+        if ($params->getTags()) {
+            $query['tags'] = json_encode($params->getTags());
+        }
+
+        if (!is_null($params->getShallow())) {
+            $query['shallow'] = $params->getShallow() === true ? '1' : '0';
         }
 
         $response = $this->makeRequest(
@@ -299,7 +311,15 @@ class Client implements ClientInterface
         $chunkSize = $params->getLimit();
 
         while ($hasNextPage) {
-            $params = new Request\Files\ListGet($chunkSize, $offset, $params->getSortBy(), $params->getOrder());
+            $params = new Request\Files\ListGet(
+                $chunkSize,
+                $offset,
+                $params->getCriteria(),
+                $params->getOrder(),
+                $params->getFilter(),
+                $params->getTags(),
+                $params->getShallow()
+            );
             /** @var Response\Files\ListGet $chunk */
             $chunk = $this->getViewList($params);
             /** @var Response\Files\ListGet\Meta $meta */

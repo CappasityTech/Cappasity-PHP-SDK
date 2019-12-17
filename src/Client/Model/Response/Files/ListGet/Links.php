@@ -20,7 +20,7 @@ class Links
     private $self;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $next;
 
@@ -44,18 +44,18 @@ class Links
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNext(): string
+    public function getNext(): ?string
     {
         return $this->next;
     }
 
     /**
-     * @param string $next
+     * @param string|null $next
      * @return $this
      */
-    public function setNext(string $next)
+    public function setNext(?string $next)
     {
         $this->next = $next;
 

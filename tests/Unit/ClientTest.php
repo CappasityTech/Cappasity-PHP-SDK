@@ -964,7 +964,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testgetViewListIterator()
+    public function testGetViewListIterator()
     {
         $client = $this->makeClient();
 
@@ -1098,6 +1098,70 @@ class ClientTest extends \PHPUnit\Framework\TestCase
                     'timeout' => 7,
                     'query' => [
                         'limit' => 1,
+                    ]
+                ]
+            ],
+            $mockedTransportResponse
+        );
+
+        $actualResponse = $client->getViewList($requestParams);
+        $this->assertInstanceOf(Client\Model\Response\Container::class, $actualResponse);
+        $this->assertInstanceOf(Client\Model\Response\Files\ListGet::class, $actualResponse->getBodyData());
+        /** @var Client\Model\Response\Files\ListGet $actualResponseData */
+        $actualResponseData = $actualResponse->getBodyData();
+        $file = $actualResponseData->getData()[0];
+        $this->assertInstanceOf(Client\Model\Response\Files\Common\File::class, $file);
+        $attributes = $file->getAttributes();
+        $this->assertInstanceOf(Client\Model\Response\Files\Common\File\Attributes::class, $attributes);
+        $files = $attributes->getFiles();
+        $this->assertCount(6, $files);
+    }
+
+    public function testGetViewListWithFullQuery()
+    {
+        $client = $this->makeClient();
+        $requestParams = Client\Model\Request\Files\ListGet::fromData(
+            1,
+            1,
+            'name',
+            Client\Model\Request\Files\ListGet::ORDER_ASC,
+            ['alias' => [Client\Model\Request\Files\ListGet::FILTER_MATCH => 'foobar']],
+            ['tag1'],
+            true
+        );
+        $mockedResponseData = $this->getViewListMockedResponse(2, 1, '698c86d4-e68e-4bc0-80b0-a58e57e59a5b');
+        $mockedTransportResponse = $this->makeTransportResponseContainer(200, $mockedResponseData);
+        $mockedClientResponse = $this->makeClientResponseContainer(
+            $mockedTransportResponse,
+            Client\Model\Response\Files\ListGet::class
+        );
+        $this->expectResponseTransformed(
+            [$mockedTransportResponse, Client\Model\Response\Files\ListGet::class],
+            $mockedClientResponse
+        );
+
+        $this->expectValidationPerformed(
+            $requestParams,
+            Client\Validator\Type\Request\Files\ListGet::class
+        );
+
+        $this->expectRequestMade(
+            [
+                'GET',
+                'https://api.cappasity.com/api/files',
+                [
+                    'headers' => [
+                        'authorization' => "Bearer {$this->apiToken}",
+                    ],
+                    'timeout' => 7,
+                    'query' => [
+                        'limit' => 1,
+                        'offset' => 1,
+                        'criteria' => 'name',
+                        'order' => 'ASC',
+                        'filter' => '{"alias":{"match":"foobar"}}',
+                        'tags' => '["tag1"]',
+                        'shallow' => '1'
                     ]
                 ]
             ],
