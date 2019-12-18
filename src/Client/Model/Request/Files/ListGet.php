@@ -21,7 +21,7 @@ class ListGet implements Request\RequestParamsInterface
     const SORT_BY_CREATED_AT = 'createdAt';
     const ORDER_ASC = 'ASC';
     const ORDER_DESC = 'DESC';
-    const FILTER_MODE_MULTI = '#multi';
+    const FILTER_MULTI = '#multi';
     const FILTER_FIELDS = 'fields';
     const FILTER_MATCH = 'match';
     const FILTER_NE = 'ne';
@@ -62,7 +62,7 @@ class ListGet implements Request\RequestParamsInterface
      *
      * Multi field filter example:
      * $filter = [
-     *      ListGet::FILTER_MODE_MULTI => [
+     *      ListGet::FILTER_MULTI => [
      *          ListGet::FILTER_FIELDS => ['name', 'alias'],
      *          ListGet::FILTER_MATCH => 'foobar',
      *      ]

@@ -58,55 +58,51 @@ class ListGet implements Validator\TypeInterface
              *
              * Multi field filter example:
              * $filter = [
-             *      ListGet::FILTER_MODE_MULTI => [
+             *      ListGet::FILTER_MULTI => [
              *          ListGet::FILTER_FIELDS => ['name', 'alias'],
              *          ListGet::FILTER_MATCH => 'foobar',
              *      ]
              * ]
+             *
+             * [
+             *   '#multi' => [
+             *     'fields' => ['name', 'alias'],
+             *     'match' => 'filter-me',
+             *   ],
+             *   'alias' => ['match' => 'filter-me'],
+             *   'status' => ['eq' => 'processed'],
+             *   'public' => ['ne' => '1'],
+             *   'uploadedAt' => ['gte' => 1551090243020, 'lte' => 1551090243029],
+             *   'startedAt' => ['gte' => 1551090243020],
+             * ]
              */
-            ->attribute('filter', V::oneOf(
-                V::nullType(),
-                V::stringType(),
-                // multi field match filter
-                V::allOf(
-                    V::arrayType(),
-                    V::length(1, 1),
-                    V::key(
-                        ListGetModel::FILTER_MODE_MULTI,
-                        V::allOf(
-                            V::arrayType(),
-                            V::length(1, 2),
-                            V::keySet(
-                                V::key(
-                                    ListGetModel::FILTER_FIELDS,
-                                    V::allOf(V::arrayType(), V::each(V::stringType())),
-                                    self::NOT_MANDATORY
-                                ),
-                                V::key(
-                                    ListGetModel::FILTER_MATCH,
-                                    V::stringType(),
-                                    self::NOT_MANDATORY
+            ->attribute(
+                'filter',
+                V::oneOf(
+                    V::nullType(),
+                    V::stringType(),
+                    V::allOf(
+                        V::arrayVal(),
+                        V::length(1),
+                        V::each(
+                            V::oneOf(
+                                V::stringType(),
+                                V::allOf(
+                                    V::arrayVal(),
+                                    V::keySet(
+                                        V::key(ListGetModel::FILTER_FIELDS, V::allOf(V::arrayVal(), V::each(V::stringType())), self::NOT_MANDATORY),
+                                        V::key(ListGetModel::FILTER_EQ, V::stringType(), self::NOT_MANDATORY),
+                                        V::key(ListGetModel::FILTER_NE, V::stringType(), self::NOT_MANDATORY),
+                                        V::key(ListGetModel::FILTER_MATCH, V::stringType(), self::NOT_MANDATORY),
+                                        V::key(ListGetModel::FILTER_GTE, V::intType(), self::NOT_MANDATORY),
+                                        V::key(ListGetModel::FILTER_LTE, V::intType(), self::NOT_MANDATORY)
+                                    )
                                 )
                             )
                         )
                     )
-                ),
-                // simple field filter
-                V::allOf(
-                    V::arrayType(),
-                    V::length(1),
-                    V::each(
-                        V::length(1),
-                        V::keySet(
-                            V::key(ListGetModel::FILTER_EQ, V::stringType(), self::NOT_MANDATORY),
-                            V::key(ListGetModel::FILTER_NE, V::stringType(), self::NOT_MANDATORY),
-                            V::key(ListGetModel::FILTER_MATCH, V::stringType(), self::NOT_MANDATORY),
-                            V::key(ListGetModel::FILTER_GTE, V::intType(), self::NOT_MANDATORY),
-                            V::key(ListGetModel::FILTER_LTE, V::intType(), self::NOT_MANDATORY)
-                        )
-                    )
                 )
-            ));
+            );
     }
 
     /**

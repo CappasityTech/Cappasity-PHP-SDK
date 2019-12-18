@@ -297,7 +297,7 @@ You may user filter modifiers to filter by string type field values: equal, non-
 $filter = [
     'alias' => [ListGet::FILTER_MATCH => 'filter-me'], // alias should match 'filter-me'
     'status' => [ListGet::FILTER_EQ => 'processed'], // return only processed Views 
-    'public' => [LustGet::FILTER_NE => '1'], // return only public Views
+    'public' => [ListGet::FILTER_NE => '1'], // return only public Views
     'uploadedAt' => [ListGet::FILTER_LTE => 1551090243029], // uploaded before 1551090243029
     'startedAt' => [ListGet::FILTER_GTE => 1551090243020], // upload started after 1551090243020        
 ];
@@ -308,11 +308,11 @@ $requestParams->setFilter($filter);
 You may also filter by multiple fields matching values. If you want to filter items which names OR aliases match 'foobar', configure the filter like this:
 ```php
 $filter = [
-    ListGet::FILTER_MODE_MULTI => [
+    ListGet::FILTER_MULTI => [
         ListGet::FILTER_FIELDS => ['name', 'alias'],
         ListGet::FILTER_MATCH => 'foobar',
     ],
-    'public' => [LustGet::FILTER_NE => '1'], // return only public Views
+    'public' => [ListGet::FILTER_NE => '1'], // return only public Views
 ];
 $requestParams = Client\Model\Request\Files\ListGet();
 $requestParams->setFilter($filter);
