@@ -233,7 +233,7 @@ $params = Request\Files\ListGet::fromData(self::LIMIT);
 /** @var Response\Files\ListGet $response */
 $response = $client->getViewList($params)->getBodyData();
 
-/** @var Response\Files\Common\File */
+/** @var Response\Files\Common\File[] */
 $views = $response->getData();
 foreach ($views as $view) {
     $viewId = $view->getId();
@@ -246,6 +246,77 @@ You may implement pagination manually, or use `getViewListIterator` helper metho
 | Code | Description                   |
 |:----:|-------------------------------|
 | 401  | Authorization error           |
+
+#### Filtering, sorting
+Filtering and sorting params are nullable. Use them to search for items that match specific SKU (alias):
+```php
+use CappasitySDK\Client\Model\Request;
+use CappasitySDK\Client\Model\Response;
+
+$limit = 10;
+$offset = null;
+$criteria = 'name'; // sort by name
+$order = Client\Model\Request\Files\ListGet::ORDER_ASC; // sort in ascending order
+$filter = ['alias' => [Client\Model\Request\Files\ListGet::FILTER_MATCH => 'desired-sku']]; // filter by 'alias' that matches 'desired-sku'
+$tags = ['bags']; // filter by tags
+$shallow = true; // to omit files parts from serialization, in most cases you don't need them
+
+$requestParams = Client\Model\Request\Files\ListGet::fromData($limit, $offset, $criteria, $order, $filter, $tags, $shallow);
+/** @var Response\Files\ListGet $response */
+$response = $client->getViewList($requestParams)->getBodyData();
+/** @var Response\Files\Common\File[] */
+$views = $response->getData();
+```
+
+Filtering is quite flexible.
+Let's say we have our basic parameter object:
+```php
+$requestParams = Client\Model\Request\Files\ListGet($limit, $offset);
+```
+
+Simple filter example:
+```php
+$filter = ['alias' => 'desired-sku'];
+$requestParams = Client\Model\Request\Files\ListGet();
+$requestParams->setFilter($filter);
+```
+
+Or you may set it instantly through the factory method:
+```php
+$requestParams = Client\Model\Request\Files\ListGet::fromData(
+     $limit,
+     $offset,
+     null,
+     null, 
+     $filter
+ );
+```
+
+You may user filter modifiers to filter by string type field values: equal, non-equal, matching, and to filter by numeric type field values: less than or equal and greater than or equal items.
+```php
+$filter = [
+    'alias' => [ListGet::FILTER_MATCH => 'filter-me'], // alias should match 'filter-me'
+    'status' => [ListGet::FILTER_EQ => 'processed'], // return only processed Views 
+    'public' => [ListGet::FILTER_NE => '1'], // return only public Views
+    'uploadedAt' => [ListGet::FILTER_LTE => 1551090243029], // uploaded before 1551090243029
+    'startedAt' => [ListGet::FILTER_GTE => 1551090243020], // upload started after 1551090243020        
+];
+$requestParams = Client\Model\Request\Files\ListGet();
+$requestParams->setFilter($filter);
+```
+
+You may also filter by multiple fields matching values. If you want to filter items which names OR aliases match 'foobar', configure the filter like this:
+```php
+$filter = [
+    ListGet::FILTER_MULTI => [
+        ListGet::FILTER_FIELDS => ['name', 'alias'],
+        ListGet::FILTER_MATCH => 'foobar',
+    ],
+    'public' => [ListGet::FILTER_NE => '1'], // return only public Views
+];
+$requestParams = Client\Model\Request\Files\ListGet();
+$requestParams->setFilter($filter);
+```
 
 #### Get view list with iterator
 This method is implemented as a [generator function](https://www.php.net/manual/en/language.generators.overview.php). This method returns an `Generator` instance so you could iterate over the whole View list using a regular `foreach` loop without worrying about pages count. Or you can use the [Iterator interface](https://www.php.net/manual/en/class.iterator.php) methods to work with it directly. 
@@ -269,6 +340,7 @@ foreach ($viewList as $chunk) {
     array_push($fileIds, ...$chunkFileIds);
 }
 ```
+This helper method works above `getViewList()` method and supports same filtering and sorting options. 
 
 ### Get view info
 This method provides full View data, although in terms of synchronization you may need only its background color value.

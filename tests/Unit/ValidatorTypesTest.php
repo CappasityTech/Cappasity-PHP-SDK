@@ -20,11 +20,13 @@ use CappasitySDK\Client\Model\Request\Process\JobsPullListGet as JobsPullListGet
 use CappasitySDK\Client\Model\Request\Process\JobsPullResultGet as JobsPullResultGetModel;
 use CappasitySDK\Client\Model\Request\Process\JobsPullAckPost as JobsPullAckPostModel;
 use CappasitySDK\Client\Model\Request\Files\InfoGet as InfoGetModel;
+use CappasitySDK\Client\Model\Request\Files\ListGet as ListGetModel;
 use CappasitySDK\Client\Validator\Type\Request\Process\JobsRegisterSyncPost as JobsRegisterSyncPostType;
 use CappasitySDK\Client\Validator\Type\Request\Process\JobsPullListGet as JobsPullListGetType;
 use CappasitySDK\Client\Validator\Type\Request\Process\JobsPullResultGet as JobsPullResultGetType;
 use CappasitySDK\Client\Validator\Type\Request\Process\JobsPullAckPost as JobsPullAckPostType;
 use CappasitySDK\Client\Validator\Type\Request\Files\InfoGet as InfoGetType;
+use CappasitySDK\Client\Validator\Type\Request\Files\ListGet as ListGetType;
 use CappasitySDK\PreviewImageSrcGenerator\Validator\Type\PreviewImageOptions as PreviewImageOptionsType;
 use CappasitySDK\EmbedRenderer\Validator\Type\Render as RenderType;
 
@@ -212,7 +214,7 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @dataProvider provideGetPullHobListData
+     * @dataProvider provideGetPullJobListData
      * @param array $fromDataArgs
      * @param bool $shouldBeValid
      * @param null|string $expectedError
@@ -230,7 +232,7 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
         $this->assertValidator($validator, $params, $shouldBeValid, $expectedError);
     }
 
-    public function provideGetPullHobListData()
+    public function provideGetPullJobListData()
     {
         return [
             [
@@ -473,6 +475,138 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @dataProvider provideFileListGetData
+     * @param [] $fromDataArgs
+     * @param bool $shouldBeValid
+     * @param null|string $expectedError
+     */
+    public function testValidateFileListGetData(array $fromDataArgs, $shouldBeValid, $expectedError = null)
+    {
+        $params = ListGetModel::fromData(...$fromDataArgs);
+
+        foreach (ListGetType::getRequiredRuleNamespaces() as $namespace) {
+            v::with($namespace);
+        }
+
+        $validator = ListGetType::configureValidator();
+
+        $this->assertValidator($validator, $params, $shouldBeValid, $expectedError);
+    }
+
+    public function provideFileListGetData()
+    {
+        return [
+            [
+                // limit, offset
+                [
+                    20,
+                    10
+                ],
+                true,
+            ],
+            [
+                // sorting criteria and order
+                [
+                    null,
+                    null,
+                    'name',
+                    'ASC',
+                ],
+                true,
+            ],
+            [
+                // filtering
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    [
+                        '#multi' => [
+                            'fields' => ['name', 'alias'],
+                            'match' => 'filter-me',
+                        ],
+                        'alias' => ['match' => 'filter-me'],
+                        'status' => ['eq' => 'processed'],
+                        'public' => ['ne' => '1'],
+                        'uploadedAt' => ['gte' => 1551090243020, 'lte' => 1551090243029],
+                        'startedAt' => ['gte' => 1551090243020],
+                    ]
+                ],
+                true,
+            ],
+            [
+                // filtering
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    [
+                        'alias' => ['match' => 'filter-me'],
+                        'status' => ['eq' => 'processed'],
+                        'public' => ['ne' => '1'],
+                        'uploadedAt' => ['lte' => 1551090243029],
+                        'startedAt' => ['gte' => 1551090243020],
+                    ]
+                ],
+                true,
+            ],
+            [
+                // filtering
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    [
+                        'alias' => 'desired-alias',
+                    ]
+                ],
+                true,
+            ],
+            [
+                // filtering
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    [
+                        '#multi' => [
+                            'fields' => ['name', 'alias'],
+                            'match' => 'filter-me',
+                        ],
+                    ]
+                ],
+                true,
+            ],
+            [
+                // invalid filtering
+                [
+                    null,
+                    null,
+                    null,
+                    null,
+                    [
+                        'some_field' => [
+                            'unknown-filter-modifier' => '1',
+                        ],
+                    ]
+                ],
+                false,
+                join(PHP_EOL, [
+                    '- At least one of these rules must pass for filter',
+                    '  - filter must be null',
+                    '  - filter must be a string',
+                    '    - At least one of these rules must pass for { "unknown-filter-modifier": "1" }',
+                    '      - { "unknown-filter-modifier": "1" } must be a string',
+                    '        - Must have keys { "fields", "eq", "ne", "match", "gte", "lte" }'
+                ]),
+            ],
+        ];
+    }
 
     /**
      * @dataProvider provideRenderData

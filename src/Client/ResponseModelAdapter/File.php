@@ -74,19 +74,6 @@ class File
                 ->setCode($attributesData['embed']['code'])
                 ->setParams($embedParams);
 
-            $files = array_map(
-                function (array $file) {
-                    return (new FileModel\Attributes\File())
-                        ->setType($file['type'])
-                        ->setFilename($file['filename'])
-                        ->setContentLength($file['contentLength'])
-                        ->setContentType($file['contentType'])
-                        ->setBucket($file['bucket'])
-                        ->setMd5Hash($file['md5Hash']);
-                },
-                $attributesData['files']
-            );
-
             $attributes = (new FileModel\Attributes())
                 ->setAlias($attributesData['alias'])
                 ->setName($attributesData['name'])
@@ -108,8 +95,23 @@ class File
                 ->setUploadId($attributesData['uploadId'])
                 ->setUploadType($attributesData['uploadType'])
                 ->setEmbed($embed)
-                ->setFiles($files)
             ;
+
+            if (array_key_exists('files', $attributesData)) {
+                $files = array_map(
+                    function (array $file) {
+                        return (new FileModel\Attributes\File())
+                            ->setType($file['type'])
+                            ->setFilename($file['filename'])
+                            ->setContentLength($file['contentLength'])
+                            ->setContentType($file['contentType'])
+                            ->setBucket($file['bucket'])
+                            ->setMd5Hash($file['md5Hash']);
+                    },
+                    $attributesData['files']
+                );
+                $attributes->setFiles($files);
+            }
 
             $links = (new FileModel\Links())
                 ->setSelf($linksData['self'])

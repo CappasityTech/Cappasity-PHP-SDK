@@ -30,7 +30,7 @@ class Meta
     private $pages;
 
     /**
-     * @var integer
+     * @var integer|null
      */
     private $cursor;
 
@@ -38,9 +38,9 @@ class Meta
      * @param string $id
      * @param int $page
      * @param int $pages
-     * @param int $cursor
+     * @param int|null $cursor
      */
-    public function __construct(string $id, int $page, int $pages, int $cursor)
+    public function __construct(string $id, int $page, int $pages, ?int $cursor)
     {
         $this->id = $id;
         $this->page = $page;
@@ -106,18 +106,18 @@ class Meta
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCursor(): int
+    public function getCursor(): ?int
     {
         return $this->cursor;
     }
 
     /**
-     * @param int $cursor
+     * @param int|null $cursor
      * @return $this
      */
-    public function setCursor(int $cursor)
+    public function setCursor(?int $cursor)
     {
         $this->cursor = $cursor;
 
