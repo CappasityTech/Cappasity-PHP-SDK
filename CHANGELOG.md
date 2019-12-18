@@ -1,3 +1,11 @@
+# [3.5.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.4.1...v3.5.0) (2019-12-18)
+
+
+### Features
+
+* **client:** support filter & sorting options in getViewList method ([8056c3f](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/8056c3f))
+* **client:** support filter & sorting options in getViewList method ([e0dcf27](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/e0dcf27))
+
 ## [3.4.1](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.4.0...v3.4.1) (2019-12-12)
 
 
