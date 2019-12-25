@@ -1107,14 +1107,6 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         $actualResponse = $client->getViewList($requestParams);
         $this->assertInstanceOf(Client\Model\Response\Container::class, $actualResponse);
         $this->assertInstanceOf(Client\Model\Response\Files\ListGet::class, $actualResponse->getBodyData());
-        /** @var Client\Model\Response\Files\ListGet $actualResponseData */
-        $actualResponseData = $actualResponse->getBodyData();
-        $file = $actualResponseData->getData()[0];
-        $this->assertInstanceOf(Client\Model\Response\Files\Common\File::class, $file);
-        $attributes = $file->getAttributes();
-        $this->assertInstanceOf(Client\Model\Response\Files\Common\File\Attributes::class, $attributes);
-        $files = $attributes->getFiles();
-        $this->assertCount(6, $files);
     }
 
     public function testGetViewListWithFullQuery()
@@ -1171,14 +1163,6 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         $actualResponse = $client->getViewList($requestParams);
         $this->assertInstanceOf(Client\Model\Response\Container::class, $actualResponse);
         $this->assertInstanceOf(Client\Model\Response\Files\ListGet::class, $actualResponse->getBodyData());
-        /** @var Client\Model\Response\Files\ListGet $actualResponseData */
-        $actualResponseData = $actualResponse->getBodyData();
-        $file = $actualResponseData->getData()[0];
-        $this->assertInstanceOf(Client\Model\Response\Files\Common\File::class, $file);
-        $attributes = $file->getAttributes();
-        $this->assertInstanceOf(Client\Model\Response\Files\Common\File\Attributes::class, $attributes);
-        $files = $attributes->getFiles();
-        $this->assertCount(6, $files);
     }
 
     /**
