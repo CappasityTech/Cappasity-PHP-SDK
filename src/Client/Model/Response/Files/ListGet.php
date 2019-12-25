@@ -93,7 +93,8 @@ class ListGet implements Response\DataInterface
             $response['data']
         );
 
-        ['self' => $self, 'next' => $next] = $response['links'];
+        ['self' => $self] = $response['links'];
+        $next = $response['links']['next'] ?? null;
         $links = (new ListGet\Links())
             ->setSelf($self)
             ->setNext($next);
