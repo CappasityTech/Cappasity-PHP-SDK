@@ -1,3 +1,10 @@
+## [3.5.2](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.5.1...v3.5.2) (2019-12-26)
+
+
+### Bug Fixes
+
+* files list last page deserialization ([c2c960e](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/c2c960e))
+
 ## [3.5.1](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.5.0...v3.5.1) (2019-12-25)
 
 
