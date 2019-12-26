@@ -83,6 +83,25 @@ class ListGet implements Response\DataInterface
     }
 
     /**
+     * @return ListGet\Links
+     */
+    public function getLinks(): ListGet\Links
+    {
+        return $this->links;
+    }
+
+    /**
+     * @param ListGet\Links $links
+     * @return $this
+     */
+    public function setLinks(ListGet\Links $links)
+    {
+        $this->links = $links;
+
+        return $this;
+    }
+
+    /**
      * @param array $response
      * @return ListGet
      */
@@ -103,8 +122,8 @@ class ListGet implements Response\DataInterface
             'id' => $id,
             'page' => $page,
             'pages' => $pages,
-            'cursor' => $cursor,
         ] = $response['meta'];
+        $cursor = $response['meta']['cursor'] ?? null;
 
         return new self(
             new ListGet\Meta($id, $page, $pages, $cursor),
