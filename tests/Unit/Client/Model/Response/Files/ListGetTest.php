@@ -32,6 +32,12 @@ class ListGetTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(Client\Model\Response\Files\Common\File\Attributes::class, $attributes);
         $files = $attributes->getFiles();
         $this->assertCount(count($response['data'][0]['attributes']['files']), $files);
+        if (!is_null($response['meta']['cursor'])) {
+            $this->assertEquals($response['meta']['cursor'], $responseModel->getMeta()->getCursor());
+        } else {
+            $this->assertNull($responseModel->getMeta()->getCursor());
+            $this->assertNull($responseModel->getLinks()->getNext());
+        }
     }
 
     private function provideResponseData()
@@ -290,7 +296,6 @@ class ListGetTest extends \PHPUnit\Framework\TestCase
                         'id' => '698c86d4-e68e-4bc0-80b0-a58e57e59a5b',
                         'page' => 1,
                         'pages' => 1,
-                        'cursor' => 1,
                         'timers' =>
                             [
                                 'list:pre-parse' => 0.144045,
