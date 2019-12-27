@@ -90,9 +90,9 @@ class File
                 ->setStartedAt($attributesData['startedAt'])
                 ->setStatus($attributesData['status'])
                 ->setType($attributesData['type'])
-                ->setUploaded($attributesData['uploaded'])
+                ->setUploaded($attributesData['uploaded'] ?? null)
+                ->setUploadId($attributesData['uploadId'] ?? null)
                 ->setUploadedAt($attributesData['uploadedAt'])
-                ->setUploadId($attributesData['uploadId'])
                 ->setUploadType($attributesData['uploadType'])
                 ->setEmbed($embed)
             ;
