@@ -87,13 +87,13 @@ class File
                 ->setPreview($attributesData['preview'])
                 ->setPublic($attributesData['public'])
                 ->setSimple($attributesData['simple'])
-                ->setStartedAt($attributesData['startedAt'])
                 ->setStatus($attributesData['status'])
                 ->setType($attributesData['type'])
+                ->setStartedAt($attributesData['startedAt'] ?? null)
                 ->setUploaded($attributesData['uploaded'] ?? null)
                 ->setUploadId($attributesData['uploadId'] ?? null)
-                ->setUploadedAt($attributesData['uploadedAt'])
-                ->setUploadType($attributesData['uploadType'])
+                ->setUploadedAt($attributesData['uploadedAt'] ?? null)
+                ->setUploadType($attributesData['uploadType'] ?? null)
                 ->setEmbed($embed)
             ;
 
