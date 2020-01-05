@@ -75,6 +75,7 @@ class File
                 ->setParams($embedParams);
 
             $attributes = (new FileModel\Attributes())
+                ->setType($attributesData['type'])
                 ->setAlias($attributesData['alias'])
                 ->setName($attributesData['name'])
                 ->setBackgroundColor($attributesData['backgroundColor'])
@@ -84,11 +85,10 @@ class File
                 ->setOwner($attributesData['owner'])
                 ->setPacked($attributesData['packed'])
                 ->setParts($attributesData['parts'])
-                ->setPreview($attributesData['preview'])
                 ->setPublic($attributesData['public'])
-                ->setSimple($attributesData['simple'])
-                ->setStatus($attributesData['status'])
-                ->setType($attributesData['type'])
+                ->setStatus($attributesData['status'] ?? null)
+                ->setSimple($attributesData['simple'] ?? null)
+                ->setPreview($attributesData['preview'] ?? null)
                 ->setStartedAt($attributesData['startedAt'] ?? null)
                 ->setUploaded($attributesData['uploaded'] ?? null)
                 ->setUploadId($attributesData['uploadId'] ?? null)
@@ -126,7 +126,7 @@ class File
                 $links
             );
         } catch (\Exception $e) {
-            throw new AdapterException('Can not transform response. Please contact developers.');
+            throw new AdapterException('Can not transform response. Please contact developers.', 0, $e);
         }
     }
 }
