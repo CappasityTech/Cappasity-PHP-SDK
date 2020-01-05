@@ -1,3 +1,10 @@
+## [3.5.4](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.5.3...v3.5.4) (2020-01-05)
+
+
+### Bug Fixes
+
+* soften file transform ([3ca0af6](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/3ca0af6))
+
 ## [3.5.3](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.5.2...v3.5.3) (2019-12-30)
 
 
