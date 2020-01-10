@@ -1,3 +1,10 @@
+## [3.5.5](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.5.4...v3.5.5) (2020-01-10)
+
+
+### Bug Fixes
+
+* expose view list iterator to reportable client ([dc62e49](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/dc62e49))
+
 ## [3.5.4](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.5.3...v3.5.4) (2020-01-05)
 
 
