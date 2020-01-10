@@ -40,7 +40,7 @@ class ListGetTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    private function provideResponseData()
+    public function provideResponseData()
     {
         return [
             // with next page

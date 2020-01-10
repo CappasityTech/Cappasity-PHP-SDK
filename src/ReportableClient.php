@@ -131,6 +131,21 @@ class ReportableClient implements ClientInterface
         }
     }
 
+    /**
+     * @param Request\Files\ListGet $params
+     * @return \Generator
+     * @throws \Exception
+     */
+    public function getViewListIterator(Request\Files\ListGet $params): \Generator
+    {
+        try {
+            return $this->client->getViewListIterator($params);
+        } catch (\Exception $e) {
+            $this->ravenClient->captureException($e);
+
+            throw $e;
+        }
+    }
 
     /**
      * @param Request\Files\InfoGet $params

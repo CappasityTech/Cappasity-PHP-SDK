@@ -54,6 +54,12 @@ interface ClientInterface
     public function getViewList(Request\Files\ListGet $params): Response\Container;
 
     /**
+     * @param Request\Files\ListGet $params
+     * @return \Generator
+     */
+    public function getViewListIterator(Request\Files\ListGet $params): \Generator;
+
+    /**
      * @param Request\Files\InfoGet $params
      * @return Response\Container
      */
