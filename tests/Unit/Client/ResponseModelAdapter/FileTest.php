@@ -79,7 +79,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($attributesData['packed'], $attributes->getPacked());
         $this->assertEquals($attributesData['c_ver'], $attributes->getCVer());
         $this->assertEquals($attributesData['owner'], $attributes->getOwner());
-        $this->assertEquals($attributesData['status'], $attributes->getStatus());
+        $this->assertEquals($attributesData['status'] ?? null, $attributes->getStatus());
     }
 
     public function provideTransformData()

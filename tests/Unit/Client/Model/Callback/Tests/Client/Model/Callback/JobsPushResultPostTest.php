@@ -30,8 +30,8 @@ class JobsPushResultPostTest extends \PHPUnit\Framework\TestCase
         foreach ($matches as $position => $match) {
             $this->assertEquals($body[$position]['id'], $match->getId());
             $this->assertEquals($body[$position]['uploadId'], $match->getUploadId());
-            $this->assertEquals($body[$position]['sku'], $match->getSku());
-            $this->assertEquals($body[$position]['capp'], $match->getCapp());
+            $this->assertEquals($body[$position]['sku'] ?? null, $match->getSku());
+            $this->assertEquals($body[$position]['capp'] ?? null, $match->getCapp());
         }
     }
 

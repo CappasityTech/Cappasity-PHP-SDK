@@ -32,7 +32,7 @@ class ListGetTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(Client\Model\Response\Files\Common\File\Attributes::class, $attributes);
         $files = $attributes->getFiles();
         $this->assertCount(count($response['data'][0]['attributes']['files']), $files);
-        if (!is_null($response['meta']['cursor'])) {
+        if (array_key_exists('cursor', $response['meta'])) {
             $this->assertEquals($response['meta']['cursor'], $responseModel->getMeta()->getCursor());
         } else {
             $this->assertNull($responseModel->getMeta()->getCursor());

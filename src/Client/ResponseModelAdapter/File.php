@@ -56,14 +56,14 @@ class File
                 $value = (new FileModel\Attributes\Embed\Param())
                     ->setType($paramData['type'])
                     ->setDefault($paramData['default'])
-                    ->setDescription($paramData['description'])
-                    ->setEnum($paramData['enum'])
-                    ->setMin($paramData['min'])
-                    ->setMax($paramData['max'])
-                    ->setPaid($paramData['paid'])
-                    ->setReqPlanLevel($paramData['reqPlanLevel'])
-                    ->setInvert($paramData['invert'])
-                    ->setOwn($paramData['own']);
+                    ->setDescription($paramData['description'] ?? null)
+                    ->setEnum($paramData['enum'] ?? null)
+                    ->setMin($paramData['min'] ?? null)
+                    ->setMax($paramData['max'] ?? null)
+                    ->setPaid($paramData['paid'] ?? null)
+                    ->setReqPlanLevel($paramData['reqPlanLevel'] ?? null)
+                    ->setInvert($paramData['invert'] ?? null)
+                    ->setOwn($paramData['own'] ?? null);
 
                 $capitalizedParamTitle = ucfirst($paramTitle);
                 $setter = "set{$capitalizedParamTitle}";
@@ -76,7 +76,6 @@ class File
 
             $attributes = (new FileModel\Attributes())
                 ->setType($attributesData['type'])
-                ->setAlias($attributesData['alias'])
                 ->setName($attributesData['name'])
                 ->setBackgroundColor($attributesData['backgroundColor'])
                 ->setBucket($attributesData['bucket'])
@@ -86,6 +85,7 @@ class File
                 ->setPacked($attributesData['packed'])
                 ->setParts($attributesData['parts'])
                 ->setPublic($attributesData['public'])
+                ->setAlias($attributesData['alias'] ?? null)
                 ->setStatus($attributesData['status'] ?? null)
                 ->setSimple($attributesData['simple'] ?? null)
                 ->setPreview($attributesData['preview'] ?? null)
