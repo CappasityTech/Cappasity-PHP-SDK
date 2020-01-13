@@ -1,3 +1,10 @@
+# [3.6.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.5.5...v3.6.0) (2020-01-13)
+
+
+### Features
+
+* expect strictest error reporting level ([07323c6](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/07323c6))
+
 ## [3.5.5](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.5.4...v3.5.5) (2020-01-10)
 
 
