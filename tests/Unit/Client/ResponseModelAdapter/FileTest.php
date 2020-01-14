@@ -242,6 +242,13 @@ class FileTest extends \PHPUnit\Framework\TestCase
                                     'default' => '600px',
                                     'description' => 'Height of embedded window (px or %)',
                                 ],
+                                'enablestoreurl' => [
+                                    'type' => 'boolean',
+                                    'default' => false,
+                                    'description' => '',
+                                    'paid' => true,
+                                    'reqPlanLevel' => 30,
+                                ]
                             ],
                         ],
                     ],
@@ -453,6 +460,20 @@ class FileTest extends \PHPUnit\Framework\TestCase
                                         'default' => '600px',
                                         'description' => 'Height of embedded window (px or %)',
                                     ],
+                                    'enablestoreurl' => [
+                                        'type' => 'boolean',
+                                        'default' => false,
+                                        'description' => '',
+                                        'paid' => true,
+                                        'reqPlanLevel' => 30,
+                                    ],
+                                    'somenewparam' => [
+                                        'type' => 'boolean',
+                                        'default' => false,
+                                        'description' => '',
+                                        'paid' => true,
+                                        'reqPlanLevel' => 30,
+                                    ]
                                 ],
                             ],
                             'bucket' => 'cdn.cappasity3d.com',
