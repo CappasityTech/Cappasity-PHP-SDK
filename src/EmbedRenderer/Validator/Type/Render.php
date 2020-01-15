@@ -64,6 +64,7 @@ class Render implements Validator\TypeInterface
             ->key('hideZoomOpt', V::boolType(), self::NOT_REQUIRED)
             ->key('uiPadX', V::allOf(V::intType(), V::min(0)), self::NOT_REQUIRED)
             ->key('uiPadY', V::allOf(V::intType(), V::min(0)), self::NOT_REQUIRED)
+            ->key('enableStoreUrl', V::boolType(), self::NOT_REQUIRED)
             ;
     }
 

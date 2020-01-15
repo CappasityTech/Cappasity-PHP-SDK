@@ -17,6 +17,47 @@ use CappasitySDK\Client\ResponseModelAdapter\Exception\AdapterException;
 
 class File
 {
+    private static $embedParamsSafeList = [
+        'autoRun',
+        'closeButton',
+        'logo',
+        'autorotate',
+        'autorotateTime',
+        'autorotateDelay',
+        'autorotateDir',
+        'hideFullScreen',
+        'hideAutorotateOpt',
+        'hideSettingsBtn',
+        'enableImageZoom',
+        'zoomQuality',
+        'hideZoomOpt',
+        'width',
+        'height',
+        'analytics',
+        'uiPadX',
+        'uiPadY',
+        'enablestoreurl'
+    ];
+
+    private static $embedParamsToTransform = [
+        'c_ver' => 'cVer',
+        'autorun' => 'autoRun',
+        'closebutton' => 'closeButton',
+        'autorotate' => 'autorotate',
+        'autorotatetime' => 'autorotateTime',
+        'autorotatedelay' => 'autorotateDelay',
+        'autorotatedir' => 'autorotateDir',
+        'hidefullscreen' => 'hideFullScreen',
+        'hideautorotateopt' => 'hideAutorotateOpt',
+        'hidesettingsbtn' => 'hideSettingsBtn',
+        'enableimagezoom' => 'enableImageZoom',
+        'zoomquality' => 'zoomQuality',
+        'hidezoomopt' => 'hideZoomOpt',
+        'uipadx' => 'uiPadX',
+        'uipady' => 'uiPadY',
+        'enablestoreurl' => 'enableStoreUrl',
+    ];
+
     public static function transformFile(array $item): FileModel
     {
         try {
@@ -24,51 +65,7 @@ class File
             $linksData = $item['links'];
 
             $embedParamsData = $attributesData['embed']['params'];
-            $normalizedKeys = array_map(
-                function ($key) {
-                    $keysToTransform = [
-                        'c_ver' => 'cVer',
-                        'autorun' => 'autoRun',
-                        'closebutton' => 'closeButton',
-                        'autorotate' => 'autorotate',
-                        'autorotatetime' => 'autorotateTime',
-                        'autorotatedelay' => 'autorotateDelay',
-                        'autorotatedir' => 'autorotateDir',
-                        'hidefullscreen' => 'hideFullScreen',
-                        'hideautorotateopt' => 'hideAutorotateOpt',
-                        'hidesettingsbtn' => 'hideSettingsBtn',
-                        'enableimagezoom' => 'enableImageZoom',
-                        'zoomquality' => 'zoomQuality',
-                        'hidezoomopt' => 'hideZoomOpt',
-                        'uipadx' => 'uiPadX',
-                        'uipady' => 'uiPadY',
-                    ];
-
-                    return array_key_exists($key, $keysToTransform) ? $keysToTransform[$key] : $key;
-                },
-                array_keys($embedParamsData)
-            );
-
-            $normalizedEmbedParamsData = array_combine($normalizedKeys, $embedParamsData);
-
-            $embedParams = new FileModel\Attributes\Embed\Params();
-            foreach ($normalizedEmbedParamsData as $paramTitle => $paramData) {
-                $value = (new FileModel\Attributes\Embed\Param())
-                    ->setType($paramData['type'])
-                    ->setDefault($paramData['default'])
-                    ->setDescription($paramData['description'] ?? null)
-                    ->setEnum($paramData['enum'] ?? null)
-                    ->setMin($paramData['min'] ?? null)
-                    ->setMax($paramData['max'] ?? null)
-                    ->setPaid($paramData['paid'] ?? null)
-                    ->setReqPlanLevel($paramData['reqPlanLevel'] ?? null)
-                    ->setInvert($paramData['invert'] ?? null)
-                    ->setOwn($paramData['own'] ?? null);
-
-                $capitalizedParamTitle = ucfirst($paramTitle);
-                $setter = "set{$capitalizedParamTitle}";
-                $embedParams->{$setter}($value);
-            }
+            $embedParams = self::transformEmbedParams($embedParamsData);
 
             $embed = (new FileModel\Attributes\Embed())
                 ->setCode($attributesData['embed']['code'])
@@ -128,5 +125,47 @@ class File
         } catch (\Exception $e) {
             throw new AdapterException('Can not transform response. Please contact developers.', 0, $e);
         }
+    }
+
+    private static function transformEmbedParams(array $embedParamsData)
+    {
+        $embedParamsToTransform = self::$embedParamsToTransform;
+        $normalizedKeys = array_map(
+            function ($key) use ($embedParamsToTransform) {
+                return array_key_exists($key, $embedParamsToTransform) ? $embedParamsToTransform[$key] : $key;
+            },
+            array_keys($embedParamsData)
+        );
+
+        $normalizedEmbedParamsData = array_combine($normalizedKeys, $embedParamsData);
+        $flippedSafeList = array_flip(self::$embedParamsSafeList);
+        $safeEmbedParamsData = array_filter(
+            $normalizedEmbedParamsData,
+            function ($paramName) use ($flippedSafeList) {
+                return array_key_exists($paramName, $flippedSafeList);
+            },
+            ARRAY_FILTER_USE_KEY
+        );
+
+        $embedParams = new FileModel\Attributes\Embed\Params();
+        foreach ($safeEmbedParamsData as $paramTitle => $paramData) {
+            $value = (new FileModel\Attributes\Embed\Param())
+                ->setType($paramData['type'])
+                ->setDefault($paramData['default'])
+                ->setDescription($paramData['description'] ?? null)
+                ->setEnum($paramData['enum'] ?? null)
+                ->setMin($paramData['min'] ?? null)
+                ->setMax($paramData['max'] ?? null)
+                ->setPaid($paramData['paid'] ?? null)
+                ->setReqPlanLevel($paramData['reqPlanLevel'] ?? null)
+                ->setInvert($paramData['invert'] ?? null)
+                ->setOwn($paramData['own'] ?? null);
+
+            $capitalizedParamTitle = ucfirst($paramTitle);
+            $setter = "set{$capitalizedParamTitle}";
+            $embedParams->{$setter}($value);
+        }
+
+        return $embedParams;
     }
 }

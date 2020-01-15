@@ -576,6 +576,7 @@ Full params list:
 | `hideZoomOpt`       | Hide zoom button                                                                          |
 | `uiPadX`            | Horizontal (left, right) padding for player UI in pixels                                  |
 | `uiPadY`            | Vertical (top, bottom) padding for player UI in pixels                                    |
+| `enableStoreUrl`    | Whether to enable link to the store page                                                  |
 
 ```php
 $embedCode = $renderer->render([
@@ -598,6 +599,7 @@ $embedCode = $renderer->render([
   'hideZoomOpt' => false,
   'uiPadX' => 10,
   'uiPadY' => 20,
+  'enableStoreUrl' => true,
 ]);
 ```
 
