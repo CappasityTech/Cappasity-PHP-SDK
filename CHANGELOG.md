@@ -1,3 +1,10 @@
+## [3.6.1](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.6.0...v3.6.1) (2020-01-15)
+
+
+### Bug Fixes
+
+* embed params safe list ([f3be81d](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/f3be81d))
+
 # [3.6.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.5.5...v3.6.0) (2020-01-13)
 
 
