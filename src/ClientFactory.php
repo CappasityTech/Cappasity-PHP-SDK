@@ -12,6 +12,9 @@
 
 namespace CappasitySDK;
 
+/**
+ * Factory class that helps you to build the Client
+ */
 class ClientFactory
 {
     const GUZZLE_TRANSPORT = 'guzzle';

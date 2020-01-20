@@ -1,3 +1,5 @@
 /.hooks
 /bin
-/env
+.idea
+.DS_Store
+

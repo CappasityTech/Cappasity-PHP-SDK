@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- https://docs.phpdoc.org/latest/references/configuration.html -->
+<phpdoc>
+    <title>Cappasity PHP SDK</title>
+    <parser>
+        <target>/src/var/parser-output</target>
+        <encoding>utf8</encoding>
+        <markers>
+            <item>TODO</item>
+        </markers>
+        <extensions>
+            <extension>php</extension>
+        </extensions>
+    </parser>
+    <transformer>
+        <!-- Path within Docker container -->
+        <target>/src/docs/api</target>
+    </transformer>
+    <logging>
+        <level>err</level>
+        <paths>
+            <default>{APP_ROOT}/var/log/{DATE}.log</default>
+            <errors>{APP_ROOT}/var/log/{DATE}.errors.log</errors>
+        </paths>
+    </logging>
+    <transformations>
+        <template name="responsive-twig"/>
+    </transformations>
+    <files>
+        <!-- Path within Docker container -->
+        <directory>/src/src</directory>
+    </files>
+</phpdoc>

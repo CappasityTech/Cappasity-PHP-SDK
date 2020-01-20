@@ -1,4 +1,4 @@
-FROM php:7.4.1-cli
+FROM php:7.2-cli
 
 RUN apt-get update && apt-get install -y \
     autoconf \
@@ -7,14 +7,13 @@ RUN apt-get update && apt-get install -y \
     wget \
     zlib1g-dev \
     # Configure PHP extensions
-    && pecl install xdebug-2.9.0 \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
-    && docker-php-ext-enable xdebug intl \
+    && docker-php-ext-enable intl \
     # Install phpdoc utility
     && wget http://phpdoc.org/phpDocumentor.phar
 
 # Update PHP config
-COPY ./env/test/docker/test.ini $PHP_INI_DIR/conf.d/
+COPY env/test/docker/test.ini $PHP_INI_DIR/conf.d/
 
-ENTRYPOINT /bin/bash
+ENTRYPOINT /bin/sh

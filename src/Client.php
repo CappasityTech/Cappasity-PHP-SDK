@@ -17,6 +17,9 @@ use CappasitySDK\Client\Model\Response;
 use CappasitySDK\Client\Validator\Type\Request as RequestType;
 use CappasitySDK\Client\Exception\AuthorizationAssertionException;
 
+/**
+ * Client provides wrappers for all necessary Cappasity API methods
+ */
 class Client implements ClientInterface
 {
     /**

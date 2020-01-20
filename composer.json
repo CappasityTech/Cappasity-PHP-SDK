@@ -25,7 +25,6 @@
             "@test-php72",
             "@test-php73"
         ],
-        "docs:generate": "sh ./bin/generate-docs.sh",
         "test-php71": "composer run-script build-php71 && docker run -i --rm --name cappasity-sdk-php71 cappasity-sdk-php71",
         "build-php71": "docker build -t cappasity-sdk-php71 -f ./Dockerfile-php71 .",
         "test-php72": "composer run-script build-php72 && docker run -i --rm --name cappasity-sdk-php72 cappasity-sdk-php72",
