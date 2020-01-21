@@ -52,7 +52,7 @@
         ],
         "docs:container:build": "docker build -t cappasity-sdk -f ./Dockerfile-phpdoc .",
         "docs:container:run": "docker run -dt -v $(pwd):/src -w /src --name cappasity-sdk cappasity-sdk",
-        "docs:generate:phpdoc": "docker exec -it cappasity-sdk /bin/sh -c \"sh ./bin/generate-docs.sh\"",
+        "docs:generate:phpdoc": "docker exec cappasity-sdk /bin/sh -c 'sh ./bin/generate-docs.sh'",
         "docs:container:rm": "docker stop cappasity-sdk && docker rm cappasity-sdk",
         "post-install-cmd": "sh ./bin/setup.sh"
     },
