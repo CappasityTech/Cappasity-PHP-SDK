@@ -2,3 +2,4 @@ var
 vendor
 node_modules
 *.tar
+phpdoc.xml

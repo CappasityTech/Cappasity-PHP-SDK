@@ -1,5 +1,4 @@
 #!/bin/sh
 
-docker build -t cappasity-sdk -f ./Dockerfile-phpdoc .
-docker run -dt -v $(pwd):/src --name cappasity-sdk cappasity-sdk
-docker exec -it cappasity-sdk /bin/bash -c "cd /src && php /phpDocumentor.phar"
+phpdoc \
+&& php vendor/fr3nch13/phpdoc-markdown/bin/fixHtmlToMd.php
