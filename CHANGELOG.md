@@ -1,3 +1,5 @@
+## [3.6.4](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.6.3...v3.6.4) (2020-01-21)
+
 ## [3.6.3](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.6.2...v3.6.3) (2020-01-21)
 
 ## [3.6.2](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.6.1...v3.6.2) (2020-01-21)
