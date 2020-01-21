@@ -18,7 +18,7 @@
 ### Classes
 | Name | Summary |
 | ---- | ------- |
-| [\CappasitySDK\Client](../classes/CappasitySDK.Client.md) | Client provides wrappers for all necessary Cappasity API methods |
+| [\CappasitySDK\Client](../classes/CappasitySDK.Client.md) | Client provides wrappers for all necessary Cappasity API methods Check regenerate |
 | [\CappasitySDK\ClientFactory](../classes/CappasitySDK.ClientFactory.md) | Factory class that helps you to build the Client |
 | [\CappasitySDK\EmbedRenderer](../classes/CappasitySDK.EmbedRenderer.md) |  |
 | [\CappasitySDK\EmbedRendererFactory](../classes/CappasitySDK.EmbedRendererFactory.md) |  |

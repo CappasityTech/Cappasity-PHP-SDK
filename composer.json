@@ -28,17 +28,32 @@
             "@test-php73"
         ],
         "docs:generate": [
-            "@build-phpdoc",
-            "@run-phpdoc"
+            "@docs:container:build",
+            "@docs:container:run",
+            "@docs:generate:phpdoc",
+            "@docs:container:rm"
         ],
-        "test-php71": "composer run-script build-php71 && docker run -i --rm --name cappasity-sdk-php71 cappasity-sdk-php71",
         "build-php71": "docker build -t cappasity-sdk-php71 -f ./Dockerfile-php71 .",
-        "test-php72": "composer run-script build-php72 && docker run -i --rm --name cappasity-sdk-php72 cappasity-sdk-php72",
         "build-php72": "docker build -t cappasity-sdk-php72 -f ./Dockerfile-php72 .",
-        "test-php73": "composer run-script build-php73 && docker run -i --rm --name cappasity-sdk-php73 cappasity-sdk-php73",
         "build-php73": "docker build -t cappasity-sdk-php73 -f ./Dockerfile-php73 .",
-        "docs:build-phpdoc": "docker build -t cappasity-sdk -f ./Dockerfile-phpdoc .",
-        "docs:run-phpdoc": "docker run -dt -v $(pwd):/src -n cappasity-sdk --rm -w /src cappasity-sdk /bin/bash -c \"./bin/generate-docs.sh && exit\"",
+        "test-php71": [
+            "@build-php71",
+            "docker run -i --rm --name cappasity-sdk-php71 cappasity-sdk-php71"
+        ],
+
+        "test-php72": [
+            "@build-php72",
+            "docker run -i --rm --name cappasity-sdk-php72 cappasity-sdk-php72"
+        ],
+
+        "test-php73": [
+            "@build-php73",
+            "docker run -i --rm --name cappasity-sdk-php73 cappasity-sdk-php73"
+        ],
+        "docs:container:build": "docker build -t cappasity-sdk -f ./Dockerfile-phpdoc .",
+        "docs:container:run": "docker run -dt -v $(pwd):/src -w /src --name cappasity-sdk cappasity-sdk",
+        "docs:generate:phpdoc": "docker exec -it cappasity-sdk /bin/sh -c \"sh ./bin/generate-docs.sh\"",
+        "docs:container:rm": "docker stop cappasity-sdk && docker rm cappasity-sdk",
         "post-install-cmd": "sh ./bin/setup.sh"
     },
     "authors": [

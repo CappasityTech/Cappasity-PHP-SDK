@@ -5,7 +5,7 @@
 ---
 **Summary:**
 
-Client provides wrappers for all necessary Cappasity API methods
+Client provides wrappers for all necessary Cappasity API methods Check regenerate
 
 ---
 ### Constants
