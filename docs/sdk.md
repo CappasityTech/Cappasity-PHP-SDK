@@ -555,30 +555,30 @@ $embedCode = $renderer->render(['viewId' => '38020fdf-5e11-411c-9116-1610339d59c
 
 Full params list:
 
-| Parameter           | Description                                                                               |
-|---------------------|-------------------------------------------------------------------------------------------|
-| `viewId`            | Cappasity 3D View ID                                                                      |
-| `width`             | iFrame width                                                                              |
-| `height`            | iFrame height                                                                             |
-| `autoRun`           | Whether to start the player (widget) automatically or display the preview and play button |
-| `closeButton`       | Show close button                                                                         |
-| `logo`              | Show Cappasity logo                                                                       |
-| `analytics`         | Enable analytics                                                                          |
-| `autoRotate`        | Start automatic rotation                                                                  |
-| `autoRotateTime`    | Rotation time of the full turn, seconds                                                   |
-| `autoRotateDelay`   | Delay if rotation was interrupted, seconds                                                |
-| `autoRotateDir`     | Autorotate direction (clockwise is `1`, counter-clockwise is `-1`)                        |
-| `hideFullScreen`    | Hide fullscreen view button                                                               |
-| `hideAutoRotateOpt` | Hide autorotate button                                                                    |
-| `hideSettingsBtn`   | Hide settings button                                                                      |
-| `enableImageZoom`   | Enable zoom                                                                               |
-| `zoomQuality`       | Zoom quality (SD is `1`, HD is `2`)                                                       |
-| `hideZoomOpt`       | Hide zoom button                                                                          |
-| `uiPadX`            | Horizontal (left, right) padding for player UI in pixels                                  |
-| `uiPadY`            | Vertical (top, bottom) padding for player UI in pixels                                    |
-| `enableStoreUrl`    | Whether to enable link to the store page                                                  |
-| `storeUrl`          | Link to the store page                                                                    |
-| `hideHints`         | Hide tutorial hints                                                                       |
+| Parameter           | Type    | Default | Required | Description                                                                               |
+|---------------------|---------|---------|----------|-------------------------------------------------------------------------------------------|
+| `viewId`            | string  | -       | true     | Cappasity 3D View ID                                                                      |
+| `width`             | string  | '100%'  | false    | iFrame width, px or %                                                                     |
+| `height`            | string  | '600px' | false    | iFrame height, px or %                                                                    |
+| `autorun`           | boolean | false   | false    | Whether to start the player (widget) automatically or display the preview and play button |
+| `closebutton`       | boolean | true    | false    | Show close button                                                                         |
+| `logo`              | boolean | true    | false    | Show Cappasity logo                                                                       |
+| `analytics`         | boolean | true    | false    | Enable analytics                                                                          |
+| `autorotate`        | boolean | false   | false    | Start automatic rotation                                                                  |
+| `autorotatetime`    | float   | 10      | false    | Rotation time of the full turn, seconds                                                   |
+| `autorotatedelay`   | float   | 2       | false    | Delay if rotation was interrupted, seconds                                                |
+| `autorotatedir`     | integer | 1       | false    | Autorotate direction (clockwise is `1`, counter-clockwise is `-1`)                        |
+| `hidefullscreen`    | boolean | true    | false    | Hide fullscreen view button                                                               |
+| `hideautorotateopt` | boolean | true    | false    | Hide autorotate button                                                                    |
+| `hidesettingsbtn`   | boolean | false   | false    | Hide settings button                                                                      |
+| `enableimagezoom`   | boolean | true    | false    | Enable zoom                                                                               |
+| `zoomquality`       | integer | 1       | false    | Zoom quality (SD is `1`, HD is `2`)                                                       |
+| `hidezoomopt`       | boolean | false   | false    | Hide zoom button                                                                          |
+| `uipadx`            | integer | 0       | false    | Horizontal (left, right) padding for player UI in pixels                                  |
+| `uipady`            | integer | 0       | false    | Vertical (top, bottom) padding for player UI in pixels                                    |
+| `enablestoreurl`    | boolean | false   | false    | Whether to enable link to the store page                                                  |
+| `storeurl`          | string  | ''      | false    | Link to the store page                                                                    |
+| `hidehints`         | boolean | false   | false    | Hide tutorial hints                                                                       |
 
 ```php
 $embedCode = $renderer->render([
