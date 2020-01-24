@@ -467,6 +467,20 @@ class FileTest extends \PHPUnit\Framework\TestCase
                                         'paid' => true,
                                         'reqPlanLevel' => 30,
                                     ],
+                                    'storeurl' => [
+                                        'type' => 'string',
+                                        'default' => '',
+                                        'description' => '',
+                                        'paid' => true,
+                                        'reqPlanLevel' => 30
+                                    ],
+                                    'hidehints' => [
+                                        'type' => 'boolean',
+                                        'default' => false,
+                                        'description' => 'Hide tutorial hints',
+                                        'paid' => true,
+                                        'reqPlanLevel' => 30
+                                    ],
                                     'somenewparam' => [
                                         'type' => 'boolean',
                                         'default' => false,

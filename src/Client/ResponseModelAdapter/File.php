@@ -36,7 +36,9 @@ class File
         'analytics',
         'uiPadX',
         'uiPadY',
-        'enablestoreurl'
+        'enablestoreurl',
+        'storeurl',
+        'hidehints'
     ];
 
     private static $embedParamsToTransform = [
@@ -56,6 +58,8 @@ class File
         'uipadx' => 'uiPadX',
         'uipady' => 'uiPadY',
         'enablestoreurl' => 'enableStoreUrl',
+        'storeurl' => 'storeUrl',
+        'hidehints' => 'hideHints'
     ];
 
     public static function transformFile(array $item): FileModel

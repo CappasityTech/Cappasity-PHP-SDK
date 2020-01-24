@@ -577,6 +577,8 @@ Full params list:
 | `uiPadX`            | Horizontal (left, right) padding for player UI in pixels                                  |
 | `uiPadY`            | Vertical (top, bottom) padding for player UI in pixels                                    |
 | `enableStoreUrl`    | Whether to enable link to the store page                                                  |
+| `storeUrl`          | Link to the store page                                                                    |
+| `hideHints`         | Hide tutorial hints                                                                       |
 
 ```php
 $embedCode = $renderer->render([
@@ -600,6 +602,8 @@ $embedCode = $renderer->render([
   'uiPadX' => 10,
   'uiPadY' => 20,
   'enableStoreUrl' => true,
+  'storeUrl' => 'http://gant.myshopify.com/products/1',
+  'hideHints' => true,
 ]);
 ```
 
