@@ -6,9 +6,6 @@
     <parser>
         <target>/src/var/parser-output</target>
         <encoding>utf8</encoding>
-        <markers>
-            <item>TODO</item>
-        </markers>
         <extensions>
             <extension>php</extension>
         </extensions>

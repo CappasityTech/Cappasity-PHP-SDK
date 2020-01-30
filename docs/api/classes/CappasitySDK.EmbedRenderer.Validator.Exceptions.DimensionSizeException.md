@@ -56,4 +56,4 @@ ERROR_TEMPLATE = '{{name}} must be defined in pixels or in % of the containing e
 
 ---
 
-This document was automatically generated from source code comments on 2020-01-21 using [phpDocumentor](http://www.phpdoc.org/) and [fr3nch13/phpdoc-markdown](https://github.com/fr3nch13/phpdoc-markdown)
+This document was automatically generated from source code comments on 2020-01-30 using [phpDocumentor](http://www.phpdoc.org/) and [fr3nch13/phpdoc-markdown](https://github.com/fr3nch13/phpdoc-markdown)
