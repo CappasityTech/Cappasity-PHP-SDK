@@ -114,7 +114,7 @@ The maximum total number of items in all jobs registered for last 24 hours depen
 least.
 
 #### HTTP Push flow
-![image](./images/integration-push-flow.jpg)
+![Integration: push flow](./images/integration-push-flow.jpg)
 Collect data as described [above](#collect-data) and register a synchronization job.
 
 ##### Register push.http type sync job
@@ -177,7 +177,7 @@ foreach ($matches as $match) {
 ```
 
 #### HTTP Pull flow
-![image](./images/integration-pull-flow.jpg)
+![Integration: pull flow](./images/integration-pull-flow.jpg)
 Collect data as described [above](#collect-data) and register a synchronization job.
 
 ##### Register pull type sync job
@@ -214,7 +214,9 @@ matched View IDs because you will need it [later.](./flow.md#refresh-matches-on-
 by IDs at the same time.
 
 ### Refresh matches on demand
-![image](./images/integration-handling-results.jpg)
+![Integration: handling results](./images/integration-handling-results.jpg)
+
+
 Cappasity stores the matches of your inner product IDs and Cappasity View IDs in order to provide you only those items 
 which have changed.
 
