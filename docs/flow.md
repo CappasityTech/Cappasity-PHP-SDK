@@ -115,6 +115,8 @@ least.
 
 #### HTTP Push flow
 ![Integration: push flow](./images/integration-push-flow.jpg)
+
+
 Collect data as described [above](#collect-data) and register a synchronization job.
 
 ##### Register push.http type sync job
@@ -178,6 +180,8 @@ foreach ($matches as $match) {
 
 #### HTTP Pull flow
 ![Integration: pull flow](./images/integration-pull-flow.jpg)
+
+
 Collect data as described [above](#collect-data) and register a synchronization job.
 
 ##### Register pull type sync job
