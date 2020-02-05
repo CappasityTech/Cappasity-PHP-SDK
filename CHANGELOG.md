@@ -1,3 +1,24 @@
+# [3.7.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.6.4...v3.7.0) (2020-01-24)
+
+
+### Features
+
+* encode store url ([318ff35](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/318ff35))
+* introduce storeUrl and hideHints params ([434db65](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/434db65))
+
+## [3.6.4](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.6.3...v3.6.4) (2020-01-21)
+
+## [3.6.3](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.6.2...v3.6.3) (2020-01-21)
+
+## [3.6.2](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.6.1...v3.6.2) (2020-01-21)
+
+## [3.6.1](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.6.0...v3.6.1) (2020-01-15)
+
+
+### Bug Fixes
+
+* embed params safe list ([f3be81d](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/f3be81d))
+
 # [3.6.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.5.5...v3.6.0) (2020-01-13)
 
 

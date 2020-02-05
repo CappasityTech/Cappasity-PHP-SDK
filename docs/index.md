@@ -1,1 +1,7 @@
-[Integration Flow](docs/flow.md) | [SDK Documentation](docs/sdk.md) | [SDK Full Reference](docs/api/home.md)
+# Documentation
+
+Learn about the [integration flow](flow.md)
+
+Explore SDK usage examples in [SDK Documentation](sdk.md)
+
+Dive into the [SDK Full Reference](api/home.md)

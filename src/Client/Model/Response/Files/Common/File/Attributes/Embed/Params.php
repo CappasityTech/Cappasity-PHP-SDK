@@ -105,6 +105,11 @@ class Params
     private $uiPadY;
 
     /**
+     * @var Param
+     */
+    private $enableStoreUrl;
+
+    /**
      * @return Param
      */
     public function getAutoRun()
@@ -442,6 +447,25 @@ class Params
     public function setUiPadY(Param $uiPadY)
     {
         $this->uiPadY = $uiPadY;
+
+        return $this;
+    }
+
+    /**
+     * @return Param
+     */
+    public function getEnableStoreUrl(): Param
+    {
+        return $this->enableStoreUrl;
+    }
+
+    /**
+     * @param Param $enableStoreUrl
+     * @return $this
+     */
+    public function setEnableStoreUrl(Param $enableStoreUrl)
+    {
+        $this->enableStoreUrl = $enableStoreUrl;
 
         return $this;
     }
