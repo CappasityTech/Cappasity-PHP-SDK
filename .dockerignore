@@ -1,3 +1,5 @@
-/hooks
+/.hooks
 /bin
-/docs
+.idea
+.DS_Store
+
