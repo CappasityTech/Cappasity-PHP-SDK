@@ -1,3 +1,18 @@
+# [3.8.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.7.0...v3.8.0) (2020-02-07)
+
+
+### Bug Fixes
+
+* rm comments ([57f6e1b](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/57f6e1b))
+* typo ([cbede64](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/cbede64))
+* typo ([dbb8f48](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/dbb8f48))
+* use phpdoc.xml ([19b49fb](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/19b49fb))
+
+
+### Features
+
+* git hooks using husky ([6bcfc2c](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/6bcfc2c))
+
 # [3.7.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.6.4...v3.7.0) (2020-01-24)
 
 
