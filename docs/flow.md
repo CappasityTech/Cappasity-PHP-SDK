@@ -114,6 +114,9 @@ The maximum total number of items in all jobs registered for last 24 hours depen
 least.
 
 #### HTTP Push flow
+![Integration: push flow](./images/integration-push-flow.jpg)
+
+
 Collect data as described [above](#collect-data) and register a synchronization job.
 
 ##### Register push.http type sync job
@@ -176,6 +179,9 @@ foreach ($matches as $match) {
 ```
 
 #### HTTP Pull flow
+![Integration: pull flow](./images/integration-pull-flow.jpg)
+
+
 Collect data as described [above](#collect-data) and register a synchronization job.
 
 ##### Register pull type sync job
@@ -212,6 +218,9 @@ matched View IDs because you will need it [later.](./flow.md#refresh-matches-on-
 by IDs at the same time.
 
 ### Refresh matches on demand
+![Integration: handling results](./images/integration-handling-results.jpg)
+
+
 Cappasity stores the matches of your inner product IDs and Cappasity View IDs in order to provide you only those items 
 which have changed.
 
@@ -237,7 +246,7 @@ $collectedItems = [
   [
     'id' => '222',
     'aliases' => ['SKU-222-b'],
-    'capp' => '00000000-0000-0000-0000-00000000222b',
+    'capp' => '00000000-0000-0000-0000-222bbb222bbb',
   ],
   [
     'id' => '333',
@@ -249,9 +258,9 @@ $collectedItems = [
 Assuming that:
 * View with ID `00000000-0000-0000-0000-000000000111` still has SKU `SKU-111`
 * View with ID `00000000-0000-0000-0000-00000000222a` has been deleted
-* New view with ID `00000000-0000-0000-0000-00000000222B` created and has SKU `SKU-222-b`,
+* New view with ID `00000000-0000-0000-0000-222bbb222bbb` has been created and has SKU `SKU-222-b`,
 `00000000-0000-0000-0000-00000000222b` has no SKU
-* New view with ID `00000000-0000-0000-0000-000000000333` created and has SKU `SKU-333`
+* New view with ID `00000000-0000-0000-0000-000000000333` has been created and has SKU `SKU-333`
 
 Then if you receive results via the callback it will receive a POST request with a body:
 ```
@@ -269,7 +278,7 @@ Then if you receive results via the callback it will receive a POST request with
     },
     {
       "id": "222",
-      "uploadId": "00000000-0000-0000-0000-00000000222b",
+      "uploadId": "00000000-0000-0000-0000-222bbb222bbb",
       "sku": "SKU-222-b",
     },
     {
