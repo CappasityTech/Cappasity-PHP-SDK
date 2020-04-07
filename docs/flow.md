@@ -1,6 +1,6 @@
 # Cappasity PHP SDK Integration Developer Guide
 
-(c) Copyright 2019, Cappasity Inc. All rights reserved.
+(c) Copyright 2019-2020, Cappasity Inc. All rights reserved.
 
 ## Table of Contents
 - [Glossary](#glossary)
@@ -25,6 +25,11 @@
   * [Refresh matches on demand](#refresh-matches-on-demand)
   * [Resynchronization](#resynchronization)
 - [Render iFrame](#render-iframe)
+
+## About Cappasity
+Cappasity is a SaaS solution that allows e-commerce businesses to create and display interactive 3D images on websites, mobile, and VR/AR apps to increase conversion and reduce product returns.
+
+An online retailer creates 3D images of products using the Easy 3D ScanTM software and uploads them to the Cappasity platform account. Once integrated into the e-commerce website, the Cappasity PHP SDK synchronizes the retailer's catalog with the account based on matching SKU numbers. It enables the display of the required iFrame on the product page without its manual embedding for each product in the catalog.
 
 ## Glossary
 * Store-side product catalogue
