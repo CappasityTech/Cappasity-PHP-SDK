@@ -25,6 +25,7 @@
   * [Refresh matches on demand](#refresh-matches-on-demand)
   * [Resynchronization](#resynchronization)
 - [Render iFrame](#render-iframe)
+- [Send Analytics](#send-analytics)
 
 ## About Cappasity
 Cappasity is a SaaS solution that allows e-commerce businesses to create and display interactive 3D images on websites, mobile, and VR/AR apps to increase conversion and reduce product returns.
@@ -303,3 +304,10 @@ the synchronization job.
 ## Render iFrame
 Now you have all necessary Cappasity 3D View IDs.
 Use them [to render an iFrame with `EmbedRenderer`](./sdk.md#render-embed-code) helper class.
+
+## Send Analytics
+Add the following script tag to the pages with Cappasity 3D Views:
+```
+<script async src=”https://api.cappasity.com/api/player/cappasity-ai” />
+```
+It will collect and send Cappasity 3D View analytics.
