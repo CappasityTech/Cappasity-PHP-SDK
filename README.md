@@ -1,7 +1,7 @@
 [![Build Status](https://semaphoreci.com/api/v1/cappasityinc/cappasity-php-sdk/branches/master/badge.svg)](https://semaphoreci.com/cappasityinc/cappasity-php-sdk)
 
 # Cappasity PHP SDK
-Thin [Cappasity](http://cappasity.com) services SDK.
+Provides object oriented PHP wrapper for [Cappasity](http://cappasity.com) integration API and some useful helpers to render embed code and build customized preview URL.
 
 ## Requirements
 Requires PHP version 7.1 or higher.

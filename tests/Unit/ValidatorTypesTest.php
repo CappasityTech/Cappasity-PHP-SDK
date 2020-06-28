@@ -661,6 +661,10 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     'analytics' => 1,
                     'uiPadX' => '10',
                     'uiPadY' => '20',
+                    'enableStoreUrl' => '1',
+                    'storeUrl' => false,
+                    'hideHints' => '1',
+                    'arButton' => 'yes',
                 ],
                 false,
                 join(PHP_EOL, [
@@ -682,6 +686,10 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     '  - hideZoomOpt must be a boolean',
                     '  - uiPadX must be of the type integer',
                     '  - uiPadY must be of the type integer',
+                    '  - enableStoreUrl must be a boolean',
+                    '  - storeUrl must be a string',
+                    '  - hideHints must be a boolean',
+                    '  - arButton must be a boolean',
                 ]),
             ],
             [
@@ -709,6 +717,10 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     'analytics' => true,
                     'uiPadX' => 10,
                     'uiPadY' => 20,
+                    'enableStoreUrl' => true,
+                    'storeUrl' => 'http://google.com',
+                    'hideHints' => true,
+                    'arButton' => false,
                 ],
                 true
             ],
@@ -734,6 +746,10 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     'analytics' => true,
                     'uiPadX' => 10,
                     'uiPadY' => 20,
+                    'enableStoreUrl' => true,
+                    'storeUrl' => 'http://google.com',
+                    'hideHints' => true,
+                    'arButton' => false,
                 ],
                 true
             ]

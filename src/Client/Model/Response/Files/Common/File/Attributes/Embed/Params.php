@@ -110,6 +110,21 @@ class Params
     private $enableStoreUrl;
 
     /**
+     * @var Param
+     */
+    private $storeUrl;
+
+    /**
+     * @var Param
+     */
+    private $hideHints;
+
+    /**
+     * @var Param
+     */
+    private $arButton;
+
+    /**
      * @return Param
      */
     public function getAutoRun()
@@ -466,6 +481,63 @@ class Params
     public function setEnableStoreUrl(Param $enableStoreUrl)
     {
         $this->enableStoreUrl = $enableStoreUrl;
+
+        return $this;
+    }
+
+    /**
+     * @return Param
+     */
+    public function getStoreUrl(): Param
+    {
+        return $this->storeUrl;
+    }
+
+    /**
+     * @param Param $storeUrl
+     * @return $this
+     */
+    public function setStoreUrl(Param $storeUrl)
+    {
+        $this->storeUrl = $storeUrl;
+
+        return $this;
+    }
+
+    /**
+     * @return Param
+     */
+    public function getHideHints(): Param
+    {
+        return $this->hideHints;
+    }
+
+    /**
+     * @param Param $hideHints
+     * @return $this
+     */
+    public function setHideHints(Param $hideHints)
+    {
+        $this->hideHints = $hideHints;
+
+        return $this;
+    }
+
+    /**
+     * @return Param
+     */
+    public function getArButton(): Param
+    {
+        return $this->arButton;
+    }
+
+    /**
+     * @param Param $arButton
+     * @return $this
+     */
+    public function setArButton(Param $arButton)
+    {
+        $this->arButton = $arButton;
 
         return $this;
     }

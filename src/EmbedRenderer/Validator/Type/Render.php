@@ -67,6 +67,7 @@ class Render implements Validator\TypeInterface
             ->key('enableStoreUrl', V::boolType(), self::NOT_REQUIRED)
             ->key('storeUrl', V::stringType(), self::NOT_REQUIRED)
             ->key('hideHints', V::boolType(), self::NOT_REQUIRED)
+            ->key('arButton', V::boolType(), self::NOT_REQUIRED)
             ;
     }
 

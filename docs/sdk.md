@@ -579,6 +579,7 @@ Full params list:
 | `enableStoreUrl`    | boolean | false   | false    | Whether to enable link to the store page                                                  |
 | `storeUrl`          | string  | ''      | false    | Link to the store page                                                                    |
 | `hideHints`         | boolean | false   | false    | Hide tutorial hints                                                                       |
+| `arButton`          | boolean | true    | false    | Show AR button                                                                            |
 
 ```php
 $embedCode = $renderer->render([
@@ -594,7 +595,7 @@ $embedCode = $renderer->render([
   'autorotateDelay' => 2,
   'autorotateDir' => 1,
   'hideFullScreen' => true,
-  'hideAutoRotateOpt' => true,
+  'hideAutorotateOpt' => true,
   'hideSettingsBtn' => false,
   'enableImageZoom' => true,
   'zoomQuality' => 2,
@@ -604,6 +605,7 @@ $embedCode = $renderer->render([
   'enableStoreUrl' => true,
   'storeUrl' => 'http://gant.myshopify.com/products/1',
   'hideHints' => true,
+  'arButton' => false,
 ]);
 ```
 
@@ -618,7 +620,7 @@ $embedCode = $renderer->render([
     frameborder="0"
     style="border:0;"
     onmousewheel=""
-    src="https://api.cappasity.com/api/player/38020fdf-5e11-411c-9116-1610339d59cf/embedded?autorun=1&closebutton=0&logo=1&autorotate=0&autorotatetime=10&autorotatedelay=2&autorotatedir=1&hidefullscreen=1&hideautorotateopt=1&hidesettingsbtn=0&enableimagezoom=1&zoomquality=2&hidezoomopt=0&analytics=1"
+    src="https://api.cappasity.com/api/player/38020fdf-5e11-411c-9116-1610339d59cf/embedded?autorun=1&closebutton=0&logo=1&autorotate=0&autorotatetime=10&autorotatedelay=2&autorotatedir=1&hidefullscreen=1&hideautorotateopt=1&hidesettingsbtn=0&enableimagezoom=1&zoomquality=2&hidezoomopt=0&analytics=1&uipadx=10&uipady=20&enablestoreurl=1&storeurl=http%3A%2F%2Fgant.myshopify.com%2Fproducts%2F1&hidehints=1&arbutton=0"
 ></iframe>
 ```
 
