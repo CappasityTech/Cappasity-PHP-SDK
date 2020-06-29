@@ -1374,7 +1374,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
                             'type' => 'object',
                             'uploadedAt' => 1551090243029,
                             'embed' => [
-                                'code' => '<iframe allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" width="{{ width }}" height="{{ height }}" frameborder="0" style="border:0;" src="https://api.cappasity.com/api/player/ffd3edb7-cfbc-4880-8287-a6dc7ca84579/embedded?autorun={{ autorun }}&closebutton={{ closebutton }}&logo={{ logo }}&analytics={{ analytics }}&uipadx={{ uipadx }}&uipady={{ uipady }}&autorotate={{ autorotate }}&autorotatetime={{ autorotatetime }}&autorotatedelay={{ autorotatedelay }}&autorotatedir={{ autorotatedir }}&hidefullscreen={{ hidefullscreen }}&hideautorotateopt={{ hideautorotateopt }}&hidesettingsbtn={{ hidesettingsbtn }}&enableimagezoom={{ enableimagezoom }}&zoomquality={{ zoomquality }}&hidezoomopt={{ hidezoomopt }}"></iframe>',
+                                'code' => '<iframe allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" width="{{ width }}" height="{{ height }}" frameborder="0" style="border:0;" src="https://api.cappasity.com/api/player/ffd3edb7-cfbc-4880-8287-a6dc7ca84579/embedded?autorun={{ autorun }}&closebutton={{ closebutton }}&logo={{ logo }}&analytics={{ analytics }}&uipadx={{ uipadx }}&uipady={{ uipady }}&autorotate={{ autorotate }}&autorotatetime={{ autorotatetime }}&autorotatedelay={{ autorotatedelay }}&autorotatedir={{ autorotatedir }}&hidefullscreen={{ hidefullscreen }}&hideautorotateopt={{ hideautorotateopt }}&hidesettingsbtn={{ hidesettingsbtn }}&enableimagezoom={{ enableimagezoom }}&zoomquality={{ zoomquality }}&hidezoomopt={{ hidezoomopt }}&arbutton={{ arbutton }}"></iframe>',
                                 'params' => [
                                     'autorun' => [
                                         'type' => 'boolean',
@@ -1495,6 +1495,12 @@ class ClientTest extends \PHPUnit\Framework\TestCase
                                         'paid' => true,
                                         'invert' => true,
                                         'reqPlanLevel' => 30,
+                                    ],
+                                    'arbutton' => [
+                                        'type' => 'boolean',
+                                        'default' => 1,
+                                        'description' => 'AR button',
+                                        'paid' => false,
                                     ],
                                     'width' => [
                                         'type' => 'string',
