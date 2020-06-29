@@ -560,25 +560,25 @@ Full params list:
 | `viewId`            | string  | -       | true     | Cappasity 3D View ID                                                                      |
 | `width`             | string  | '100%'  | false    | iFrame width, px or %                                                                     |
 | `height`            | string  | '600px' | false    | iFrame height, px or %                                                                    |
-| `autorun`           | boolean | false   | false    | Whether to start the player (widget) automatically or display the preview and play button |
-| `closebutton`       | boolean | true    | false    | Show close button                                                                         |
+| `autoRun`           | boolean | false   | false    | Whether to start the player (widget) automatically or display the preview and play button |
+| `closeButton`       | boolean | true    | false    | Show close button                                                                         |
 | `logo`              | boolean | true    | false    | Show Cappasity logo                                                                       |
 | `analytics`         | boolean | true    | false    | Enable analytics                                                                          |
 | `autorotate`        | boolean | false   | false    | Start automatic rotation                                                                  |
-| `autorotatetime`    | float   | 10      | false    | Rotation time of the full turn, seconds                                                   |
-| `autorotatedelay`   | float   | 2       | false    | Delay if rotation was interrupted, seconds                                                |
-| `autorotatedir`     | integer | 1       | false    | Autorotate direction (clockwise is `1`, counter-clockwise is `-1`)                        |
-| `hidefullscreen`    | boolean | true    | false    | Hide fullscreen view button                                                               |
-| `hideautorotateopt` | boolean | true    | false    | Hide autorotate button                                                                    |
-| `hidesettingsbtn`   | boolean | false   | false    | Hide settings button                                                                      |
-| `enableimagezoom`   | boolean | true    | false    | Enable zoom                                                                               |
-| `zoomquality`       | integer | 1       | false    | Zoom quality (SD is `1`, HD is `2`)                                                       |
-| `hidezoomopt`       | boolean | false   | false    | Hide zoom button                                                                          |
-| `uipadx`            | integer | 0       | false    | Horizontal (left, right) padding for player UI in pixels                                  |
-| `uipady`            | integer | 0       | false    | Vertical (top, bottom) padding for player UI in pixels                                    |
-| `enablestoreurl`    | boolean | false   | false    | Whether to enable link to the store page                                                  |
-| `storeurl`          | string  | ''      | false    | Link to the store page                                                                    |
-| `hidehints`         | boolean | false   | false    | Hide tutorial hints                                                                       |
+| `autorotateTime`    | float   | 10      | false    | Rotation time of the full turn, seconds                                                   |
+| `autorotateDelay`   | float   | 2       | false    | Delay if rotation was interrupted, seconds                                                |
+| `autorotateDir`     | integer | 1       | false    | Autorotate direction (clockwise is `1`, counter-clockwise is `-1`)                        |
+| `hideFullScreen`    | boolean | true    | false    | Hide fullscreen view button                                                               |
+| `hideAutorotateOpt` | boolean | true    | false    | Hide autorotate button                                                                    |
+| `hideSettingsBtn`   | boolean | false   | false    | Hide settings button                                                                      |
+| `enableImageZoom`   | boolean | true    | false    | Enable zoom                                                                               |
+| `zoomQuality`       | integer | 1       | false    | Zoom quality (SD is `1`, HD is `2`)                                                       |
+| `hideZoomOpt`       | boolean | false   | false    | Hide zoom button                                                                          |
+| `uiPadX`            | integer | 0       | false    | Horizontal (left, right) padding for player UI in pixels                                  |
+| `uiPadY`            | integer | 0       | false    | Vertical (top, bottom) padding for player UI in pixels                                    |
+| `enableStoreUrl`    | boolean | false   | false    | Whether to enable link to the store page                                                  |
+| `storeUrl`          | string  | ''      | false    | Link to the store page                                                                    |
+| `hideHints`         | boolean | false   | false    | Hide tutorial hints                                                                       |
 
 ```php
 $embedCode = $renderer->render([
@@ -589,10 +589,10 @@ $embedCode = $renderer->render([
   'closeButton' => false,
   'logo' => true,
   'analytics' => true,
-  'autoRotate' => false,
-  'autoRotateTime' => 10,
-  'autoRotateDelay' => 2,
-  'autoRotateDir' => 1,
+  'autorotate' => false,
+  'autorotateTime' => 10,
+  'autorotateDelay' => 2,
+  'autorotateDir' => 1,
   'hideFullScreen' => true,
   'hideAutoRotateOpt' => true,
   'hideSettingsBtn' => false,
