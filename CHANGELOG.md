@@ -1,3 +1,10 @@
+## [3.8.3](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.8.2...v3.8.3) (2020-06-29)
+
+
+### Bug Fixes
+
+* autorotate inconsistent naming ([931c7b7](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/931c7b7))
+
 ## [3.8.2](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.8.1...v3.8.2) (2020-06-29)
 
 
