@@ -45,6 +45,8 @@ class EmbedRenderer
      */
     public function render(array $params)
     {
+        $this->triggerDeprecationWarning($params);
+
         $this->validateParams($params);
 
         try {
@@ -60,6 +62,22 @@ class EmbedRenderer
             $this->validator->assert($params, $this->validator->buildByType(Render::class));
         } catch (ValidatorWrapper\Exception\ValidationException $e) {
             throw new EmbedRenderer\Exception\InvalidParamsException($e->getMessage());
+        }
+    }
+
+    /**
+     * Produces silenced deprecation error when deprecated params are passed
+     *
+     * @deprecated since 3.8.4, will be removed in 4.0.0
+     * @param array $params
+     */
+    private function triggerDeprecationWarning(array $params)
+    {
+        $paramTitles = array_keys($params);
+        $deprecatedCaseSettingsTitles = ['autoRotate', 'autoRotateTime', 'autoRotateDelay', 'autoRotateDir', 'hideAutoRotateOpt'];
+
+        if (count(array_intersect($paramTitles, $deprecatedCaseSettingsTitles))) {
+            @trigger_error('EmbedRenderer::render($params) method params autoRotate, autoRotateTime, autoRotateDelay, autoRotateDir, hideAutoRotateOpt are deprecated. Since version 4.0.0 the support of this params will be stopped. Use autorotate, autorotateTime, autorotateDelay, autorotateDir and hideAutorotateOpt instead.', E_USER_DEPRECATED);
         }
     }
 }

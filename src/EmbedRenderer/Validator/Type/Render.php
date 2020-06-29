@@ -36,9 +36,9 @@ class Render implements Validator\TypeInterface
             ->key('closeButton', V::boolType(), self::NOT_REQUIRED)
             ->key('logo', V::boolType(), self::NOT_REQUIRED)
             ->key('analytics', V::boolType(), self::NOT_REQUIRED)
-            ->key('autoRotate', V::boolType(), self::NOT_REQUIRED)
+            ->key('autorotate', V::boolType(), self::NOT_REQUIRED)
             ->key(
-                'autoRotateTime',
+                'autorotateTime',
                 V::allOf(
                     V::intType(),
                     V::min(RenderModel::AUTOROTATE_TIME_MIN),
@@ -47,7 +47,7 @@ class Render implements Validator\TypeInterface
                 self::NOT_REQUIRED
             )
             ->key(
-                'autoRotateDelay',
+                'autorotateDelay',
                 V::allOf(
                     V::intType(),
                     V::min(RenderModel::AUTOROTATE_DELAY_MIN),
@@ -55,9 +55,9 @@ class Render implements Validator\TypeInterface
                 ),
                 self::NOT_REQUIRED
             )
-            ->key('autoRotateDir', V::in(RenderModel::$rotateDirectionOptions), self::NOT_REQUIRED)
+            ->key('autorotateDir', V::in(RenderModel::$rotateDirectionOptions), self::NOT_REQUIRED)
             ->key('hideFullScreen', V::boolType(), self::NOT_REQUIRED)
-            ->key('hideAutoRotateOpt', V::boolType(), self::NOT_REQUIRED)
+            ->key('hideAutorotateOpt', V::boolType(), self::NOT_REQUIRED)
             ->key('hideSettingsBtn', V::boolType(), self::NOT_REQUIRED)
             ->key('enableImageZoom', V::boolType(), self::NOT_REQUIRED)
             ->key('zoomQuality', V::in(RenderModel::$qualityOptions), self::NOT_REQUIRED)
