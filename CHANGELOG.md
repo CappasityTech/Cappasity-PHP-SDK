@@ -1,3 +1,10 @@
+## [3.8.2](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.8.1...v3.8.2) (2020-06-29)
+
+
+### Bug Fixes
+
+* consider default values ([3de2602](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/3de2602))
+
 ## [3.8.1](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.8.0...v3.8.1) (2020-05-21)
 
 # [3.8.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.7.0...v3.8.0) (2020-02-07)
