@@ -664,6 +664,7 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     'enableStoreUrl' => '1',
                     'storeUrl' => false,
                     'hideHints' => '1',
+                    'startHint' => '1',
                     'arButton' => 'yes',
                 ],
                 false,
@@ -689,6 +690,7 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     '  - enableStoreUrl must be a boolean',
                     '  - storeUrl must be a string',
                     '  - hideHints must be a boolean',
+                    '  - startHint must be a boolean',
                     '  - arButton must be a boolean',
                 ]),
             ],
@@ -720,6 +722,7 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     'enableStoreUrl' => true,
                     'storeUrl' => 'http://google.com',
                     'hideHints' => true,
+                    'startHint' => true,
                     'arButton' => false,
                 ],
                 true
@@ -749,6 +752,7 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     'enableStoreUrl' => true,
                     'storeUrl' => 'http://google.com',
                     'hideHints' => true,
+                    'startHint' => true,
                     'arButton' => false,
                 ],
                 true

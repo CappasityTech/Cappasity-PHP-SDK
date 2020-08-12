@@ -122,6 +122,11 @@ class Params
     /**
      * @var Param
      */
+    private $startHint;
+
+    /**
+     * @var Param
+     */
     private $arButton;
 
     /**
@@ -519,6 +524,25 @@ class Params
     public function setHideHints(Param $hideHints)
     {
         $this->hideHints = $hideHints;
+
+        return $this;
+    }
+
+    /**
+     * @return Param
+     */
+    public function getStartHint(): Param
+    {
+        return $this->startHint;
+    }
+
+    /**
+     * @param Param $startHint
+     * @return $this
+     */
+    public function setStartHint(Param $startHint)
+    {
+        $this->startHint = $startHint;
 
         return $this;
     }
