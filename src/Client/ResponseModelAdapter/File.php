@@ -39,6 +39,7 @@ class File
         'enableStoreUrl',
         'storeUrl',
         'hideHints',
+        'startHint',
         'arButton',
     ];
 
@@ -61,6 +62,7 @@ class File
         'enablestoreurl' => 'enableStoreUrl',
         'storeurl' => 'storeUrl',
         'hidehints' => 'hideHints',
+        'starthint' => 'startHint',
         'arbutton' => 'arButton',
     ];
 

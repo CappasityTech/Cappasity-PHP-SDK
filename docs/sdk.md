@@ -579,6 +579,7 @@ Full params list:
 | `enableStoreUrl`    | boolean | false   | false    | Whether to enable link to the store page                                                  |
 | `storeUrl`          | string  | ''      | false    | Link to the store page                                                                    |
 | `hideHints`         | boolean | false   | false    | Hide tutorial hints                                                                       |
+| `startHint`         | boolean | false   | false    | Whether to hide 'rotate' hint                                                             |
 | `arButton`          | boolean | true    | false    | Show AR button                                                                            |
 
 ```php
@@ -605,6 +606,7 @@ $embedCode = $renderer->render([
   'enableStoreUrl' => true,
   'storeUrl' => 'http://gant.myshopify.com/products/1',
   'hideHints' => true,
+  'startHint' => true,
   'arButton' => false,
 ]);
 ```

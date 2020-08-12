@@ -254,6 +254,12 @@ class FileTest extends \PHPUnit\Framework\TestCase
                                     'description' => '',
                                     'paid' => true,
                                     'reqPlanLevel' => 30,
+                                ],
+                                'starthint' => [
+                                    'type' => 'boolean',
+                                    'default' => false,
+                                    'description' => 'Skip rotate hint',
+                                    'paid' => false,
                                 ]
                             ],
                         ],
@@ -492,6 +498,12 @@ class FileTest extends \PHPUnit\Framework\TestCase
                                         'description' => 'Hide tutorial hints',
                                         'paid' => true,
                                         'reqPlanLevel' => 30
+                                    ],
+                                    'starthint' => [
+                                        'type' => 'boolean',
+                                        'default' => false,
+                                        'description' => 'Skip rotate hint',
+                                        'paid' => false,
                                     ],
                                     'somenewparam' => [
                                         'type' => 'boolean',
