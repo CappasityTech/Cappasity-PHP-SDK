@@ -1,3 +1,10 @@
+# [3.10.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.9.0...v3.10.0) (2020-08-12)
+
+
+### Features
+
+* starthint param support ([943ef15](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/943ef15))
+
 # [3.9.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.8.3...v3.9.0) (2020-06-29)
 
 
