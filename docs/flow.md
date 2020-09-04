@@ -12,7 +12,6 @@
 - [Integration](#integration)
   * [Match products and 3D Views](#match-products-and-3d-views)
     + [Collect data](#collect-data)
-    + [Limits](#limits)
     + [HTTP Push flow](#http-push-flow)
       - [Register push.http type sync job](#register-pushhttp-type-sync-job)
       - [Handle result with callback](#handle-result-with-callback)
@@ -24,6 +23,7 @@
       - [Get pull job list](#get-pull-job-list)
   * [Refresh matches on demand](#refresh-matches-on-demand)
   * [Resynchronization](#resynchronization)
+  * [Rate Limits](#rate-limits)
 - [Render iFrame](#render-iframe)
 - [Send Analytics](#send-analytics)
 
@@ -69,8 +69,8 @@ In order to get Cappasity View IDs you need to match your products SKUs with 3D 
 ### Match products and 3D Views
 In general, to get the matches you should register a synchronization job via our SDK to have 3D images embedded into 
 your website. As your product database could be huge, it could take some time to process it. Our server processes your 
-request and stores the result. You should specify how you want to get the processing result: via push (push.http) or 
-pull (pull). In the push case, you should also specify the callback URL on job registration. Once processing is done, 
+request and stores the result. You should specify how you want to get the processing result: via push or 
+pull. In the push case, you should also specify the callback URL on job registration. Once processing is done, 
 our server sends the result to the specified callback URL. In the pull case, you should keep track of the job state and 
 the results by yourself. When you get the result, you should store received matches for further usage.
 
@@ -112,12 +112,7 @@ $collectedItems = [
 Notice that options IDs are not present. So you should be sure you can find back the product option ID by its SKU 
 to handle the matches later.
 
-Also consider [the synchronization limits](./flow.md#limits).
-
-#### Limits
-The maximum number of items per job is 500.
-The maximum total number of items in all jobs registered for last 24 hours depends on your account plan, 1000 items at
-least.
+Also consider [the synchronization limits](./flow.md#rate-limits).
 
 #### HTTP Push flow
 ![Integration: push flow](./images/integration-push-flow.jpg)
@@ -300,6 +295,35 @@ Notice that there is no match for `SKU-111` because you get the diff only. What 
 ### Resynchronization
 In case you need to resynchronize your product database or a single item just don't send the `capp` IDs when you register
 the synchronization job.
+
+### Rate Limits
+
+#### By sync items to register
+Most likely, you are going to reach sync items rate limit.
+
+##### Per job
+* Maximum of 500 items
+
+To register a bigger collection, split your items into several jobs.
+
+##### Per all jobs for last 24 hours
+* The maximum total number of items in all jobs registered for last 24 hours depends on your account plan, 10000 items at least.
+
+Keep track of registered items not to overflow the limit and defer registering new jobs if needed, especially if you are used to operate with huge collections. For now, we don't provide current limit state and remaining items to sync. 
+Consider retrying requests failed due to rate limit and use exponential backoff to reduce request count.
+
+#### By requests
+
+##### Per single IP
+* Maximum of 1000 requests per 10 seconds
+
+#### By connections
+
+##### Per single IP
+* Maximum of 60 new connections per 3 seconds
+* Maximum of 30 active connections in total
+
+Consider reusing connections.
 
 ## Render iFrame
 Now you have all necessary Cappasity 3D View IDs.
