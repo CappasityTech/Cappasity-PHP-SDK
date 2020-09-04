@@ -323,7 +323,7 @@ Consider retrying requests failed due to rate limit and use exponential backoff 
 * Maximum of 60 new connections per 3 seconds
 * Maximum of 30 active connections in total
 
-Consider reusing connections.
+Consider connection reuse.
 
 ## Render iFrame
 Now you have all necessary Cappasity 3D View IDs.
