@@ -1,3 +1,5 @@
+## [3.10.1](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.10.0...v3.10.1) (2020-09-07)
+
 # [3.10.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.9.0...v3.10.0) (2020-08-12)
 
 
