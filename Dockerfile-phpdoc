@@ -1,0 +1,22 @@
+FROM php:7.2-cli
+
+RUN apt-get update && apt-get install -y \
+    autoconf \
+    graphviz \
+    libicu-dev \
+    wget \
+    zlib1g-dev \
+    # Configure PHP extensions
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl \
+    && docker-php-ext-enable intl \
+    # Install phpdoc utility
+    && wget https://pear.phpdoc.org/channel.xml \
+    && pear channel-add ./channel.xml \
+    && wget https://github.com/phpDocumentor/phpDocumentor/releases/download/v2.9.0/phpDocumentor-2.9.0.tgz \
+    && pear install phpDocumentor-2.9.0.tgz
+
+# Update PHP config
+COPY env/test/docker/test.ini $PHP_INI_DIR/conf.d/
+
+ENTRYPOINT /bin/sh

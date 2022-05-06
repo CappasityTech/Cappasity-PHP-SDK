@@ -1,0 +1,66 @@
+{
+    "name": "cappasity-tech/cappasity-php-sdk",
+    "description": "Cappasity PHP SDK",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "CappasitySDK\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CappasitySDK\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "sentry/sentry": "^1.9",
+        "respect/validation": "^1.1",
+        "twig/twig": "~1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5",
+        "squizlabs/php_codesniffer": "3.x.x",
+        "phpdocumentor/reflection-docblock": "2.0.5",
+        "phpdocumentor/phpdocumentor": "2.9.0",
+        "fr3nch13/phpdoc-markdown": "^1.0"
+    },
+    "scripts": {
+        "test": [
+            "@test-php71",
+            "@test-php72",
+            "@test-php73"
+        ],
+        "docs:generate": [
+            "@docs:container:build",
+            "@docs:container:run",
+            "@docs:generate:phpdoc",
+            "@docs:container:rm"
+        ],
+        "build-php71": "docker build -t cappasity-sdk-php71 -f ./Dockerfile-php71 .",
+        "build-php72": "docker build -t cappasity-sdk-php72 -f ./Dockerfile-php72 .",
+        "build-php73": "docker build -t cappasity-sdk-php73 -f ./Dockerfile-php73 .",
+        "test-php71": [
+            "@build-php71",
+            "docker run -i --rm --name cappasity-sdk-php71 cappasity-sdk-php71"
+        ],
+        "test-php72": [
+            "@build-php72",
+            "docker run -i --rm --name cappasity-sdk-php72 cappasity-sdk-php72"
+        ],
+        "test-php73": [
+            "@build-php73",
+            "docker run -i --rm --name cappasity-sdk-php73 cappasity-sdk-php73"
+        ],
+        "docs:container:build": "docker build -t cappasity-sdk -f ./Dockerfile-phpdoc .",
+        "docs:container:run": "docker run -dt -v $(pwd):/src -w /src --name cappasity-sdk cappasity-sdk",
+        "docs:generate:phpdoc": "docker exec cappasity-sdk /bin/sh -c 'sh ./bin/generate-docs.sh'",
+        "docs:container:rm": "docker stop cappasity-sdk && docker rm cappasity-sdk"
+    },
+    "authors": [
+        {
+            "name": "Cappasity",
+            "email": "support@cappasity.com"
+        }
+    ]
+}

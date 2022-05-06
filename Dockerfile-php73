@@ -1,0 +1,12 @@
+FROM php:7.3-cli
+
+RUN pecl install xdebug-2.7.0 \
+    && docker-php-ext-enable xdebug
+
+COPY ./env/test/docker/test.ini $PHP_INI_DIR/conf.d/
+
+COPY . /usr/src/sdk
+
+WORKDIR /usr/src/sdk
+
+CMD [ "php", "./run-tests.php" ]

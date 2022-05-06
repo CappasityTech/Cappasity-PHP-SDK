@@ -1,0 +1,11 @@
+<iframe
+    allowfullscreen
+    mozallowfullscreen="true"
+    webkitallowfullscreen="true"
+    width="{{ width }}"
+    height="{{ height }}"
+    frameborder="0"
+    style="border:0;"
+    onmousewheel=""
+    src="https://api.cappasity.com/api/player/{{ viewId }}/embedded?autorun={{ autoRun ? 1 : 0 }}&closebutton={{ (closeButton ?? true) ? 1 : 0 }}&logo={{ (logo ?? true) ? 1 : 0 }}&autorotate={{ (autorotate ?? autoRotate) ? 1 : 0 }}&autorotatetime={{ autorotateTime ?? autoRotateTime }}&autorotatedelay={{ autorotateDelay ?? autoRotateDelay }}&autorotatedir={{ autorotateDir ?? autoRotateDir }}&hidefullscreen={{ (hideFullScreen ?? true) ? 1 : 0 }}&hideautorotateopt={{ (hideAutorotateOpt ?? hideAutoRotateOpt ?? true) ? 1 : 0 }}&hidesettingsbtn={{ (hideSettingsBtn ?? false) ? 1 : 0 }}&enableimagezoom={{ (enableImageZoom ?? true) ? 1 : 0 }}&zoomquality={{ zoomQuality }}&hidezoomopt={{ (hideZoomOpt ?? false) ? 1 : 0 }}&analytics={{ (analytics ?? true) ? 1 : 0 }}&uipadx={{ uiPadX }}&uipady={{ uiPadY }}&enablestoreurl={{ (enableStoreUrl ?? false) ? 1 : 0 }}&storeurl={{ storeUrl | url_encode }}&hidehints={{ (hideHints ?? false) ? 1 : 0 }}&starthint={{ (startHint ?? false) ? 1 : 0 }}&arbutton={{ (arButton ?? true) ? 1 : 0 }}"
+></iframe>
