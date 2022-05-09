@@ -1,4 +1,5 @@
-[![Build Status](https://semaphoreci.com/api/v1/cappasityinc/cappasity-php-sdk/branches/master/badge.svg)](https://semaphoreci.com/cappasityinc/cappasity-php-sdk)
+[![Build Status](https://semaphoreci.com/api/v1/cappasityinc/cappasity-php-sdk/branches/main/badge.svg
+)](https://semaphoreci.com/cappasityinc/cappasity-php-sdk)
 
 # Cappasity PHP SDK
 Provides object oriented PHP wrapper for [Cappasity](http://cappasity.com) integration API and some useful helpers to render embed code and build customized preview URL.

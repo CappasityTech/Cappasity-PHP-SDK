@@ -1,6 +1,6 @@
 # Cappasity SDK API
 
-(c) Copyright 2019-2021, Cappasity Inc. All rights reserved.
+(c) Copyright 2019-2022, Cappasity Inc. All rights reserved.
 
 Cappasity SDK includes three components – `Client`, `EmbedRenderer` and `PreviewImageSrcGenerator`.
 

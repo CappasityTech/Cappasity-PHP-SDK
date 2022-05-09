@@ -1,6 +1,6 @@
 # Cappasity PHP SDK Integration Developer Guide
 
-(c) Copyright 2019-2021, Cappasity Inc. All rights reserved.
+(c) Copyright 2019-2022, Cappasity Inc. All rights reserved.
 
 ## Table of Contents
 - [Glossary](#glossary)
