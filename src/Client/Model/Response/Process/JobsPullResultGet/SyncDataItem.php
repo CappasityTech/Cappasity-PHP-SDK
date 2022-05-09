@@ -51,7 +51,7 @@ class SyncDataItem
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -60,7 +60,7 @@ class SyncDataItem
      * @param string $id
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): SyncDataItem
     {
         $this->id = $id;
 
@@ -79,7 +79,7 @@ class SyncDataItem
      * @param bool|string $uploadId
      * @return $this
      */
-    public function setUploadId($uploadId)
+    public function setUploadId($uploadId): SyncDataItem
     {
         $this->uploadId = $uploadId;
 
@@ -89,7 +89,7 @@ class SyncDataItem
     /**
      * @return null|string
      */
-    public function getSku()
+    public function getSku(): ?string
     {
         return $this->sku;
     }
@@ -98,7 +98,7 @@ class SyncDataItem
      * @param null|string $sku
      * @return $this
      */
-    public function setSku($sku)
+    public function setSku($sku): SyncDataItem
     {
         $this->sku = $sku;
 
@@ -108,7 +108,7 @@ class SyncDataItem
     /**
      * @return null|string
      */
-    public function getCapp()
+    public function getCapp(): ?string
     {
         return $this->capp;
     }
@@ -117,7 +117,7 @@ class SyncDataItem
      * @param null|string $capp
      * @return $this
      */
-    public function setCapp($capp)
+    public function setCapp($capp): SyncDataItem
     {
         $this->capp = $capp;
 

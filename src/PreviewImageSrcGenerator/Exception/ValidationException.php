@@ -20,7 +20,7 @@ class ValidationException extends GeneratorException
      * @param ValidatorException $e
      * @return static
      */
-    public static function fromValidatorWrapperValidationException(ValidatorException $e)
+    public static function fromValidatorWrapperValidationException(ValidatorException $e): ValidationException
     {
         return new static($e->getMessage(), $e->getCode(), $e->getPrevious());
     }

@@ -17,10 +17,10 @@ trait BackgroundTrait
     public static $backgroundRegex = '/^#[0-9a-fA-F]{6}$/';
 
     /**
-     * @param string $background
+     * @param mixed $background
      * @return bool
      */
-    public function isValidBackground($background)
+    public function isValidBackground($background): bool
     {
         return is_string($background)
             && preg_match($this->getValidBackgroundPattern(), $background) === 1;
@@ -29,7 +29,7 @@ trait BackgroundTrait
     /**
      * @return string
      */
-    private function getValidBackgroundPattern()
+    private function getValidBackgroundPattern(): string
     {
         return self::$backgroundRegex;
     }

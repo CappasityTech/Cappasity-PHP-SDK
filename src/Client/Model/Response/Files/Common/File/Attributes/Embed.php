@@ -27,7 +27,7 @@ class Embed
     /**
      * @return string
      */
-    public function getCode()
+    public function getCode(): string
     {
         return $this->code;
     }
@@ -36,7 +36,7 @@ class Embed
      * @param string $code
      * @return $this
      */
-    public function setCode($code)
+    public function setCode(string $code): Embed
     {
         $this->code = $code;
 
@@ -46,7 +46,7 @@ class Embed
     /**
      * @return Embed\Params
      */
-    public function getParams()
+    public function getParams(): Embed\Params
     {
         return $this->params;
     }
@@ -55,7 +55,7 @@ class Embed
      * @param Embed\Params $params
      * @return $this
      */
-    public function setParams(Embed\Params $params)
+    public function setParams(Embed\Params $params): Embed
     {
         $this->params = $params;
 

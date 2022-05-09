@@ -39,7 +39,7 @@ class InfoGet implements Request\RequestParamsInterface
     /**
      * @return string
      */
-    public function getUserAlias()
+    public function getUserAlias(): string
     {
         return $this->userAlias;
     }
@@ -48,7 +48,7 @@ class InfoGet implements Request\RequestParamsInterface
      * @param string $userAlias
      * @return $this
      */
-    public function setUserAlias($userAlias)
+    public function setUserAlias(string $userAlias): InfoGet
     {
         $this->userAlias = $userAlias;
 
@@ -58,7 +58,7 @@ class InfoGet implements Request\RequestParamsInterface
     /**
      * @return string
      */
-    public function getViewId()
+    public function getViewId(): string
     {
         return $this->viewId;
     }
@@ -67,7 +67,7 @@ class InfoGet implements Request\RequestParamsInterface
      * @param string $viewId
      * @return $this
      */
-    public function setViewId($viewId)
+    public function setViewId(string $viewId): InfoGet
     {
         $this->viewId = $viewId;
 
@@ -75,12 +75,12 @@ class InfoGet implements Request\RequestParamsInterface
     }
 
     /**
-     * @param $userAlias
-     * @param $viewId
+     * @param string $userAlias
+     * @param string $viewId
      *
      * @return InfoGet
      */
-    public static function fromData($userAlias, $viewId)
+    public static function fromData($userAlias, $viewId): InfoGet
     {
         return new self($userAlias, $viewId);
     }

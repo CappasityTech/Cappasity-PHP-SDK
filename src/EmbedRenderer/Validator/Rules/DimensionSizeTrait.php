@@ -20,7 +20,7 @@ trait DimensionSizeTrait
      * @param $value
      * @return bool
      */
-    public function isValidDimensionSize($value)
+    public function isValidDimensionSize($value): bool
     {
         if ($this->isValidPixelCount($value)) {
             return true;
@@ -37,7 +37,7 @@ trait DimensionSizeTrait
      * @param $value
      * @return bool
      */
-    public function isValidPixelCount($value)
+    public function isValidPixelCount($value): bool
     {
         if (!is_string($value) || !is_numeric($value)) {
             return false;
@@ -52,7 +52,7 @@ trait DimensionSizeTrait
      * @param $value
      * @return bool
      */
-    public function isValidPercentage($value)
+    public function isValidPercentage($value): bool
     {
         if (!is_string($value)) {
             return false;

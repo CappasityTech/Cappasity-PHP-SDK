@@ -14,6 +14,7 @@ namespace CappasitySDK;
 
 use CappasitySDK\Client\Model\Request;
 use CappasitySDK\Client\Model\Response;
+use Generator;
 
 interface ClientInterface
 {
@@ -55,9 +56,9 @@ interface ClientInterface
 
     /**
      * @param Request\Files\ListGet $params
-     * @return \Generator
+     * @return Generator
      */
-    public function getViewListIterator(Request\Files\ListGet $params): \Generator;
+    public function getViewListIterator(Request\Files\ListGet $params): Generator;
 
     /**
      * @param Request\Files\InfoGet $params

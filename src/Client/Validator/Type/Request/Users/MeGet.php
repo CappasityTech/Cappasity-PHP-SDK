@@ -21,7 +21,7 @@ class MeGet implements TypeInterface
     /**
      * @return V
      */
-    public static function configureValidator()
+    public static function configureValidator(): V
     {
         return V::alwaysValid();
     }
@@ -29,7 +29,7 @@ class MeGet implements TypeInterface
     /**
      * @return array
      */
-    public static function getRequiredRuleNamespaces()
+    public static function getRequiredRuleNamespaces(): array
     {
         return [];
     }

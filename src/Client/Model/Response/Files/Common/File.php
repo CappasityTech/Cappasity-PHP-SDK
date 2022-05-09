@@ -51,7 +51,7 @@ class File
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -60,7 +60,7 @@ class File
      * @param string $id
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): File
     {
         $this->id = $id;
 
@@ -70,7 +70,7 @@ class File
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -79,7 +79,7 @@ class File
      * @param string $type
      * @return $this
      */
-    public function setType($type)
+    public function setType($type): File
     {
         $this->type = $type;
 
@@ -89,7 +89,7 @@ class File
     /**
      * @return File\Attributes
      */
-    public function getAttributes()
+    public function getAttributes(): File\Attributes
     {
         return $this->attributes;
     }
@@ -98,7 +98,7 @@ class File
      * @param File\Attributes $attributes
      * @return $this
      */
-    public function setAttributes(File\Attributes $attributes)
+    public function setAttributes(File\Attributes $attributes): File
     {
         $this->attributes = $attributes;
 
@@ -108,7 +108,7 @@ class File
     /**
      * @return File\Links
      */
-    public function getLinks()
+    public function getLinks(): File\Links
     {
         return $this->links;
     }
@@ -117,7 +117,7 @@ class File
      * @param File\Links $links
      * @return $this
      */
-    public function setLinks(File\Links $links)
+    public function setLinks(File\Links $links): File
     {
         $this->links = $links;
 

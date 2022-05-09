@@ -20,7 +20,7 @@ trait UuidTrait
      * @param $uuid
      * @return bool
      */
-    public function isValidUuid($uuid)
+    public function isValidUuid($uuid): bool
     {
         return is_string($uuid)
             && preg_match($this->getValidUuidPattern(), $uuid) === 1;
@@ -29,7 +29,7 @@ trait UuidTrait
     /**
      * @return string
      */
-    private function getValidUuidPattern()
+    private function getValidUuidPattern(): string
     {
         return self::$uuidRegex;
     }

@@ -27,8 +27,8 @@ class JobsPullListGet implements Client\Model\Request\RequestParamsInterface
     private $cursor;
 
     /**
-     * @param $limit
-     * @param $cursor
+     * @param int|null $limit
+     * @param int|null $cursor
      */
     public function __construct($limit = null, $cursor = null)
     {
@@ -39,7 +39,7 @@ class JobsPullListGet implements Client\Model\Request\RequestParamsInterface
     /**
      * @return int
      */
-    public function getLimit()
+    public function getLimit(): ?int
     {
         return $this->limit;
     }
@@ -47,12 +47,12 @@ class JobsPullListGet implements Client\Model\Request\RequestParamsInterface
     /**
      * @return int
      */
-    public function getCursor()
+    public function getCursor(): ?int
     {
         return $this->cursor;
     }
 
-    public static function fromData($limit = 20, $cursor = null)
+    public static function fromData($limit = 20, $cursor = null): JobsPullListGet
     {
         return new self($limit, $cursor);
     }

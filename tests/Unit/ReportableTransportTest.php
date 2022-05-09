@@ -13,6 +13,7 @@
 namespace CappasitySDK\Tests\Unit;
 
 use CappasitySDK\ReportableTransport;
+use CappasitySDK\Transport\ResponseContainer;
 
 class ReportableTransportTest extends \PHPUnit\Framework\TestCase
 {
@@ -24,28 +25,29 @@ class ReportableTransportTest extends \PHPUnit\Framework\TestCase
     private $basicTransportMock;
 
     /**
-     * @var \Raven_Client|\PHPUnit_Framework_MockObject_MockObject
+     * @var \Sentry\State\HubInterface|\PHPUnit_Framework_MockObject_MockObject
      */
-    private $ravenClientMock;
+    private $sentryHubMock;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
-        $this->basicTransportMock = $this->getMockBuilder(\CappasitySDK\Transport\Guzzle6::class)
+        $this->basicTransportMock = $this->getMockBuilder(\CappasitySDK\Transport\Guzzle7::class)
             ->disableOriginalConstructor()
             ->setMethods(['makeRequest'])
             ->getMock();
 
-        $this->ravenClientMock = $this->getMockBuilder(\Raven_Client::class)
+        $this->sentryHubMock = $this->getMockBuilder(\Sentry\State\HubInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['captureException'])
+            // Since we mock an interface we are required to implement all its methods (all except none)
+            ->setMethodsExcept()
             ->getMock();
     }
 
     public function testMakeRequest()
     {
-        $transport = new ReportableTransport($this->basicTransportMock, $this->ravenClientMock);
+        $transport = new ReportableTransport($this->basicTransportMock, $this->sentryHubMock);
         $mockedResponseData = [
             'meta'=> [
                 'id' => 'd86d4a7c-7cdb-4c00-9d46-dfadafcebd7c',
@@ -75,7 +77,7 @@ class ReportableTransportTest extends \PHPUnit\Framework\TestCase
             )
             ->willReturn($mockedTransportResponseContainer);
 
-        $this->ravenClientMock
+        $this->sentryHubMock
             ->expects($this->never())
             ->method('captureException');
 
@@ -97,12 +99,9 @@ class ReportableTransportTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @expectedException \CappasitySDK\Client\Exception\RequestException
-     */
     public function testMakeRequestAndCaptureException()
     {
-        $transport = new ReportableTransport($this->basicTransportMock, $this->ravenClientMock);
+        $transport = new ReportableTransport($this->basicTransportMock, $this->sentryHubMock);
 
         $mockedException = new \CappasitySDK\Client\Exception\RequestException();
 
@@ -111,11 +110,12 @@ class ReportableTransportTest extends \PHPUnit\Framework\TestCase
             ->method('makeRequest')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryHubMock
             ->expects($this->once())
             ->method('captureException')
-            ->with($mockedException, null, null, null);
+            ->with($mockedException);
 
+        $this->expectException(\CappasitySDK\Client\Exception\RequestException::class);
         $transport->makeRequest('POST', '/api/files/embed', [
             'headers' => [
                 'authorization' => "Bearer api.token.stub",
@@ -130,16 +130,16 @@ class ReportableTransportTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param $code
+     * @param int $code
      * @param array $data
      * @param array $headers
-     * @return \CappasitySDK\Transport\ResponseContainer
+     * @return ResponseContainer
      */
-    private function makeTransportResponseContainer($code, array $data, $headers = [])
+    private function makeTransportResponseContainer($code, array $data, $headers = []): ResponseContainer
     {
-        $mockedResponseBody = \GuzzleHttp\Psr7\stream_for(json_encode($data));
+        $mockedResponseBody = \GuzzleHttp\Psr7\Utils::streamFor(json_encode($data));
         $mockedOriginalResponse = new \GuzzleHttp\Psr7\Response($code, $headers, $mockedResponseBody);
 
-        return new \CappasitySDK\Transport\ResponseContainer($code, $headers, $data, $mockedOriginalResponse);
+        return new ResponseContainer($code, $headers, $data, $mockedOriginalResponse);
     }
 }

@@ -67,7 +67,7 @@ class Param
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -76,7 +76,7 @@ class Param
      * @param string $type
      * @return $this
      */
-    public function setType($type)
+    public function setType($type): Param
     {
         $this->type = $type;
 
@@ -86,7 +86,7 @@ class Param
     /**
      * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -95,7 +95,7 @@ class Param
      * @param string|null $description
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription($description): Param
     {
         $this->description = $description;
 
@@ -114,7 +114,7 @@ class Param
      * @param mixed $default
      * @return $this
      */
-    public function setDefault($default)
+    public function setDefault($default): Param
     {
         $this->default = $default;
 
@@ -124,7 +124,7 @@ class Param
     /**
      * @return bool
      */
-    public function getPaid()
+    public function getPaid(): bool
     {
         return $this->paid;
     }
@@ -133,7 +133,7 @@ class Param
      * @param bool $paid
      * @return $this
      */
-    public function setPaid($paid)
+    public function setPaid($paid): Param
     {
         $this->paid = $paid;
 
@@ -143,7 +143,7 @@ class Param
     /**
      * @return int|null
      */
-    public function getReqPlanLevel()
+    public function getReqPlanLevel(): ?int
     {
         return $this->reqPlanLevel;
     }
@@ -152,7 +152,7 @@ class Param
      * @param int|null $reqPlanLevel
      * @return $this
      */
-    public function setReqPlanLevel($reqPlanLevel)
+    public function setReqPlanLevel($reqPlanLevel): Param
     {
         $this->reqPlanLevel = $reqPlanLevel;
 
@@ -162,7 +162,7 @@ class Param
     /**
      * @return int|null
      */
-    public function getMin()
+    public function getMin(): ?int
     {
         return $this->min;
     }
@@ -171,7 +171,7 @@ class Param
      * @param int|null $min
      * @return $this
      */
-    public function setMin($min)
+    public function setMin($min): Param
     {
         $this->min = $min;
 
@@ -181,7 +181,7 @@ class Param
     /**
      * @return int|null
      */
-    public function getMax()
+    public function getMax(): ?int
     {
         return $this->max;
     }
@@ -190,7 +190,7 @@ class Param
      * @param int|null $max
      * @return $this
      */
-    public function setMax($max)
+    public function setMax($max): Param
     {
         $this->max = $max;
 
@@ -200,7 +200,7 @@ class Param
     /**
      * @return bool
      */
-    public function getInvert()
+    public function getInvert(): bool
     {
         return $this->invert;
     }
@@ -209,7 +209,7 @@ class Param
      * @param bool $invert
      * @return $this
      */
-    public function setInvert($invert)
+    public function setInvert($invert): Param
     {
         $this->invert = $invert;
 
@@ -219,7 +219,7 @@ class Param
     /**
      * @return int[]|null|string[]
      */
-    public function getEnum()
+    public function getEnum(): ?array
     {
         return $this->enum;
     }

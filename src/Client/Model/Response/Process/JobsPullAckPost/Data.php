@@ -30,7 +30,7 @@ class Data
     /**
      * @return int
      */
-    public function getAck()
+    public function getAck(): int
     {
         return $this->ack;
     }
@@ -39,7 +39,7 @@ class Data
      * @param int $ack
      * @return $this
      */
-    public function setAck($ack)
+    public function setAck($ack): Data
     {
         $this->ack = $ack;
 

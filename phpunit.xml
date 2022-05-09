@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- https://phpunit.de/manual/5.7/en/appendixes.configuration.html -->
+<!-- https://phpunit.readthedocs.io/en/9.5/configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/5.7/phpunit.xsd"
          backupGlobals="false"
          colors="true"
          bootstrap="./vendor/autoload.php"
@@ -13,13 +12,17 @@
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
+    <coverage processUncoveredFiles="true">
+        <include>
             <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
+        </include>
 
-    <logging>
-        <log type="coverage-text" target="php://stdout"/>
-    </logging>
+        <report>
+            <text outputFile="php://stdout"/>
+        </report>
+    </coverage>
+
+    <php>
+        <env name="XDEBUG_MODE" value="coverage"/>
+    </php>
 </phpunit>

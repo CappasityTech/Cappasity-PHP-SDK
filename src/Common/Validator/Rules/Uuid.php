@@ -18,7 +18,7 @@ class Uuid extends AbstractRule
 {
     use UuidTrait;
 
-    public function validate($input)
+    public function validate($input): bool
     {
         return $this->isValidUuid($input);
     }

@@ -40,7 +40,7 @@ class Meta
      * @param int $pages
      * @param int|null $cursor
      */
-    public function __construct(string $id, int $page, int $pages, ?int $cursor)
+    public function __construct($id, $page, $pages, $cursor)
     {
         $this->id = $id;
         $this->page = $page;
@@ -79,7 +79,7 @@ class Meta
      * @param int $page
      * @return $this
      */
-    public function setPage(int $page)
+    public function setPage($page): Meta
     {
         $this->page = $page;
 
@@ -98,7 +98,7 @@ class Meta
      * @param int $pages
      * @return $this
      */
-    public function setPages(int $pages)
+    public function setPages($pages): Meta
     {
         $this->pages = $pages;
 
@@ -117,7 +117,7 @@ class Meta
      * @param int|null $cursor
      * @return $this
      */
-    public function setCursor(?int $cursor)
+    public function setCursor($cursor): Meta
     {
         $this->cursor = $cursor;
 

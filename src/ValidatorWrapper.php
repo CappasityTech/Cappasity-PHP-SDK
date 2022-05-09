@@ -12,6 +12,7 @@
 
 namespace CappasitySDK;
 
+use LogicException;
 use Respect\Validation\Validator;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Factory;
@@ -43,26 +44,26 @@ class ValidatorWrapper
      * @param string $typeClassName
      * @return Validator
      */
-    public function buildByType($typeClassName)
+    public function buildByType(string $typeClassName): Validator
     {
         if (!method_exists($typeClassName, 'configureValidator')) {
-            throw new \LogicException('Type class must have method configureValidator()');
+            throw new LogicException('Type class must have method configureValidator()');
         }
 
         if (!method_exists($typeClassName, 'getRequiredRuleNamespaces')) {
-            throw new \LogicException('Type class must have method getRequiredRuleNamespaces()');
+            throw new LogicException('Type class must have method getRequiredRuleNamespaces()');
         }
 
         $namespacesDiff = array_diff($typeClassName::getRequiredRuleNamespaces(), $this->factory->getRulePrefixes());
         if (count($namespacesDiff) > 0) {
             $diffAsString = join(', ', $namespacesDiff);
 
-            throw new \LogicException("Not all required rule namespaces were appended to the factory, check out the diff: ${diffAsString}");
+            throw new LogicException("Not all required rule namespaces were appended to the factory, check out the diff: ${diffAsString}");
         }
 
         Validator::setFactory($this->factory);
 
-        /** @var \Respect\Validation\Validator $validator */
+        /** @var Validator $validator */
         $validator = $typeClassName::configureValidator($this->factory);
 
         Validator::setFactory(null);
@@ -71,13 +72,14 @@ class ValidatorWrapper
     }
 
     /**
-     * @param Validator $typeValidator
      * @param $input
+     * @param Validator $typeValidator
+     *
      * @return bool
      *
      * @throws ValidationException
      */
-    public function assert($input, Validator $typeValidator)
+    public function assert($input, Validator $typeValidator): bool
     {
         Validator::setFactory($this->factory);
 
@@ -95,7 +97,7 @@ class ValidatorWrapper
      * @param Validator $typeValidator
      * @return bool
      */
-    public function validate($input, Validator $typeValidator)
+    public function validate($input, Validator $typeValidator): bool
     {
         Validator::setFactory($this->factory);
 
@@ -109,7 +111,7 @@ class ValidatorWrapper
     /**
      * @return static
      */
-    public static function setUpInstance()
+    public static function setUpInstance(): ValidatorWrapper
     {
         $factory = new Factory();
         foreach (self::$rulePrefixesToAppend as $rulePrefix) {

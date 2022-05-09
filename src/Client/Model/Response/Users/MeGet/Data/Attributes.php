@@ -55,7 +55,7 @@ class Attributes
     private $plan;
 
     /**
-     * @var integer
+     * @var string
      */
     private $agreement;
 
@@ -98,7 +98,7 @@ class Attributes
      * @param int $created
      * @param string $alias
      * @param string $plan
-     * @param int $agreement
+     * @param string $agreement
      * @param int $nextCycle
      * @param int $models
      * @param int $modelsPrice
@@ -143,7 +143,7 @@ class Attributes
     /**
      * @return string
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
@@ -152,7 +152,7 @@ class Attributes
      * @param string $firstName
      * @return $this
      */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName): Attributes
     {
         $this->firstName = $firstName;
 
@@ -162,7 +162,7 @@ class Attributes
     /**
      * @return string
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
@@ -171,7 +171,7 @@ class Attributes
      * @param string $lastName
      * @return $this
      */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName): Attributes
     {
         $this->lastName = $lastName;
 
@@ -181,7 +181,7 @@ class Attributes
     /**
      * @return bool
      */
-    public function getOrg()
+    public function getOrg(): bool
     {
         return $this->org;
     }
@@ -190,7 +190,7 @@ class Attributes
      * @param bool $org
      * @return $this
      */
-    public function setOrg($org)
+    public function setOrg($org): Attributes
     {
         $this->org = $org;
 
@@ -200,7 +200,7 @@ class Attributes
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -209,7 +209,7 @@ class Attributes
      * @param string $id
      * @return $this
      */
-    public function setId($id)
+    public function setId(string $id): Attributes
     {
         $this->id = $id;
 
@@ -219,7 +219,7 @@ class Attributes
     /**
      * @return string
      */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -228,7 +228,7 @@ class Attributes
      * @param string $username
      * @return $this
      */
-    public function setUsername($username)
+    public function setUsername(string $username): Attributes
     {
         $this->username = $username;
 
@@ -238,7 +238,7 @@ class Attributes
     /**
      * @return int
      */
-    public function getCreated()
+    public function getCreated(): int
     {
         return $this->created;
     }
@@ -247,7 +247,7 @@ class Attributes
      * @param int $created
      * @return $this
      */
-    public function setCreated($created)
+    public function setCreated($created): Attributes
     {
         $this->created = $created;
 
@@ -257,7 +257,7 @@ class Attributes
     /**
      * @return string
      */
-    public function getAlias()
+    public function getAlias(): string
     {
         return $this->alias;
     }
@@ -266,7 +266,7 @@ class Attributes
      * @param string $alias
      * @return $this
      */
-    public function setAlias($alias)
+    public function setAlias(string $alias): Attributes
     {
         $this->alias = $alias;
 
@@ -276,7 +276,7 @@ class Attributes
     /**
      * @return string
      */
-    public function getPlan()
+    public function getPlan(): string
     {
         return $this->plan;
     }
@@ -285,7 +285,7 @@ class Attributes
      * @param string $plan
      * @return $this
      */
-    public function setPlan($plan)
+    public function setPlan(string $plan): Attributes
     {
         $this->plan = $plan;
 
@@ -293,18 +293,18 @@ class Attributes
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getAgreement()
+    public function getAgreement(): string
     {
         return $this->agreement;
     }
 
     /**
-     * @param int $agreement
+     * @param string $agreement
      * @return $this
      */
-    public function setAgreement($agreement)
+    public function setAgreement(string $agreement): Attributes
     {
         $this->agreement = $agreement;
 
@@ -314,7 +314,7 @@ class Attributes
     /**
      * @return int
      */
-    public function getNextCycle()
+    public function getNextCycle(): int
     {
         return $this->nextCycle;
     }
@@ -323,7 +323,7 @@ class Attributes
      * @param int $nextCycle
      * @return $this
      */
-    public function setNextCycle($nextCycle)
+    public function setNextCycle($nextCycle): Attributes
     {
         $this->nextCycle = $nextCycle;
 
@@ -333,7 +333,7 @@ class Attributes
     /**
      * @return int
      */
-    public function getModels()
+    public function getModels(): int
     {
         return $this->models;
     }
@@ -342,7 +342,7 @@ class Attributes
      * @param int $models
      * @return $this
      */
-    public function setModels($models)
+    public function setModels($models): Attributes
     {
         $this->models = $models;
 
@@ -352,7 +352,7 @@ class Attributes
     /**
      * @return int
      */
-    public function getModelsPrice()
+    public function getModelsPrice(): int
     {
         return $this->modelsPrice;
     }
@@ -361,7 +361,7 @@ class Attributes
      * @param int $modelsPrice
      * @return $this
      */
-    public function setModelsPrice($modelsPrice)
+    public function setModelsPrice($modelsPrice): Attributes
     {
         $this->modelsPrice = $modelsPrice;
 
@@ -380,7 +380,7 @@ class Attributes
      * @param string|integer $subscriptionPrice
      * @return $this
      */
-    public function setSubscriptionPrice($subscriptionPrice)
+    public function setSubscriptionPrice($subscriptionPrice): Attributes
     {
         $this->subscriptionPrice = $subscriptionPrice;
 
@@ -390,7 +390,7 @@ class Attributes
     /**
      * @return string
      */
-    public function getSubscriptionInterval()
+    public function getSubscriptionInterval(): string
     {
         return $this->subscriptionInterval;
     }
@@ -399,7 +399,7 @@ class Attributes
      * @param string $subscriptionInterval
      * @return $this
      */
-    public function setSubscriptionInterval($subscriptionInterval)
+    public function setSubscriptionInterval(string $subscriptionInterval): Attributes
     {
         $this->subscriptionInterval = $subscriptionInterval;
 
@@ -409,7 +409,7 @@ class Attributes
     /**
      * @return bool
      */
-    public function getMfa()
+    public function getMfa(): bool
     {
         return $this->mfa;
     }
@@ -418,7 +418,7 @@ class Attributes
      * @param bool $mfa
      * @return $this
      */
-    public function setMfa($mfa)
+    public function setMfa($mfa): Attributes
     {
         $this->mfa = $mfa;
 

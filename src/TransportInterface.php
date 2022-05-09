@@ -20,6 +20,8 @@ interface TransportInterface
      * @param array $options
      *
      * @return Transport\ResponseContainer
+     *
+     * @throws Transport\Exception\RequestException
      */
-    public function makeRequest($method, $url, array $options = []);
+    public function makeRequest($method, $url, array $options = []): Transport\ResponseContainer;
 }

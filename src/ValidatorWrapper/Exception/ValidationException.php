@@ -20,7 +20,7 @@ class ValidationException extends \Exception
      * @param NestedValidationException $e
      * @return ValidationException
      */
-    public static function fromNestedValidationException(NestedValidationException $e)
+    public static function fromNestedValidationException(NestedValidationException $e): ValidationException
     {
         return new self($e->getFullMessage(), $e->getCode(), $e);
     }

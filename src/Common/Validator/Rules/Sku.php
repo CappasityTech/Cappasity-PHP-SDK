@@ -18,7 +18,7 @@ class Sku extends AbstractRule
 {
     use SkuTrait;
 
-    public function validate($input)
+    public function validate($input): bool
     {
         return $this->isValidSku($input);
     }

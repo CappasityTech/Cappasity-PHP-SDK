@@ -31,7 +31,7 @@ class JobsPullResultGet implements Client\Model\Request\RequestParamsInterface
         return $this->jobId;
     }
 
-    public static function fromData($jobId)
+    public static function fromData($jobId): JobsPullResultGet
     {
         return new self($jobId);
     }

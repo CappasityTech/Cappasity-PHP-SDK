@@ -135,7 +135,7 @@ class File
         }
     }
 
-    private static function transformEmbedParams(array $embedParamsData)
+    private static function transformEmbedParams(array $embedParamsData): FileModel\Attributes\Embed\Params
     {
         $embedParamsToTransform = self::$embedParamsToTransform;
         $normalizedKeys = array_map(
@@ -164,10 +164,10 @@ class File
                 ->setEnum($paramData['enum'] ?? null)
                 ->setMin($paramData['min'] ?? null)
                 ->setMax($paramData['max'] ?? null)
-                ->setPaid($paramData['paid'] ?? null)
+                ->setPaid($paramData['paid'] ?? false)
                 ->setReqPlanLevel($paramData['reqPlanLevel'] ?? null)
-                ->setInvert($paramData['invert'] ?? null)
-                ->setOwn($paramData['own'] ?? null);
+                ->setInvert($paramData['invert'] ?? false)
+                ->setOwn($paramData['own'] ?? false);
 
             $capitalizedParamTitle = ucfirst($paramTitle);
             $setter = "set{$capitalizedParamTitle}";

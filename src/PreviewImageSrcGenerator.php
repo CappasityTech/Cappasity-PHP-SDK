@@ -12,6 +12,7 @@
 
 namespace CappasitySDK;
 
+use CappasitySDK\PreviewImageSrcGenerator\Exception\ValidationException;
 use CappasitySDK\PreviewImageSrcGenerator\Validator\Type\PreviewImageOptions as PreviewImageOptionsType;
 
 class PreviewImageSrcGenerator
@@ -135,7 +136,7 @@ class PreviewImageSrcGenerator
     /**
      * @return string
      */
-    private static function getBaseUrl()
+    private static function getBaseUrl(): string
     {
         $baseUrl = static::BASE_URL_API_CAPPASITY;
         $path = static::PATH_API_FILES_PREVIEW;
@@ -150,9 +151,9 @@ class PreviewImageSrcGenerator
      *
      * @return string
      *
-     * @throws \CappasitySDK\PreviewImageSrcGenerator\Exception\ValidationException
+     * @throws ValidationException
      */
-    public function generatePreviewImageSrc($userAlias, $viewId, array $options = [])
+    public function generatePreviewImageSrc($userAlias, $viewId, array $options = []): string
     {
         $urlSections = [self::getBaseUrl(), $userAlias];
         $this->validateOptions($options);
@@ -183,7 +184,7 @@ class PreviewImageSrcGenerator
      * @param array $modifiers
      * @return string
      */
-    private function prepareModifiersString(array $modifiers)
+    private function prepareModifiersString(array $modifiers): string
     {
         $filteredModifiers = array_filter(
             $modifiers,
@@ -219,7 +220,7 @@ class PreviewImageSrcGenerator
      * @param array $options
      * @return array
      */
-    private function prepareOptions(array $options)
+    private function prepareOptions(array $options): array
     {
         $transformedOptions = [];
 
@@ -240,7 +241,7 @@ class PreviewImageSrcGenerator
      * @param string $background hash prefixed hex value
      * @return bool|string
      */
-    private function prepareBackgroundModifier($background)
+    private function prepareBackgroundModifier(string $background)
     {
         return substr($background, 1);
     }

@@ -433,7 +433,7 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider provideFileInfoGetData
-     * @param [] $fromDataArgs
+     * @param array $fromDataArgs
      * @param bool $shouldBeValid
      * @param null|string $expectedError
      */
@@ -450,7 +450,7 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
         $this->assertValidator($validator, $params, $shouldBeValid, $expectedError);
     }
 
-    public function provideFileInfoGetData()
+    public function provideFileInfoGetData(): array
     {
         return [
             [
@@ -678,6 +678,7 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     '  - analytics must be a boolean',
                     '  - autorotate must be a boolean',
                     '  - autorotateTime must be less than or equal to 60',
+                    '  - autorotateDelay must be less than or equal to 10',
                     '  - autorotateDir must be in { 1, -1 }',
                     '  - hideFullScreen must be a boolean',
                     '  - hideAutorotateOpt must be a boolean',
@@ -727,36 +728,6 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                 ],
                 true
             ],
-            // @deprecated since 3.8.4, will be removed in 4.0.0
-            [
-                [
-                    'viewId' => '38020fdf-5e11-411c-9116-1610339d59cf',
-                    'width' => '100%',
-                    'height' => '600',
-                    'autoRun' => true,
-                    'closeButton' => false,
-                    'logo' => true,
-                    'autoRotate' => false,
-                    'autoRotateTime' => 10,
-                    'autoRotateDelay' => 2,
-                    'autoRotateDir' => 1,
-                    'hideFullScreen' => true,
-                    'hideAutoRotateOpt' => true,
-                    'hideSettingsBtn' => false,
-                    'enableImageZoom' => true,
-                    'zoomQuality' => 2,
-                    'hideZoomOpt' => false,
-                    'analytics' => true,
-                    'uiPadX' => 10,
-                    'uiPadY' => 20,
-                    'enableStoreUrl' => true,
-                    'storeUrl' => 'http://google.com',
-                    'hideHints' => true,
-                    'startHint' => true,
-                    'arButton' => false,
-                ],
-                true
-            ]
         ];
     }
 

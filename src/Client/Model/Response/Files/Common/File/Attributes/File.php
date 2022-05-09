@@ -47,7 +47,7 @@ class File
     /**
      * @return int
      */
-    public function getContentLength()
+    public function getContentLength(): int
     {
         return $this->contentLength;
     }
@@ -56,7 +56,7 @@ class File
      * @param int $contentLength
      * @return $this
      */
-    public function setContentLength($contentLength)
+    public function setContentLength($contentLength): File
     {
         $this->contentLength = $contentLength;
 
@@ -66,7 +66,7 @@ class File
     /**
      * @return string
      */
-    public function getContentType()
+    public function getContentType(): string
     {
         return $this->contentType;
     }
@@ -75,7 +75,7 @@ class File
      * @param string $contentType
      * @return $this
      */
-    public function setContentType($contentType)
+    public function setContentType(string $contentType): File
     {
         $this->contentType = $contentType;
 
@@ -85,7 +85,7 @@ class File
     /**
      * @return string|null
      */
-    public function getMd5Hash()
+    public function getMd5Hash(): string
     {
         return $this->md5Hash;
     }
@@ -94,7 +94,7 @@ class File
      * @param string|null $md5Hash
      * @return $this
      */
-    public function setMd5Hash($md5Hash)
+    public function setMd5Hash(string $md5Hash): File
     {
         $this->md5Hash = $md5Hash;
 
@@ -104,7 +104,7 @@ class File
     /**
      * @return string
      */
-    public function getBucket()
+    public function getBucket(): string
     {
         return $this->bucket;
     }
@@ -113,7 +113,7 @@ class File
      * @param string $bucket
      * @return $this
      */
-    public function setBucket($bucket)
+    public function setBucket(string $bucket): File
     {
         $this->bucket = $bucket;
 
@@ -123,7 +123,7 @@ class File
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -132,7 +132,7 @@ class File
      * @param string $type
      * @return $this
      */
-    public function setType($type)
+    public function setType(string $type): File
     {
         $this->type = $type;
 
@@ -142,7 +142,7 @@ class File
     /**
      * @return string
      */
-    public function getFilename()
+    public function getFilename(): string
     {
         return $this->filename;
     }
@@ -151,7 +151,7 @@ class File
      * @param string $filename
      * @return $this
      */
-    public function setFilename($filename)
+    public function setFilename(string $filename): File
     {
         $this->filename = $filename;
 

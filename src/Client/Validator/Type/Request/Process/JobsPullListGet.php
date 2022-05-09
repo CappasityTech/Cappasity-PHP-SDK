@@ -20,9 +20,9 @@ use CappasitySDK\Client\Validator\TypeInterface;
 class JobsPullListGet implements TypeInterface
 {
     /**
-     * @return \Respect\Validation\Validator
+     * @return V
      */
-    public static function configureValidator()
+    public static function configureValidator(): V
     {
         return V::create()
             ->setName('JobsPullListGet')
@@ -40,7 +40,7 @@ class JobsPullListGet implements TypeInterface
     /**
      * @return array
      */
-    public static function getRequiredRuleNamespaces()
+    public static function getRequiredRuleNamespaces(): array
     {
         return [];
     }

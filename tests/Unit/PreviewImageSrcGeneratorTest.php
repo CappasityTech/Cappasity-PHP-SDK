@@ -19,7 +19,7 @@ class PreviewImageSrcGeneratorTest extends \PHPUnit\Framework\TestCase
      */
     private $generator;
 
-    public function setUp()
+    public function setUp(): void
     {
         $validator = \CappasitySDK\ValidatorWrapper::setUpInstance();
 

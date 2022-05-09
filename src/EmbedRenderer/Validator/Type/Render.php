@@ -24,7 +24,7 @@ class Render implements Validator\TypeInterface
     /**
      * @return V
      */
-    public static function configureValidator()
+    public static function configureValidator(): V
     {
         return V::create()
             ->setName('Render')
@@ -51,7 +51,7 @@ class Render implements Validator\TypeInterface
                 V::allOf(
                     V::intType(),
                     V::min(RenderModel::AUTOROTATE_DELAY_MIN),
-                    V::max(RenderModel::AUTOROTATE_TIME_MAX)
+                    V::max(RenderModel::AUTOROTATE_DELAY_MAX)
                 ),
                 self::NOT_REQUIRED
             )
@@ -75,7 +75,7 @@ class Render implements Validator\TypeInterface
     /**
      * @return array
      */
-    public static function getRequiredRuleNamespaces()
+    public static function getRequiredRuleNamespaces(): array
     {
         return [
             'CappasitySDK\\Common\\Validator\\Rules\\',

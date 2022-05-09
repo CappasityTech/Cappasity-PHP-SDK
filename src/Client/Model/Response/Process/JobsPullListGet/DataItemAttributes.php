@@ -24,7 +24,7 @@ class DataItemAttributes
     const JOB_STATUS_ERROR = 'error';
 
     public static $jobStatuses = [
-        self::JOB_STATUS_SUCCESS,
+        self::JOB_STATUS_QUEUED,
         self::JOB_STATUS_PROCESSING,
         self::JOB_STATUS_SUCCESS,
         self::JOB_STATUS_ERROR,
@@ -46,7 +46,7 @@ class DataItemAttributes
     /**
      * @return string
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         if (!array_key_exists(self::ATTRIBUTE_STATUS, $this->attributes)) {
             throw new \LogicException('Data item is expected to have status attribute');
@@ -59,13 +59,18 @@ class DataItemAttributes
      * @param string $status
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus($status): DataItemAttributes
     {
         $this->attributes[self::ATTRIBUTE_STATUS] = $status;
 
         return $this;
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     * @throws Client\Exception\UnknownAttributeAccessException
+     */
     public function __get($name)
     {
         if (array_key_exists($name, $this->attributes)) {

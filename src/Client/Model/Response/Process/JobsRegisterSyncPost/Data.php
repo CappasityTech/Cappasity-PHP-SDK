@@ -44,7 +44,7 @@ class Data
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -53,7 +53,7 @@ class Data
      * @param string $id
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): Data
     {
         $this->id = $id;
 
@@ -63,7 +63,7 @@ class Data
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -72,7 +72,7 @@ class Data
      * @param string $type
      * @return $this
      */
-    public function setType($type)
+    public function setType($type): Data
     {
         $this->type = $type;
 
@@ -82,7 +82,7 @@ class Data
     /**
      * @return DataAttributes
      */
-    public function getAttributes()
+    public function getAttributes(): DataAttributes
     {
         return $this->attributes;
     }
@@ -91,7 +91,7 @@ class Data
      * @param DataAttributes $attributes
      * @return $this
      */
-    public function setAttributes($attributes)
+    public function setAttributes(DataAttributes $attributes): Data
     {
         $this->attributes = $attributes;
 

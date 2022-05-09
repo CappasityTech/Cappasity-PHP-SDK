@@ -36,7 +36,7 @@ class Links
      * @param string $self
      * @return $this
      */
-    public function setSelf(string $self)
+    public function setSelf(string $self): Links
     {
         $this->self = $self;
 
@@ -55,7 +55,7 @@ class Links
      * @param string|null $next
      * @return $this
      */
-    public function setNext(?string $next)
+    public function setNext(?string $next): Links
     {
         $this->next = $next;
 

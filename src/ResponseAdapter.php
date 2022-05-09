@@ -12,6 +12,8 @@
 
 namespace CappasitySDK;
 
+use Exception;
+
 class ResponseAdapter
 {
     /**
@@ -20,12 +22,12 @@ class ResponseAdapter
      *
      * @return Client\Model\Response\Container
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function transform(Transport\ResponseContainer $response, $className)
+    public function transform(Transport\ResponseContainer $response, $className): Client\Model\Response\Container
     {
         if (!method_exists($className, 'fromResponse')) {
-            throw new \Exception();
+            throw new Exception();
         }
 
         return new Client\Model\Response\Container(

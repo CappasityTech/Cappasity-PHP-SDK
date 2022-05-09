@@ -18,7 +18,7 @@ class Background extends AbstractRule
 {
     use BackgroundTrait;
 
-    public function validate($input)
+    public function validate($input): bool
     {
         return $this->isValidBackground($input);
     }

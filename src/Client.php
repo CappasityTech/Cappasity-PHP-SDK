@@ -12,10 +12,13 @@
 
 namespace CappasitySDK;
 
+use Exception;
+use Generator;
 use CappasitySDK\Client\Model\Request;
 use CappasitySDK\Client\Model\Response;
 use CappasitySDK\Client\Validator\Type\Request as RequestType;
 use CappasitySDK\Client\Exception\AuthorizationAssertionException;
+use LogicException;
 
 /**
  * Client provides wrappers for all necessary Cappasity API methods
@@ -102,6 +105,8 @@ class Client implements ClientInterface
      * @param ValidatorWrapper $validator
      * @param ResponseAdapter $responseAdapter
      * @param array $config
+     *
+     * @throws Client\Exception\InvalidConfigValueException
      */
     public function __construct(
         TransportInterface $transport,
@@ -123,6 +128,11 @@ class Client implements ClientInterface
      * @param Request\Process\JobsRegisterSyncPost $params
      *
      * @return Response\Container
+     *
+     * @throws AuthorizationAssertionException
+     * @throws Client\Exception\RequestException
+     * @throws Client\Exception\ValidationException
+     * @throws Exception
      */
     public function registerSyncJob(Request\Process\JobsRegisterSyncPost $params): Response\Container
     {
@@ -158,6 +168,11 @@ class Client implements ClientInterface
      * @param Request\Process\JobsPullListGet $params
      *
      * @return Response\Container
+     *
+     * @throws AuthorizationAssertionException
+     * @throws Client\Exception\RequestException
+     * @throws Client\Exception\ValidationException
+     * @throws Exception
      */
     public function getPullJobList(Request\Process\JobsPullListGet $params): Response\Container
     {
@@ -190,6 +205,11 @@ class Client implements ClientInterface
      * @param Request\Process\JobsPullAckPost $params
      *
      * @return Response\Container
+     *
+     * @throws AuthorizationAssertionException
+     * @throws Client\Exception\RequestException
+     * @throws Client\Exception\ValidationException
+     * @throws Exception
      */
     public function ackPullJobList(Request\Process\JobsPullAckPost $params): Response\Container
     {
@@ -219,6 +239,11 @@ class Client implements ClientInterface
      * @param Request\Process\JobsPullResultGet $params
      *
      * @return Response\Container
+     *
+     * @throws AuthorizationAssertionException
+     * @throws Client\Exception\RequestException
+     * @throws Client\Exception\ValidationException
+     * @throws Exception
      */
     public function getPullJobResult(Request\Process\JobsPullResultGet $params): Response\Container
     {
@@ -243,6 +268,11 @@ class Client implements ClientInterface
      * @param Request\Users\MeGet $params
      *
      * @return Response\Container
+     *
+     * @throws AuthorizationAssertionException
+     * @throws Client\Exception\RequestException
+     * @throws Client\Exception\ValidationException
+     * @throws Exception
      */
     public function getUser(Request\Users\MeGet $params): Response\Container
     {
@@ -255,6 +285,16 @@ class Client implements ClientInterface
         return $this->getResponseAdapter()->transform($response, Response\Users\MeGet::class);
     }
 
+    /**
+     * @param Request\Files\ListGet $params
+     *
+     * @return Response\Container
+     *
+     * @throws AuthorizationAssertionException
+     * @throws Client\Exception\RequestException
+     * @throws Client\Exception\ValidationException
+     * @throws Exception
+     */
     public function getViewList(Request\Files\ListGet $params): Response\Container
     {
         $this->assertAPITokenIsSet();
@@ -302,12 +342,16 @@ class Client implements ClientInterface
 
     /**
      * @param Request\Files\ListGet $params
-     * @return \Generator|Response\Container Yielded value is Response\Container instance which holds
+     * @return Generator|Response\Container Yielded value is Response\Container instance which holds
      * Response\Files\ListGet object as body data
+     *
+     * @throws AuthorizationAssertionException
+     * @throws Client\Exception\RequestException
+     * @throws Client\Exception\ValidationException
      *
      * @see Response\Files\ListGet
      */
-    public function getViewListIterator(Request\Files\ListGet $params): \Generator
+    public function getViewListIterator(Request\Files\ListGet $params): Generator
     {
         $hasNextPage = true;
         $offset = $params->getOffset();
@@ -323,21 +367,26 @@ class Client implements ClientInterface
                 $params->getTags(),
                 $params->getShallow()
             );
-            /** @var Response\Files\ListGet $chunk */
             $chunk = $this->getViewList($params);
-            /** @var Response\Files\ListGet\Meta $meta */
-            $meta = $chunk->getBodyData()->getMeta();
+            /** @var Response\Files\ListGet $data */
+            $data = $chunk->getBodyData();
+            $meta = $data->getMeta();
             $hasNextPage = $meta->getPage() < $meta->getPages();
             $offset += $chunkSize;
 
             yield $chunk;
         }
     }
-    
+
     /**
      * @param Request\Files\InfoGet $params
      *
      * @return Response\Container
+     *
+     * @throws AuthorizationAssertionException
+     * @throws Client\Exception\RequestException
+     * @throws Client\Exception\ValidationException
+     * @throws Exception
      */
     public function getViewInfo(Request\Files\InfoGet $params): Response\Container
     {
@@ -357,6 +406,10 @@ class Client implements ClientInterface
      * @param Request\Payments\Plans\PlanGet $params
      *
      * @return Response\Container
+     *
+     * @throws Client\Exception\RequestException
+     * @throws Client\Exception\ValidationException
+     * @throws Exception
      */
     public function getPaymentsPlan(Request\Payments\Plans\PlanGet $params): Response\Container
     {
@@ -374,7 +427,7 @@ class Client implements ClientInterface
     /**
      * @return array
      */
-    public function getConfig()
+    public function getConfig(): array
     {
         return $this->config;
     }
@@ -382,15 +435,15 @@ class Client implements ClientInterface
     /**
      * @return string
      */
-    public function getApiToken()
+    public function getApiToken(): string
     {
         return $this->apiToken;
     }
 
     /**
-     * @return \CappasitySDK\ResponseAdapter
+     * @return ResponseAdapter
      */
-    private function getResponseAdapter()
+    private function getResponseAdapter(): ResponseAdapter
     {
         return $this->responseAdapter;
     }
@@ -404,7 +457,12 @@ class Client implements ClientInterface
      * @return Transport\ResponseContainer
      * @throws Client\Exception\RequestException
      */
-    private function makeRequest($method, $endpoint, $urlParams = [], array $options = [])
+    private function makeRequest(
+        $method,
+        $endpoint,
+        array $urlParams = [],
+        array $options = []
+    ): Transport\ResponseContainer
     {
         try {
             return $this->transport->makeRequest(
@@ -423,7 +481,7 @@ class Client implements ClientInterface
      *
      * @return array
      */
-    private function makeOptions($endpoint, array $options)
+    private function makeOptions($endpoint, array $options): array
     {
         $options['headers']['authorization'] = "Bearer {$this->apiToken}";
         $options['timeout'] = $this->getTimeout($endpoint);
@@ -447,7 +505,7 @@ class Client implements ClientInterface
      *
      * @throws Client\Exception\ValidationException
      */
-    private function assertParams(Client\Model\Request\RequestParamsInterface $params, $validatorType)
+    private function assertParams(Client\Model\Request\RequestParamsInterface $params, string $validatorType)
     {
         try {
             $this->validator->assert($params, $this->validator->buildByType($validatorType));
@@ -456,6 +514,9 @@ class Client implements ClientInterface
         }
     }
 
+    /**
+     * @throws Client\Exception\InvalidConfigValueException|LogicException
+     */
     private function validateConfig()
     {
         if (!in_array($this->config['baseUrl'], self::$allowedBaseUrls)) {
@@ -464,7 +525,7 @@ class Client implements ClientInterface
 
         foreach (self::$allowedEndpoints as $endpoint) {
             if (!array_key_exists($endpoint, $this->config['timeout'])) {
-                throw new \LogicException("Timeout not set for endpoint \"{$endpoint}\"");
+                throw new LogicException("Timeout not set for endpoint \"{$endpoint}\"");
             }
 
             if (!is_int($this->config['timeout'][$endpoint])) {
@@ -478,7 +539,7 @@ class Client implements ClientInterface
      * @param string[] $urlParams
      * @return string
      */
-    private function getUrl($endpoint, array $urlParams = [])
+    private function getUrl($endpoint, array $urlParams = []): string
     {
         $path = sprintf($endpoint, ...$urlParams);
 
@@ -489,7 +550,7 @@ class Client implements ClientInterface
      * @param string $endpoint
      * @return int
      */
-    private function getTimeout($endpoint)
+    private function getTimeout(string $endpoint): int
     {
         return $this->config['timeout'][$endpoint];
     }

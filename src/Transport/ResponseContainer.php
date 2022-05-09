@@ -12,6 +12,8 @@
 
 namespace CappasitySDK\Transport;
 
+use GuzzleHttp\Message\ResponseInterface;
+
 class ResponseContainer
 {
     /**
@@ -30,7 +32,7 @@ class ResponseContainer
     private $data;
 
     /**
-     * @var mixed|\GuzzleHttp\Message\ResponseInterface
+     * @var mixed|ResponseInterface
      */
     private $originalResponse;
 
@@ -107,7 +109,7 @@ class ResponseContainer
     }
 
     /**
-     * @return mixed|\GuzzleHttp\Message\ResponseInterface
+     * @return mixed|ResponseInterface
      */
     public function getOriginalResponse()
     {
@@ -115,7 +117,7 @@ class ResponseContainer
     }
 
     /**
-     * @param mixed|\GuzzleHttp\Message\ResponseInterface $originalResponse
+     * @param mixed|ResponseInterface $originalResponse
      * @return $this
      */
     public function setOriginalResponse($originalResponse)

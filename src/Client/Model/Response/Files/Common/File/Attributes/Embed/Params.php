@@ -160,7 +160,7 @@ class Params
      * @param Param $closeButton
      * @return $this
      */
-    public function setCloseButton($closeButton)
+    public function setCloseButton(Param $closeButton): Params
     {
         $this->closeButton = $closeButton;
 
@@ -170,7 +170,7 @@ class Params
     /**
      * @return Param
      */
-    public function getLogo()
+    public function getLogo(): Param
     {
         return $this->logo;
     }
@@ -179,7 +179,7 @@ class Params
      * @param Param $logo
      * @return $this
      */
-    public function setLogo($logo)
+    public function setLogo(Param $logo): Params
     {
         $this->logo = $logo;
 
@@ -189,7 +189,7 @@ class Params
     /**
      * @return Param
      */
-    public function getAutorotate()
+    public function getAutorotate(): Param
     {
         return $this->autorotate;
     }
@@ -198,7 +198,7 @@ class Params
      * @param Param $autorotate
      * @return $this
      */
-    public function setAutorotate($autorotate)
+    public function setAutorotate(Param $autorotate): Params
     {
         $this->autorotate = $autorotate;
 
@@ -208,7 +208,7 @@ class Params
     /**
      * @return Param
      */
-    public function getAutorotateTime()
+    public function getAutorotateTime(): Param
     {
         return $this->autorotateTime;
     }
@@ -217,7 +217,7 @@ class Params
      * @param Param $autorotateTime
      * @return $this
      */
-    public function setAutorotateTime($autorotateTime)
+    public function setAutorotateTime(Param $autorotateTime): Params
     {
         $this->autorotateTime = $autorotateTime;
 
@@ -227,7 +227,7 @@ class Params
     /**
      * @return Param
      */
-    public function getAutorotateDelay()
+    public function getAutorotateDelay(): Param
     {
         return $this->autorotateDelay;
     }
@@ -236,7 +236,7 @@ class Params
      * @param Param $autorotateDelay
      * @return $this
      */
-    public function setAutorotateDelay($autorotateDelay)
+    public function setAutorotateDelay(Param $autorotateDelay): Params
     {
         $this->autorotateDelay = $autorotateDelay;
 
@@ -246,7 +246,7 @@ class Params
     /**
      * @return Param
      */
-    public function getAutorotateDir()
+    public function getAutorotateDir(): Param
     {
         return $this->autorotateDir;
     }
@@ -255,7 +255,7 @@ class Params
      * @param Param $autorotateDir
      * @return $this
      */
-    public function setAutorotateDir($autorotateDir)
+    public function setAutorotateDir(Param $autorotateDir): Params
     {
         $this->autorotateDir = $autorotateDir;
 
@@ -265,7 +265,7 @@ class Params
     /**
      * @return Param
      */
-    public function getHideFullScreen()
+    public function getHideFullScreen(): Param
     {
         return $this->hideFullScreen;
     }
@@ -274,7 +274,7 @@ class Params
      * @param Param $hideFullScreen
      * @return $this
      */
-    public function setHideFullScreen($hideFullScreen)
+    public function setHideFullScreen(Param $hideFullScreen): Params
     {
         $this->hideFullScreen = $hideFullScreen;
 
@@ -284,7 +284,7 @@ class Params
     /**
      * @return Param
      */
-    public function getHideAutorotateOpt()
+    public function getHideAutorotateOpt(): Param
     {
         return $this->hideAutorotateOpt;
     }
@@ -293,7 +293,7 @@ class Params
      * @param Param $hideAutorotateOpt
      * @return $this
      */
-    public function setHideAutorotateOpt($hideAutorotateOpt)
+    public function setHideAutorotateOpt(Param $hideAutorotateOpt): Params
     {
         $this->hideAutorotateOpt = $hideAutorotateOpt;
 
@@ -303,7 +303,7 @@ class Params
     /**
      * @return Param
      */
-    public function getHideSettingsBtn()
+    public function getHideSettingsBtn(): Param
     {
         return $this->hideSettingsBtn;
     }
@@ -312,7 +312,7 @@ class Params
      * @param Param $hideSettingsBtn
      * @return $this
      */
-    public function setHideSettingsBtn($hideSettingsBtn)
+    public function setHideSettingsBtn(Param $hideSettingsBtn): Params
     {
         $this->hideSettingsBtn = $hideSettingsBtn;
 
@@ -322,7 +322,7 @@ class Params
     /**
      * @return Param
      */
-    public function getEnableImageZoom()
+    public function getEnableImageZoom(): Param
     {
         return $this->enableImageZoom;
     }
@@ -331,7 +331,7 @@ class Params
      * @param Param $enableImageZoom
      * @return $this
      */
-    public function setEnableImageZoom($enableImageZoom)
+    public function setEnableImageZoom(Param $enableImageZoom): Params
     {
         $this->enableImageZoom = $enableImageZoom;
 
@@ -341,7 +341,7 @@ class Params
     /**
      * @return Param
      */
-    public function getZoomQuality()
+    public function getZoomQuality(): Param
     {
         return $this->zoomQuality;
     }
@@ -350,7 +350,7 @@ class Params
      * @param Param $zoomQuality
      * @return $this
      */
-    public function setZoomQuality($zoomQuality)
+    public function setZoomQuality(Param $zoomQuality): Params
     {
         $this->zoomQuality = $zoomQuality;
 
@@ -360,7 +360,7 @@ class Params
     /**
      * @return Param
      */
-    public function getHideZoomOpt()
+    public function getHideZoomOpt(): Param
     {
         return $this->hideZoomOpt;
     }
@@ -369,7 +369,7 @@ class Params
      * @param Param $hideZoomOpt
      * @return $this
      */
-    public function setHideZoomOpt($hideZoomOpt)
+    public function setHideZoomOpt(Param $hideZoomOpt): Params
     {
         $this->hideZoomOpt = $hideZoomOpt;
 
@@ -379,7 +379,7 @@ class Params
     /**
      * @return Param
      */
-    public function getWidth()
+    public function getWidth(): Param
     {
         return $this->width;
     }
@@ -388,7 +388,7 @@ class Params
      * @param Param $width
      * @return $this
      */
-    public function setWidth($width)
+    public function setWidth(Param $width): Params
     {
         $this->width = $width;
 
@@ -398,7 +398,7 @@ class Params
     /**
      * @return Param
      */
-    public function getHeight()
+    public function getHeight(): Param
     {
         return $this->height;
     }
@@ -407,7 +407,7 @@ class Params
      * @param Param $height
      * @return $this
      */
-    public function setHeight($height)
+    public function setHeight(Param $height): Params
     {
         $this->height = $height;
 
@@ -426,7 +426,7 @@ class Params
      * @param Param $analytics
      * @return $this
      */
-    public function setAnalytics(Param $analytics)
+    public function setAnalytics(Param $analytics): Params
     {
         $this->analytics = $analytics;
 
@@ -445,7 +445,7 @@ class Params
      * @param Param $uiPadX
      * @return $this
      */
-    public function setUiPadX(Param $uiPadX)
+    public function setUiPadX(Param $uiPadX): Params
     {
         $this->uiPadX = $uiPadX;
 
@@ -464,7 +464,7 @@ class Params
      * @param Param $uiPadY
      * @return $this
      */
-    public function setUiPadY(Param $uiPadY)
+    public function setUiPadY(Param $uiPadY): Params
     {
         $this->uiPadY = $uiPadY;
 
@@ -483,7 +483,7 @@ class Params
      * @param Param $enableStoreUrl
      * @return $this
      */
-    public function setEnableStoreUrl(Param $enableStoreUrl)
+    public function setEnableStoreUrl(Param $enableStoreUrl): Params
     {
         $this->enableStoreUrl = $enableStoreUrl;
 
@@ -502,7 +502,7 @@ class Params
      * @param Param $storeUrl
      * @return $this
      */
-    public function setStoreUrl(Param $storeUrl)
+    public function setStoreUrl(Param $storeUrl): Params
     {
         $this->storeUrl = $storeUrl;
 
@@ -521,7 +521,7 @@ class Params
      * @param Param $hideHints
      * @return $this
      */
-    public function setHideHints(Param $hideHints)
+    public function setHideHints(Param $hideHints): Params
     {
         $this->hideHints = $hideHints;
 
@@ -540,7 +540,7 @@ class Params
      * @param Param $startHint
      * @return $this
      */
-    public function setStartHint(Param $startHint)
+    public function setStartHint(Param $startHint): Params
     {
         $this->startHint = $startHint;
 
@@ -559,7 +559,7 @@ class Params
      * @param Param $arButton
      * @return $this
      */
-    public function setArButton(Param $arButton)
+    public function setArButton(Param $arButton): Params
     {
         $this->arButton = $arButton;
 

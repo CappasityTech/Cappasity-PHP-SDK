@@ -37,7 +37,7 @@ class Links
     /**
      * @return string
      */
-    public function getSelf()
+    public function getSelf(): string
     {
         return $this->self;
     }
@@ -46,7 +46,7 @@ class Links
      * @param string $self
      * @return $this
      */
-    public function setSelf($self)
+    public function setSelf($self): Links
     {
         $this->self = $self;
 
@@ -56,7 +56,7 @@ class Links
     /**
      * @return string
      */
-    public function getOwner()
+    public function getOwner(): string
     {
         return $this->owner;
     }
@@ -65,7 +65,7 @@ class Links
      * @param string $owner
      * @return $this
      */
-    public function setOwner($owner)
+    public function setOwner($owner): Links
     {
         $this->owner = $owner;
 
@@ -75,7 +75,7 @@ class Links
     /**
      * @return string
      */
-    public function getPlayer()
+    public function getPlayer(): string
     {
         return $this->player;
     }
@@ -84,7 +84,7 @@ class Links
      * @param string $player
      * @return $this
      */
-    public function setPlayer($player)
+    public function setPlayer($player): Links
     {
         $this->player = $player;
 
@@ -94,7 +94,7 @@ class Links
     /**
      * @return string
      */
-    public function getUser()
+    public function getUser(): string
     {
         return $this->user;
     }
@@ -103,7 +103,7 @@ class Links
      * @param string $user
      * @return $this
      */
-    public function setUser($user)
+    public function setUser($user): Links
     {
         $this->user = $user;
 

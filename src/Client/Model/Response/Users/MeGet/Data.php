@@ -51,7 +51,7 @@ class Data
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -60,7 +60,7 @@ class Data
      * @param string $type
      * @return $this
      */
-    public function setType($type)
+    public function setType(string $type): Data
     {
         $this->type = $type;
 
@@ -70,7 +70,7 @@ class Data
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -79,7 +79,7 @@ class Data
      * @param string $id
      * @return $this
      */
-    public function setId($id)
+    public function setId(string $id): Data
     {
         $this->id = $id;
 
@@ -89,7 +89,7 @@ class Data
     /**
      * @return Data\Attributes
      */
-    public function getAttributes()
+    public function getAttributes(): Data\Attributes
     {
         return $this->attributes;
     }
@@ -98,7 +98,7 @@ class Data
      * @param Data\Attributes $attributes
      * @return $this
      */
-    public function setAttributes($attributes)
+    public function setAttributes(Data\Attributes $attributes): Data
     {
         $this->attributes = $attributes;
 
@@ -108,7 +108,7 @@ class Data
     /**
      * @return Data\Links
      */
-    public function getLinks()
+    public function getLinks(): Data\Links
     {
         return $this->links;
     }
@@ -117,7 +117,7 @@ class Data
      * @param Data\Links $links
      * @return $this
      */
-    public function setLinks($links)
+    public function setLinks(Data\Links $links): Data
     {
         $this->links = $links;
 

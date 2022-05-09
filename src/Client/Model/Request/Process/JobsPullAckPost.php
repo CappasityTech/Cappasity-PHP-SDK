@@ -29,7 +29,7 @@ class JobsPullAckPost implements Client\Model\Request\RequestParamsInterface
     /**
      * @return string[]
      */
-    public function getJobIds()
+    public function getJobIds(): array
     {
         return $this->jobIds;
     }
@@ -39,7 +39,7 @@ class JobsPullAckPost implements Client\Model\Request\RequestParamsInterface
      *
      * @return JobsPullAckPost
      */
-    public static function fromData(array $jobIds = [])
+    public static function fromData(array $jobIds = []): JobsPullAckPost
     {
         return new self($jobIds);
     }

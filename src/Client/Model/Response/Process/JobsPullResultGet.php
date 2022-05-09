@@ -39,7 +39,7 @@ class JobsPullResultGet implements Response\DataInterface
     /**
      * @return JobsPullResultGet\Meta
      */
-    public function getMeta()
+    public function getMeta(): JobsPullResultGet\Meta
     {
         return $this->meta;
     }
@@ -48,7 +48,7 @@ class JobsPullResultGet implements Response\DataInterface
      * @param JobsPullResultGet\Meta $meta
      * @return $this
      */
-    public function setMeta(JobsPullResultGet\Meta $meta)
+    public function setMeta(JobsPullResultGet\Meta $meta): JobsPullResultGet
     {
         $this->meta = $meta;
 
@@ -58,7 +58,7 @@ class JobsPullResultGet implements Response\DataInterface
     /**
      * @return JobsPullResultGet\SyncDataItem[]|mixed
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }
@@ -67,7 +67,7 @@ class JobsPullResultGet implements Response\DataInterface
      * @param JobsPullResultGet\SyncDataItem[]|mixed $data
      * @return $this
      */
-    public function setData($data)
+    public function setData($data): JobsPullResultGet
     {
         $this->data = $data;
 
@@ -78,7 +78,7 @@ class JobsPullResultGet implements Response\DataInterface
      * @param $response
      * @return JobsPullResultGet
      */
-    public static function fromResponse($response)
+    public static function fromResponse($response): JobsPullResultGet
     {
         $meta = new JobsPullResultGet\Meta($response['meta']['jobId']);
 

@@ -20,7 +20,7 @@ trait SkuTrait
      * @param $sku
      * @return bool
      */
-    public function isValidSku($sku)
+    public function isValidSku($sku): bool
     {
         return is_string($sku)
             && preg_match($this->getValidSkuPattern(), $sku) === 1;
@@ -29,7 +29,7 @@ trait SkuTrait
     /**
      * @return string
      */
-    private function getValidSkuPattern()
+    private function getValidSkuPattern(): string
     {
         return self::$skuRegex;
     }

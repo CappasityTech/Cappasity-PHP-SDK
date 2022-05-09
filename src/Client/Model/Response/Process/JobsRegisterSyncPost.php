@@ -32,7 +32,7 @@ class JobsRegisterSyncPost implements Response\DataInterface
     /**
      * @return JobsRegisterSyncPost\Data
      */
-    public function getData()
+    public function getData(): JobsRegisterSyncPost\Data
     {
         return $this->data;
     }
@@ -41,7 +41,7 @@ class JobsRegisterSyncPost implements Response\DataInterface
      * @param JobsRegisterSyncPost\Data $data
      * @return $this
      */
-    public function setData($data)
+    public function setData($data): JobsRegisterSyncPost
     {
         $this->data = $data;
 
@@ -52,7 +52,7 @@ class JobsRegisterSyncPost implements Response\DataInterface
      * @param array $response
      * @return JobsRegisterSyncPost
      */
-    public static function fromResponse(array $response)
+    public static function fromResponse(array $response): JobsRegisterSyncPost
     {
         $data = $response['data'];
         $attributes = new JobsRegisterSyncPost\DataAttributes($data['attributes']);

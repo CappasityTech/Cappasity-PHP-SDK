@@ -12,9 +12,13 @@
 
 namespace CappasitySDK\Client\Model\Callback\Process;
 
+use ArrayAccess;
 use CappasitySDK\Client\Model\Response;
+use Countable;
+use Iterator;
+use LogicException;
 
-class JobsPushResultPost implements Response\DataInterface, \Iterator, \ArrayAccess, \Countable
+class JobsPushResultPost implements Response\DataInterface, Iterator, ArrayAccess, Countable
 {
     /**
      * @var int
@@ -24,19 +28,17 @@ class JobsPushResultPost implements Response\DataInterface, \Iterator, \ArrayAcc
     /**
      * @var JobsPushResultPost\SyncDataItem[]|mixed
      */
-    private $matches = [];
+    private $matches;
 
     /**
      * @param JobsPushResultPost\SyncDataItem[] $matches
      */
     public function __construct(array $matches = [])
     {
-        $this->position = 0;
-
         $className = self::class;
         array_walk($matches, function ($match) use ($className) {
             if (!$match instanceof JobsPushResultPost\SyncDataItem) {
-                throw new \LogicException("Every sync item should be an instance of ${className}");
+                throw new LogicException("Every sync item should be an instance of ${className}");
             }
         });
 
@@ -46,7 +48,7 @@ class JobsPushResultPost implements Response\DataInterface, \Iterator, \ArrayAcc
     /**
      * @return void
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->position = 0;
     }
@@ -54,7 +56,7 @@ class JobsPushResultPost implements Response\DataInterface, \Iterator, \ArrayAcc
     /**
      * @return JobsPushResultPost\SyncDataItem
      */
-    public function current()
+    public function current(): JobsPushResultPost\SyncDataItem
     {
         return $this->matches[$this->position];
     }
@@ -62,7 +64,7 @@ class JobsPushResultPost implements Response\DataInterface, \Iterator, \ArrayAcc
     /**
      * @return int
      */
-    public function key()
+    public function key(): int
     {
         return $this->position;
     }
@@ -70,7 +72,7 @@ class JobsPushResultPost implements Response\DataInterface, \Iterator, \ArrayAcc
     /**
      * @return void
      */
-    public function next()
+    public function next(): void
     {
         ++$this->position;
     }
@@ -78,25 +80,25 @@ class JobsPushResultPost implements Response\DataInterface, \Iterator, \ArrayAcc
     /**
      * @return bool
      */
-    public function valid()
+    public function valid(): bool
     {
         return isset($this->matches[$this->position]);
     }
 
     /**
-     * @param int $offset
+     * @param mixed|int $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->matches[$offset]);
     }
 
     /**
-     * @param int $offset
+     * @param mixed|int $offset
      * @return JobsPushResultPost\SyncDataItem|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?JobsPushResultPost\SyncDataItem
     {
         return isset($this->matches[$offset]) ? $this->matches[$offset] : null;
     }
@@ -104,20 +106,20 @@ class JobsPushResultPost implements Response\DataInterface, \Iterator, \ArrayAcc
     /**
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->matches);
     }
 
     /**
-     * @param int $offset
-     * @param JobsPushResultPost\SyncDataItem $value
+     * @param mixed|int $offset
+     * @param mixed|JobsPushResultPost\SyncDataItem $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (!$value instanceof JobsPushResultPost\SyncDataItem) {
             $className = self::class;
-            throw new \LogicException("Every sync item should be an instance of ${className}");
+            throw new LogicException("Every sync item should be an instance of ${className}");
         }
 
         if (is_null($offset)) {
@@ -128,9 +130,9 @@ class JobsPushResultPost implements Response\DataInterface, \Iterator, \ArrayAcc
     }
 
     /**
-     * @param int $offset
+     * @param mixed|int $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->matches[$offset]);
     }
@@ -139,7 +141,7 @@ class JobsPushResultPost implements Response\DataInterface, \Iterator, \ArrayAcc
      * @param array $body
      * @return JobsPushResultPost
      */
-    public static function fromCallbackBody(array $body)
+    public static function fromCallbackBody(array $body): JobsPushResultPost
     {
         $data = array_map(function (array $item) {
             return new JobsPushResultPost\SyncDataItem(

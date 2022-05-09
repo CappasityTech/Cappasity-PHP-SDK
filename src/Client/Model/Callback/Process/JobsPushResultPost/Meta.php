@@ -30,7 +30,7 @@ class Meta
     /**
      * @return string
      */
-    public function getJobId()
+    public function getJobId(): string
     {
         return $this->jobId;
     }
@@ -39,7 +39,7 @@ class Meta
      * @param string $jobId
      * @return $this
      */
-    public function setJobId($jobId)
+    public function setJobId($jobId): Meta
     {
         $this->jobId = $jobId;
 

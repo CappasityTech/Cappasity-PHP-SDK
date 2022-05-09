@@ -12,15 +12,17 @@
 
 namespace CappasitySDK;
 
+use Respect\Validation\Validator;
+
 interface ValidatorTypeInterface
 {
     /**
-     * @return \Respect\Validation\Validator
+     * @return Validator
      */
-    public static function configureValidator();
+    public static function configureValidator(): Validator;
 
     /**
      * @return array
      */
-    public static function getRequiredRuleNamespaces();
+    public static function getRequiredRuleNamespaces(): array;
 }
