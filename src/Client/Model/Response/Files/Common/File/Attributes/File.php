@@ -25,7 +25,7 @@ class File
     private $contentType;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $md5Hash;
 
@@ -83,7 +83,7 @@ class File
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getMd5Hash()
     {
@@ -91,7 +91,7 @@ class File
     }
 
     /**
-     * @param string $md5Hash
+     * @param string|null $md5Hash
      * @return $this
      */
     public function setMd5Hash($md5Hash)

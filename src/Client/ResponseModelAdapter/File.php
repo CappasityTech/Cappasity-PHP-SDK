@@ -111,7 +111,7 @@ class File
                             ->setContentLength($file['contentLength'])
                             ->setContentType($file['contentType'] ?? '')
                             ->setBucket($file['bucket'])
-                            ->setMd5Hash($file['md5Hash']);
+                            ->setMd5Hash($file['md5Hash'] ?? null);
                     },
                     $attributesData['files']
                 );
