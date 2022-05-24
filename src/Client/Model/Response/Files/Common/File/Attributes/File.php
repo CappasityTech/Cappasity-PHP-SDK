@@ -85,7 +85,7 @@ class File
     /**
      * @return string|null
      */
-    public function getMd5Hash(): string
+    public function getMd5Hash(): ?string
     {
         return $this->md5Hash;
     }
@@ -94,7 +94,7 @@ class File
      * @param string|null $md5Hash
      * @return $this
      */
-    public function setMd5Hash(string $md5Hash): File
+    public function setMd5Hash(?string $md5Hash): File
     {
         $this->md5Hash = $md5Hash;
 
@@ -104,7 +104,7 @@ class File
     /**
      * @return string
      */
-    public function getBucket(): string
+    public function getBucket(): ?string
     {
         return $this->bucket;
     }
