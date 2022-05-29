@@ -20,7 +20,7 @@ class Param
     private $type;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $description;
 
@@ -84,7 +84,7 @@ class Param
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDescription()
     {
@@ -92,7 +92,7 @@ class Param
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      * @return $this
      */
     public function setDescription($description)

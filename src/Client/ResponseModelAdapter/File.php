@@ -87,7 +87,7 @@ class File
                 ->setCVer($attributesData['c_ver'] ?? '')
                 ->setOwner($attributesData['owner'])
                 ->setParts($attributesData['parts'])
-                ->setPublic($attributesData['public'])
+                ->setPublic($attributesData['public'] ?? null)
                 ->setBackgroundColor($attributesData['backgroundColor'] ?? null)
                 ->setPacked($attributesData['packed'] ?? false)
                 ->setAlias($attributesData['alias'] ?? null)

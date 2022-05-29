@@ -15,7 +15,7 @@ namespace CappasitySDK\Client\Model\Response\Files\Common\File;
 class Attributes
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $alias;
 
@@ -65,27 +65,27 @@ class Attributes
     private $parts;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $preview;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $public;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $simple;
 
     /**
-     * @var integer
+     * @var int|null
      */
     private $startedAt;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $status;
 
@@ -95,22 +95,22 @@ class Attributes
     private $type;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $uploadId;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $uploadType;
 
     /**
-     * @var integer
+     * @var int|null
      */
     private $uploaded;
 
     /**
-     * @var integer
+     * @var int|null
      */
     private $uploadedAt;
 
@@ -125,7 +125,7 @@ class Attributes
     private $files;
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getAlias()
     {
@@ -133,7 +133,7 @@ class Attributes
     }
 
     /**
-     * @param string $alias
+     * @param string|null $alias
      * @return $this
      */
     public function setAlias($alias)
@@ -315,7 +315,7 @@ class Attributes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getPreview()
     {
@@ -323,7 +323,7 @@ class Attributes
     }
 
     /**
-     * @param string $preview
+     * @param string|null $preview
      * @return $this
      */
     public function setPreview($preview)
@@ -334,7 +334,7 @@ class Attributes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getPublic()
     {
@@ -342,7 +342,7 @@ class Attributes
     }
 
     /**
-     * @param string $public
+     * @param string|null $public
      * @return $this
      */
     public function setPublic($public)
@@ -353,7 +353,7 @@ class Attributes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getSimple()
     {
@@ -361,7 +361,7 @@ class Attributes
     }
 
     /**
-     * @param string $simple
+     * @param string|null $simple
      * @return $this
      */
     public function setSimple($simple)
@@ -372,7 +372,7 @@ class Attributes
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getStartedAt()
     {
@@ -380,7 +380,7 @@ class Attributes
     }
 
     /**
-     * @param int $startedAt
+     * @param int|null $startedAt
      * @return $this
      */
     public function setStartedAt($startedAt)
@@ -391,7 +391,7 @@ class Attributes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getStatus()
     {
@@ -399,7 +399,7 @@ class Attributes
     }
 
     /**
-     * @param string $status
+     * @param string|null $status
      * @return $this
      */
     public function setStatus($status)
@@ -429,7 +429,7 @@ class Attributes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getUploadId()
     {
@@ -437,7 +437,7 @@ class Attributes
     }
 
     /**
-     * @param string $uploadId
+     * @param string|null $uploadId
      * @return $this
      */
     public function setUploadId($uploadId)
@@ -448,7 +448,7 @@ class Attributes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getUploadType()
     {
@@ -456,7 +456,7 @@ class Attributes
     }
 
     /**
-     * @param string $uploadType
+     * @param string|null $uploadType
      * @return $this
      */
     public function setUploadType($uploadType)
@@ -467,7 +467,7 @@ class Attributes
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getUploaded()
     {
@@ -475,7 +475,7 @@ class Attributes
     }
 
     /**
-     * @param int $uploaded
+     * @param int|null $uploaded
      * @return $this
      */
     public function setUploaded($uploaded)
@@ -486,7 +486,7 @@ class Attributes
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getUploadedAt()
     {
@@ -494,7 +494,7 @@ class Attributes
     }
 
     /**
-     * @param int $uploadedAt
+     * @param int|null $uploadedAt
      * @return $this
      */
     public function setUploadedAt($uploadedAt)
