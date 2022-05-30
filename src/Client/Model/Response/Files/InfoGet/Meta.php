@@ -22,7 +22,7 @@ class Meta
     /**
      * @param string $id
      */
-    public function __construct($id)
+    public function __construct(string $id)
     {
         $this->id = $id;
     }
@@ -30,7 +30,7 @@ class Meta
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -39,7 +39,7 @@ class Meta
      * @param string $id
      * @return $this
      */
-    public function setId($id)
+    public function setId(string $id): Meta
     {
         $this->id = $id;
 

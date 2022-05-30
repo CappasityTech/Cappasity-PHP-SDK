@@ -37,7 +37,7 @@ class Meta
     /**
      * @return int
      */
-    public function getCursor()
+    public function getCursor(): int
     {
         return $this->cursor;
     }
@@ -46,7 +46,7 @@ class Meta
      * @param int $cursor
      * @return $this
      */
-    public function setCursor($cursor)
+    public function setCursor($cursor): Meta
     {
         $this->cursor = $cursor;
 
@@ -56,7 +56,7 @@ class Meta
     /**
      * @return int
      */
-    public function getLimit()
+    public function getLimit(): int
     {
         return $this->limit;
     }
@@ -65,7 +65,7 @@ class Meta
      * @param int $limit
      * @return $this
      */
-    public function setLimit($limit)
+    public function setLimit($limit): Meta
     {
         $this->limit = $limit;
 

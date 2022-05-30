@@ -32,7 +32,7 @@ class PlanGet implements Client\Model\Request\RequestParamsInterface
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -42,7 +42,7 @@ class PlanGet implements Client\Model\Request\RequestParamsInterface
      *
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): PlanGet
     {
         $this->id = $id;
 
@@ -54,7 +54,7 @@ class PlanGet implements Client\Model\Request\RequestParamsInterface
      *
      * @return PlanGet
      */
-    public static function fromData($id)
+    public static function fromData($id): PlanGet
     {
         return new self($id);
     }

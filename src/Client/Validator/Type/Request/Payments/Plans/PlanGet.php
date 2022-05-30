@@ -22,7 +22,7 @@ class PlanGet implements Validator\TypeInterface
     /**
      * @return V
      */
-    public static function configureValidator()
+    public static function configureValidator(): V
     {
         return V::create()
             ->setName('PlanGet')
@@ -34,7 +34,7 @@ class PlanGet implements Validator\TypeInterface
     /**
      * @return array
      */
-    public static function getRequiredRuleNamespaces()
+    public static function getRequiredRuleNamespaces(): array
     {
         return [];
     }

@@ -12,6 +12,12 @@
 
 namespace CappasitySDK;
 
+use CappasitySDK\Transport\Guzzle7;
+use LogicException;
+use Sentry\ClientBuilder as SentryClientBuilder;
+use Sentry\State\Hub;
+use Sentry\State\Scope;
+
 /**
  * Factory class that helps you to build the Client
  */
@@ -32,12 +38,9 @@ class ClientFactory
         ],
         'sendReports' => true,
         'reportableClient' => [
-            'ravenClient' => [
-                'optionsOrDSN' => ReportableClient::CAPPASITY_DSN,
-                'options' => [
-                    'timeout' => 2,
-                ],
-            ]
+            'sentryHub' => [
+                'dsn' => ReportableClient::CAPPASITY_DSN,
+            ],
         ],
         'config' => []
     ];
@@ -45,6 +48,7 @@ class ClientFactory
     /**
      * @param array $options
      * @return Client|ReportableClient
+     * @throws Client\Exception\InvalidConfigValueException
      */
     public static function getClientInstance(array $options)
     {
@@ -55,9 +59,9 @@ class ClientFactory
         $apiToken = $resolvedOptions['apiToken'];
 
         if ($resolvedOptions['transport']['type'] === self::GUZZLE_TRANSPORT) {
-            $transport = new \CappasitySDK\Transport\Guzzle6($httpClient, $transportOptions);
+            $transport = new Guzzle7($httpClient, $transportOptions);
         } else {
-            throw new \LogicException(sprintf('Unhandled transport type %s', $resolvedOptions['transport']));
+            throw new LogicException(sprintf('Unhandled transport type %s', $resolvedOptions['transport']));
         }
 
         $validator = ValidatorWrapper::setUpInstance();
@@ -67,9 +71,12 @@ class ClientFactory
         $client = new Client($transport, $apiToken, $validator, $responseAdapter, $clientConfig);
 
         if ($resolvedOptions['sendReports'] === true) {
-            $ravenOptions = $resolvedOptions['reportableClient']['ravenClient'];
-            $ravenClient = new \Raven_Client($ravenOptions['optionsOrDSN'], $ravenOptions['options']);
-            $client = new ReportableClient($client, $ravenClient);
+            $sentryOptions = $resolvedOptions['reportableClient']['sentryHub'];
+            $sentryClientBuilder = SentryClientBuilder::create($sentryOptions);
+            $sentryClient = $sentryClientBuilder->getClient();
+            $stateScope = new Scope();
+            $sentryHub = new Hub($sentryClient, $stateScope);
+            $client = new ReportableClient($client, $sentryHub);
         }
 
         return $client;

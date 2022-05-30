@@ -35,7 +35,7 @@ class DataAttributes
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         if (!array_key_exists(self::ATTRIBUTE_TYPE, $this->attributes)) {
             throw new \LogicException('Sync result data is expected to have type attribute');
@@ -48,7 +48,7 @@ class DataAttributes
      * @param string $type
      * @return $this
      */
-    public function setType($type)
+    public function setType($type): DataAttributes
     {
         $this->attributes[self::ATTRIBUTE_TYPE] = $type;
 
@@ -58,7 +58,7 @@ class DataAttributes
     /**
      * @return bool
      */
-    public function getGzip()
+    public function getGzip(): bool
     {
         if (!array_key_exists(self::ATTRIBUTE_GZIP, $this->attributes)) {
             throw new \LogicException('Sync result data is expected to have gzip attribute');
@@ -71,13 +71,18 @@ class DataAttributes
      * @param bool $gzip
      * @return $this
      */
-    public function setGzip($gzip)
+    public function setGzip($gzip): DataAttributes
     {
         $this->attributes[self::ATTRIBUTE_GZIP] = $gzip;
 
         return $this;
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     * @throws Client\Exception\UnknownAttributeAccessException
+     */
     public function __get($name)
     {
         if (array_key_exists($name, $this->attributes)) {

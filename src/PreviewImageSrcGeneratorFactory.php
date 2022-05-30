@@ -17,7 +17,7 @@ class PreviewImageSrcGeneratorFactory
     /**
      * @return PreviewImageSrcGenerator
      */
-    public static function getGeneratorInstance()
+    public static function getGeneratorInstance(): PreviewImageSrcGenerator
     {
         $validator = ValidatorWrapper::setUpInstance();
 

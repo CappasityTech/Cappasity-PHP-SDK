@@ -23,11 +23,11 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
     private $clientMock;
 
     /**
-     * @var \Raven_Client|\PHPUnit_Framework_MockObject_MockObject
+     * @var \Sentry\State\Hub|\PHPUnit_Framework_MockObject_MockObject
      */
-    private $ravenClientMock;
+    private $sentryHubMock;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->clientMock = $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
@@ -43,20 +43,16 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ])
             ->getMock();
 
-        $this->ravenClientMock = $this->getMockBuilder(\Raven_Client::class)
+        $this->sentryHubMock = $this->getMockBuilder(\Sentry\State\HubInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods([
-                'captureException',
-            ])
+            // Since we mock an interface we are required to implement all its methods (all except none)
+            ->setMethodsExcept()
             ->getMock();
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testRegisterSyncJob()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryHubMock);
 
         $mockedException = new \Exception();
 
@@ -65,11 +61,12 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('registerSyncJob')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryHubMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);
 
+        $this->expectException(\Exception::class);
         $client->registerSyncJob(Client\Model\Request\Process\JobsRegisterSyncPost::fromData(
             [
                 [
@@ -82,12 +79,9 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
         ));
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testGetPullJobList()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryHubMock);
 
         $mockedException = new \Exception();
 
@@ -96,20 +90,18 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('getPullJobList')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryHubMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);
 
+        $this->expectException(\Exception::class);
         $client->getPullJobList(Client\Model\Request\Process\JobsPullListGet::fromData(null, null));
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testAckPullJobList()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryHubMock);
 
         $mockedException = new \Exception();
 
@@ -118,20 +110,18 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('ackPullJobList')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryHubMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);
 
+        $this->expectException(\Exception::class);
         $client->ackPullJobList(Client\Model\Request\Process\JobsPullAckPost::fromData(['a9673347-8f2e-4caa-83e9-4139d7473c2f:A1']));
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testGetPullJobResult()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryHubMock);
 
         $mockedException = new \Exception();
 
@@ -140,20 +130,18 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('getPullJobResult')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryHubMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);
 
+        $this->expectException(\Exception::class);
         $client->getPullJobResult(Client\Model\Request\Process\JobsPullResultGet::fromData('a9673347-8f2e-4caa-83e9-4139d7473c2f:A1'));
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testGetUser()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryHubMock);
 
         $mockedException = new \Exception();
 
@@ -162,20 +150,18 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('getUser')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryHubMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);
 
+        $this->expectException(\Exception::class);
         $client->getUser(new Client\Model\Request\Users\MeGet());
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testGetViewInfo()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryHubMock);
 
         $mockedException = new \Exception();
 
@@ -184,23 +170,21 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('getViewInfo')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryHubMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);
 
+        $this->expectException(\Exception::class);
         $client->getViewInfo(Client\Model\Request\Files\InfoGet::fromData(
             'alice',
             'dd596de4-ae2b-4d66-a023-242ca7d86b51'
         ));
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testGetPaymentsPlan()
     {
-        $client = new ReportableClient($this->clientMock, $this->ravenClientMock);
+        $client = new ReportableClient($this->clientMock, $this->sentryHubMock);
 
         $mockedException = new \Exception();
 
@@ -209,11 +193,12 @@ class ReportableClientTest extends \PHPUnit\Framework\TestCase
             ->method('getPaymentsPlan')
             ->willThrowException($mockedException);
 
-        $this->ravenClientMock
+        $this->sentryHubMock
             ->expects($this->once())
             ->method('captureException')
             ->with($mockedException);
 
+        $this->expectException(\Exception::class);
         $client->getPaymentsPlan(Client\Model\Request\Payments\Plans\PlanGet::fromData(
             'P-1AS44544Y0488105H5QI6O2I'
         ));

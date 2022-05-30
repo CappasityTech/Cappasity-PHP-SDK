@@ -12,6 +12,8 @@
 
 namespace CappasitySDK\Client\Model\Response;
 
+use GuzzleHttp\Message\ResponseInterface;
+
 class Container
 {
     /**
@@ -30,7 +32,7 @@ class Container
     private $bodyData;
 
     /**
-     * @var mixed|\GuzzleHttp\Message\ResponseInterface
+     * @var mixed|ResponseInterface
      */
     private $originalResponse;
 
@@ -51,7 +53,7 @@ class Container
     /**
      * @return int
      */
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->statusCode;
     }
@@ -60,7 +62,7 @@ class Container
      * @param int $statusCode
      * @return $this
      */
-    public function setStatusCode($statusCode)
+    public function setStatusCode($statusCode): Container
     {
         $this->statusCode = $statusCode;
 
@@ -70,7 +72,7 @@ class Container
     /**
      * @return array
      */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->headers;
     }
@@ -79,7 +81,7 @@ class Container
      * @param array $headers
      * @return $this
      */
-    public function setHeaders($headers)
+    public function setHeaders(array $headers): Container
     {
         $this->headers = $headers;
 
@@ -89,7 +91,7 @@ class Container
     /**
      * @return DataInterface
      */
-    public function getBodyData()
+    public function getBodyData(): DataInterface
     {
         return $this->bodyData;
     }
@@ -99,7 +101,7 @@ class Container
      *
      * @return $this
      */
-    public function setBodyData(DataInterface $bodyData)
+    public function setBodyData(DataInterface $bodyData): Container
     {
         $this->bodyData = $bodyData;
 
@@ -107,18 +109,18 @@ class Container
     }
 
     /**
-     * @return mixed|\GuzzleHttp\Message\ResponseInterface
+     * @return mixed|ResponseInterface
      */
-    public function getOriginalResponse()
+    public function getOriginalResponse(): ResponseInterface
     {
         return $this->originalResponse;
     }
 
     /**
-     * @param mixed|\GuzzleHttp\Message\ResponseInterface $originalResponse
+     * @param mixed|ResponseInterface $originalResponse
      * @return $this
      */
-    public function setOriginalResponse($originalResponse)
+    public function setOriginalResponse($originalResponse): Container
     {
         $this->originalResponse = $originalResponse;
 

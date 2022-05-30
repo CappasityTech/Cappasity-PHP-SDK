@@ -55,7 +55,7 @@ class SyncItem implements CappasitySDK\Client\Model\Request\RequestParamsInterfa
     /**
      * @return string[]
      */
-    public function getAliases()
+    public function getAliases(): array
     {
         return $this->aliases;
     }
@@ -63,15 +63,15 @@ class SyncItem implements CappasitySDK\Client\Model\Request\RequestParamsInterfa
     /**
      * @return string|null
      */
-    public function getCapp()
+    public function getCapp(): ?string
     {
         return $this->capp;
     }
 
     /**
-     * @return mixed serialized json-api compatible format
+     * @return array serialized json-api compatible format
      */
-    public function serialize()
+    public function serialize(): array
     {
         $jsonAPIFormat = [
             'id' => $this->getId(),
@@ -96,7 +96,7 @@ class SyncItem implements CappasitySDK\Client\Model\Request\RequestParamsInterfa
      *
      * @return self
      */
-    public static function fromData($id, array $aliases, $capp = null)
+    public static function fromData($id, array $aliases, $capp = null): SyncItem
     {
         return new self($id, $aliases, $capp);
     }

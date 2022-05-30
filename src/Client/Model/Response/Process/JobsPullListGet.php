@@ -48,7 +48,7 @@ class JobsPullListGet implements Response\DataInterface
      * @param JobsPullListGet\Meta $meta
      * @return $this
      */
-    public function setMeta($meta)
+    public function setMeta(JobsPullListGet\Meta $meta): JobsPullListGet
     {
         $this->meta = $meta;
 
@@ -58,7 +58,7 @@ class JobsPullListGet implements Response\DataInterface
     /**
      * @return JobsPullListGet\DataItem[]
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }
@@ -67,14 +67,14 @@ class JobsPullListGet implements Response\DataInterface
      * @param JobsPullListGet\DataItem[] $data
      * @return $this
      */
-    public function setData($data)
+    public function setData(array $data): JobsPullListGet
     {
         $this->data = $data;
 
         return $this;
     }
 
-    public static function fromResponse(array $response)
+    public static function fromResponse(array $response): JobsPullListGet
     {
         return new self(
             new JobsPullListGet\Meta($response['meta']['cursor'], $response['meta']['limit']),

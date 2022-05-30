@@ -83,15 +83,23 @@ class ListGet implements Request\RequestParamsInterface
     private $shallow;
 
     /**
-     * @param int $limit Limit or chunk size
-     * @param int $offset
-     * @param string $criteria
-     * @param string $order
+     * @param null|int $limit Limit or chunk size
+     * @param null|int $offset
+     * @param null|string $criteria
+     * @param null|string $order
      * @param null|string|array $filter
      * @param null|string[] $tags
      * @param null|boolean $shallow
      */
-    public function __construct($limit, $offset, $criteria, $order, $filter, $tags, $shallow)
+    public function __construct(
+        $limit,
+        $offset,
+        $criteria,
+        $order,
+        $filter,
+        $tags,
+        $shallow
+    )
     {
         $this->limit = $limit;
         $this->offset = $offset;
@@ -113,13 +121,13 @@ class ListGet implements Request\RequestParamsInterface
      * @return ListGet
      */
     public static function fromData(
-        ?int $limit = null,
-        ?int $offset = null,
-        ?string $criteria = null,
-        ?string $order = null,
+        $limit = null,
+        $offset = null,
+        $criteria = null,
+        $order = null,
         $filter = null,
-        ?array $tags = null,
-        ?bool $shallow = null
+        $tags = null,
+        $shallow = null
     ): ListGet {
         return new self($limit, $offset, $criteria, $order, $filter, $tags, $shallow);
     }
@@ -129,7 +137,7 @@ class ListGet implements Request\RequestParamsInterface
         return $this->offset;
     }
 
-    public function setOffset(?int $offset)
+    public function setOffset($offset): ListGet
     {
         $this->offset = $offset;
 
@@ -141,7 +149,7 @@ class ListGet implements Request\RequestParamsInterface
         return $this->limit;
     }
 
-    public function setLimit(?int $limit)
+    public function setLimit($limit): ListGet
     {
         $this->limit = $limit;
 
@@ -153,7 +161,7 @@ class ListGet implements Request\RequestParamsInterface
         return $this->criteria;
     }
 
-    public function setCriteria(?string $criteria)
+    public function setCriteria($criteria): ListGet
     {
         $this->criteria = $criteria;
 
@@ -165,7 +173,7 @@ class ListGet implements Request\RequestParamsInterface
         return $this->order;
     }
 
-    public function setOrder(?string $order)
+    public function setOrder($order): ListGet
     {
         $this->order = $order;
 
@@ -184,7 +192,7 @@ class ListGet implements Request\RequestParamsInterface
      * @param array|null|string $filter
      * @return $this
      */
-    public function setFilter($filter)
+    public function setFilter($filter): ListGet
     {
         $this->filter = $filter;
 
@@ -203,7 +211,7 @@ class ListGet implements Request\RequestParamsInterface
      * @param null|string[] $tags
      * @return $this
      */
-    public function setTags(?array $tags)
+    public function setTags(?array $tags): ListGet
     {
         $this->tags = $tags;
 
@@ -222,7 +230,7 @@ class ListGet implements Request\RequestParamsInterface
      * @param bool|null $shallow
      * @return $this
      */
-    public function setShallow(?bool $shallow)
+    public function setShallow($shallow): ListGet
     {
         $this->shallow = $shallow;
 

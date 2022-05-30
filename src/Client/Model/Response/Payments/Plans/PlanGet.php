@@ -39,7 +39,7 @@ class PlanGet implements Response\DataInterface
     /**
      * @return PlanGet\Meta
      */
-    public function getMeta()
+    public function getMeta(): PlanGet\Meta
     {
         return $this->meta;
     }
@@ -48,7 +48,7 @@ class PlanGet implements Response\DataInterface
      * @param PlanGet\Meta $meta
      * @return $this
      */
-    public function setMeta(PlanGet\Meta $meta)
+    public function setMeta(PlanGet\Meta $meta): PlanGet
     {
         $this->meta = $meta;
 
@@ -58,7 +58,7 @@ class PlanGet implements Response\DataInterface
     /**
      * @return PlanGet\Data
      */
-    public function getData()
+    public function getData(): PlanGet\Data
     {
         return $this->data;
     }
@@ -67,7 +67,7 @@ class PlanGet implements Response\DataInterface
      * @param PlanGet\Data $data
      * @return $this
      */
-    public function setData(PlanGet\Data $data)
+    public function setData(PlanGet\Data $data): PlanGet
     {
         $this->data = $data;
 
@@ -78,7 +78,7 @@ class PlanGet implements Response\DataInterface
      * @param array $response
      * @return PlanGet
      */
-    public static function fromResponse(array $response)
+    public static function fromResponse(array $response): PlanGet
     {
         $attributesData = $response['data']['attributes'];
         $linksData = $response['data']['links'];

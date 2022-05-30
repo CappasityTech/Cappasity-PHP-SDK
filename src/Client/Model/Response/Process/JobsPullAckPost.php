@@ -32,7 +32,7 @@ class JobsPullAckPost implements Response\DataInterface
     /**
      * @return JobsPullAckPost\Data
      */
-    public function getData()
+    public function getData(): JobsPullAckPost\Data
     {
         return $this->data;
     }
@@ -41,7 +41,7 @@ class JobsPullAckPost implements Response\DataInterface
      * @param JobsPullAckPost\Data $data
      * @return $this
      */
-    public function setData($data)
+    public function setData(JobsPullAckPost\Data $data): JobsPullAckPost
     {
         $this->data = $data;
 
@@ -52,7 +52,7 @@ class JobsPullAckPost implements Response\DataInterface
      * @param array $response
      * @return JobsPullAckPost
      */
-    public static function fromResponse(array $response)
+    public static function fromResponse(array $response): JobsPullAckPost
     {
         return new self(new JobsPullAckPost\Data($response['data']['ack']));
     }

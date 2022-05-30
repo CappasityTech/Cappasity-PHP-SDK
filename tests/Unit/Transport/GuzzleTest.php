@@ -24,7 +24,7 @@ class GuzzleTest extends \PHPUnit\Framework\TestCase
      */
     private $config;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->httpClientMock = $this->getMockBuilder(\GuzzleHttp\Client::class)
             ->disableOriginalConstructor()
@@ -44,7 +44,7 @@ class GuzzleTest extends \PHPUnit\Framework\TestCase
             ['e' => 'f'],
             \GuzzleHttp\json_encode(['c' => 'd'])
         );
-        $mockedResponseBody = \GuzzleHttp\Psr7\stream_for(json_encode(['data' => 'foobar']));
+        $mockedResponseBody = \GuzzleHttp\Psr7\Utils::streamFor(json_encode(['data' => 'foobar']));
         $mockedResponse = new \GuzzleHttp\Psr7\Response(200, [], $mockedResponseBody);
 
         $this->httpClientMock
@@ -58,7 +58,7 @@ class GuzzleTest extends \PHPUnit\Framework\TestCase
             )
             ->willReturn($mockedResponse);
 
-        $guzzleTransport = new \CappasitySDK\Transport\Guzzle6($this->httpClientMock, $this->config);
+        $guzzleTransport = new \CappasitySDK\Transport\Guzzle7($this->httpClientMock, $this->config);
         $response = $guzzleTransport->makeRequest('GET', 'http://aaa.com', [
             'query' => ['a' => 'b'],
             'data' => ['c' => 'd'],
@@ -73,10 +73,6 @@ class GuzzleTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(['data' => 'foobar'], $response->getData());
     }
 
-    /**
-     * @expectedException \CappasitySDK\Transport\Exception\RequestException
-     * @expectedExceptionMessage Server responded with an error [404: Not Found]: job data missing
-     */
     public function testThrowExceptionOnProcessErrorResponse()
     {
         $expectedRequest = new \GuzzleHttp\Psr7\Request(
@@ -86,7 +82,7 @@ class GuzzleTest extends \PHPUnit\Framework\TestCase
             \GuzzleHttp\json_encode(['c' => 'd'])
         );
 
-        $mockedResponseBody = \GuzzleHttp\Psr7\stream_for(json_encode([
+        $mockedResponseBody = \GuzzleHttp\Psr7\Utils::streamFor(json_encode([
             'statusCode' => 404,
             'error' => 'Not Found',
             'message' => 'job data missing',
@@ -105,7 +101,10 @@ class GuzzleTest extends \PHPUnit\Framework\TestCase
             )
             ->willReturn($mockedResponse);
 
-        $guzzleTransport = new \CappasitySDK\Transport\Guzzle6($this->httpClientMock, $this->config);
+        $guzzleTransport = new \CappasitySDK\Transport\Guzzle7($this->httpClientMock, $this->config);
+
+        $this->expectExceptionMessage("Server responded with an error [404: Not Found]: job data missing");
+        $this->expectException(\CappasitySDK\Transport\Exception\RequestException::class);
         $guzzleTransport->makeRequest('GET', 'http://aaa.com', [
             'query' => ['a' => 'b'],
             'data' => ['c' => 'd'],
@@ -114,10 +113,6 @@ class GuzzleTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    /**
-     * @expectedException \CappasitySDK\Transport\Exception\RequestException
-     * @expectedExceptionMessage Server responded with an error [404]: could not find associated data (detail: none)
-     */
     public function testThrowExceptionOnFilesErrorResponse()
     {
         $expectedRequest = new \GuzzleHttp\Psr7\Request(
@@ -153,7 +148,10 @@ class GuzzleTest extends \PHPUnit\Framework\TestCase
             )
             ->willReturn($mockedResponse);
 
-        $guzzleTransport = new \CappasitySDK\Transport\Guzzle6($this->httpClientMock, $this->config);
+        $guzzleTransport = new \CappasitySDK\Transport\Guzzle7($this->httpClientMock, $this->config);
+
+        $this->expectExceptionMessage("Server responded with an error [404]: could not find associated data (detail: none)");
+        $this->expectException(\CappasitySDK\Transport\Exception\RequestException::class);
         $guzzleTransport->makeRequest('GET', 'http://aaa.com', [
             'query' => ['a' => 'b'],
             'data' => ['c' => 'd'],

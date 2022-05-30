@@ -18,7 +18,7 @@ class DimensionSize extends AbstractRule
 {
     use DimensionSizeTrait;
 
-    public function validate($input)
+    public function validate($input): bool
     {
         return $this->isValidDimensionSize($input);
     }

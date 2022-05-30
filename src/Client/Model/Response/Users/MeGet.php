@@ -40,7 +40,7 @@ class MeGet implements Response\DataInterface
      * @param array $response
      * @return MeGet
      */
-    public static function fromResponse(array $response)
+    public static function fromResponse(array $response): MeGet
     {
         $meta = new MeGet\Meta($response['meta']['id']);
 
@@ -82,7 +82,7 @@ class MeGet implements Response\DataInterface
     /**
      * @return MeGet\Meta
      */
-    public function getMeta()
+    public function getMeta(): MeGet\Meta
     {
         return $this->meta;
     }
@@ -91,7 +91,7 @@ class MeGet implements Response\DataInterface
      * @param MeGet\Meta $meta
      * @return $this
      */
-    public function setMeta($meta)
+    public function setMeta(MeGet\Meta $meta): MeGet
     {
         $this->meta = $meta;
 
@@ -101,7 +101,7 @@ class MeGet implements Response\DataInterface
     /**
      * @return MeGet\Data
      */
-    public function getData()
+    public function getData(): MeGet\Data
     {
         return $this->data;
     }
@@ -110,7 +110,7 @@ class MeGet implements Response\DataInterface
      * @param MeGet\Data $data
      * @return $this
      */
-    public function setData($data)
+    public function setData(MeGet\Data $data): MeGet
     {
         $this->data = $data;
 

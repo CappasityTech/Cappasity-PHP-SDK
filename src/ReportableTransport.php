@@ -12,6 +12,9 @@
 
 namespace CappasitySDK;
 
+use Exception;
+use Sentry\State\HubInterface as SentryHubInterface;
+
 class ReportableTransport implements TransportInterface
 {
     /**
@@ -20,18 +23,18 @@ class ReportableTransport implements TransportInterface
     private $transport;
 
     /**
-     * @var \Raven_Client
+     * @var SentryHubInterface
      */
-    private $ravenClient;
+    private $sentryHub;
 
     /**
      * @param TransportInterface $transport
-     * @param \Raven_Client $ravenClient
+     * @param SentryHubInterface $sentryHub
      */
-    public function __construct(TransportInterface $transport, \Raven_Client $ravenClient)
+    public function __construct(TransportInterface $transport, SentryHubInterface $sentryHub)
     {
         $this->transport = $transport;
-        $this->ravenClient = $ravenClient;
+        $this->sentryHub = $sentryHub;
     }
 
     /**
@@ -41,14 +44,14 @@ class ReportableTransport implements TransportInterface
      *
      * @return Transport\ResponseContainer
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function makeRequest($method, $url, array $options = [])
+    public function makeRequest($method, $url, array $options = []): Transport\ResponseContainer
     {
         try {
             return $this->transport->makeRequest($method, $url, $options);
-        } catch (\Exception $e) {
-            $this->ravenClient->captureException($e);
+        } catch (Exception $e) {
+            $this->sentryHub->captureException($e);
 
             throw $e;
         }

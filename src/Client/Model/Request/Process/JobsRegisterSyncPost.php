@@ -60,7 +60,7 @@ class JobsRegisterSyncPost implements Client\Model\Request\RequestParamsInterfac
      *
      * @return JobsRegisterSyncPost
      */
-    public static function fromData(array $items, $syncType, $callbackUrl = null)
+    public static function fromData(array $items, $syncType, $callbackUrl = null): JobsRegisterSyncPost
     {
         return new self(
             array_map(function ($item) {
@@ -78,7 +78,7 @@ class JobsRegisterSyncPost implements Client\Model\Request\RequestParamsInterfac
     /**
      * @return JobsRegisterSyncPost\SyncItem[]
      */
-    public function getItems()
+    public function getItems(): array
     {
         return $this->items;
     }
@@ -86,7 +86,7 @@ class JobsRegisterSyncPost implements Client\Model\Request\RequestParamsInterfac
     /**
      * @return string
      */
-    public function getSyncType()
+    public function getSyncType(): string
     {
         return $this->syncType;
     }
@@ -94,7 +94,7 @@ class JobsRegisterSyncPost implements Client\Model\Request\RequestParamsInterfac
     /**
      * @return null|string
      */
-    public function getCallbackUrl()
+    public function getCallbackUrl(): ?string
     {
         return $this->callbackUrl;
     }

@@ -13,6 +13,7 @@
 namespace CappasitySDK\Tests\Unit;
 
 use CappasitySDK\Client;
+use CappasitySDK\Transport\ResponseContainer;
 
 class ClientTest extends \PHPUnit\Framework\TestCase
 {
@@ -46,11 +47,11 @@ class ClientTest extends \PHPUnit\Framework\TestCase
      */
     private $config;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
-        $this->transportMock = $this->getMockBuilder(\CappasitySDK\Transport\Guzzle6::class)
+        $this->transportMock = $this->getMockBuilder(\CappasitySDK\Transport\Guzzle7::class)
             ->disableOriginalConstructor()
             ->setMethods(['makeRequest'])
             ->getMock();
@@ -490,9 +491,6 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('9473eb1e-3fa6-4e75-aa34-6c4e01fabd64', $responseDataItem2->getCapp());
     }
 
-    /**
-     * @expectedException \CappasitySDK\Client\Exception\RequestException
-     */
     public function testGetPullJobResultNoResultsYet()
     {
         $client = $this->makeClient();
@@ -525,6 +523,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
             'Server responded with an error [404: Not Found]: job data missing'
         );
         $expectedException->setResponse($mockedTransportResponse);
+        $this->expectException(\CappasitySDK\Client\Exception\RequestException::class);
         $this->expectRequestMadeAndFailed(
             [
                 'GET',
@@ -983,73 +982,76 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         );
 
         $typeValidatorMock1 = $this->getMockBuilder(\Respect\Validation\Validator::class)->getMock();
-        $this->validatorMock
-            ->expects($this->at(0))
-            ->method('buildByType')
-            ->with(Client\Validator\Type\Request\Files\ListGet::class)
-            ->willReturn($typeValidatorMock1);
-        $this->validatorMock
-            ->expects($this->at(1))
-            ->method('assert')
-            ->with($this->isInstanceOf(Client\Model\Request\Files\ListGet::class), $typeValidatorMock1)
-            ->willReturn(true);
-        $this->responseAdapterMock
-            ->expects($this->at(0))
-            ->method('transform')
-            ->with($mockedTransportResponse1, Client\Model\Response\Files\ListGet::class)
-            ->willReturn($mockedClientResponse1);
-        $this->transportMock
-            ->expects($this->at(0))
-            ->method('makeRequest')
-            ->with(
-                'GET',
-                'https://api.cappasity.com/api/files',
-                [
-                    'headers' => [
-                        'authorization' => "Bearer {$this->apiToken}",
-                    ],
-                    'timeout' => 7,
-                    'query' => [
-                        'limit' => 1,
-                    ]
-                ]
-            )
-            ->willReturn($mockedTransportResponse1);
-
         $typeValidatorMock2 = $this->getMockBuilder(\Respect\Validation\Validator::class)->getMock();
+
         $this->validatorMock
-            ->expects($this->at(2))
             ->method('buildByType')
-            ->with(Client\Validator\Type\Request\Files\ListGet::class)
-            ->willReturn($typeValidatorMock2);
+            ->withConsecutive(
+                [Client\Validator\Type\Request\Files\ListGet::class],
+                [Client\Validator\Type\Request\Files\ListGet::class]
+            )
+            ->willReturnOnConsecutiveCalls(
+                $typeValidatorMock1,
+                $typeValidatorMock2
+            );
+
         $this->validatorMock
-            ->expects($this->at(3))
             ->method('assert')
-            ->with($this->isInstanceOf(Client\Model\Request\Files\ListGet::class), $typeValidatorMock2)
-            ->willReturn(true);
+            ->withConsecutive(
+                [$this->isInstanceOf(Client\Model\Request\Files\ListGet::class), $typeValidatorMock1],
+                [$this->isInstanceOf(Client\Model\Request\Files\ListGet::class), $typeValidatorMock2]
+            )
+            ->willReturnOnConsecutiveCalls(
+                true,
+                true
+            );
+
         $this->responseAdapterMock
-            ->expects($this->at(1))
             ->method('transform')
-            ->with($mockedTransportResponse2, Client\Model\Response\Files\ListGet::class)
-            ->willReturn($mockedClientResponse2);
+            ->withConsecutive(
+                [$mockedTransportResponse1, Client\Model\Response\Files\ListGet::class],
+                [$mockedTransportResponse2, Client\Model\Response\Files\ListGet::class]
+            )
+            ->willReturnOnConsecutiveCalls(
+                $mockedClientResponse1,
+                $mockedClientResponse2
+            );
+
         $this->transportMock
-            ->expects($this->at(1))
             ->method('makeRequest')
-            ->with(
-                'GET',
-                'https://api.cappasity.com/api/files',
+            ->withConsecutive(
                 [
-                    'headers' => [
-                        'authorization' => "Bearer {$this->apiToken}",
+                    'GET',
+                    'https://api.cappasity.com/api/files',
+                    [
+                        'headers' => [
+                            'authorization' => "Bearer {$this->apiToken}",
+                        ],
+                        'timeout' => 7,
+                        'query' => [
+                            'limit' => 1,
+                        ],
                     ],
-                    'timeout' => 7,
-                    'query' => [
-                        'limit' => 1,
-                        'offset' => 1,
-                    ]
+                ],
+                [
+                    'GET',
+                    'https://api.cappasity.com/api/files',
+                    [
+                        'headers' => [
+                            'authorization' => "Bearer {$this->apiToken}",
+                        ],
+                        'timeout' => 7,
+                        'query' => [
+                            'limit' => 1,
+                            'offset' => 1,
+                        ],
+                    ],
                 ]
             )
-            ->willReturn($mockedTransportResponse2);
+            ->willReturnOnConsecutiveCalls(
+                $mockedTransportResponse1,
+                $mockedTransportResponse2
+            );
 
         $viewList = $client->getViewListIterator(Client\Model\Request\Files\ListGet::fromData(1));
         $fileIds = [];
@@ -1202,11 +1204,11 @@ class ClientTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param array $makeRequestArguments
-     * @param \CappasitySDK\Transport\ResponseContainer $willReturnResponse
+     * @param ResponseContainer $willReturnResponse
      */
     private function expectRequestMade(
         array $makeRequestArguments,
-        \CappasitySDK\Transport\ResponseContainer $willReturnResponse
+        ResponseContainer $willReturnResponse
     ) {
         $this->transportMock
             ->expects($this->once())
@@ -1244,25 +1246,25 @@ class ClientTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param $code
+     * @param int $code
      * @param array $data
      * @param array $headers
-     * @return \CappasitySDK\Transport\ResponseContainer
+     * @return ResponseContainer
      */
-    private function makeTransportResponseContainer($code, array $data, $headers = [])
+    private function makeTransportResponseContainer($code, array $data, $headers = []): ResponseContainer
     {
-        $mockedResponseBody = \GuzzleHttp\Psr7\stream_for(json_encode($data));
+        $mockedResponseBody = \GuzzleHttp\Psr7\Utils::streamFor(json_encode($data));
         $mockedOriginalResponse = new \GuzzleHttp\Psr7\Response($code, $headers, $mockedResponseBody);
 
-        return new \CappasitySDK\Transport\ResponseContainer($code, $headers, $data, $mockedOriginalResponse);
+        return new ResponseContainer($code, $headers, $data, $mockedOriginalResponse);
     }
 
     /**
-     * @param \CappasitySDK\Transport\ResponseContainer $transportResponseContainer
+     * @param ResponseContainer $transportResponseContainer
      * @param $className
      * @return Client\Model\Response\Container
      */
-    private function makeClientResponseContainer(\CappasitySDK\Transport\ResponseContainer $transportResponseContainer, $className)
+    private function makeClientResponseContainer(ResponseContainer $transportResponseContainer, $className)
     {
         if (!method_exists($className, 'fromResponse')) {
             throw new \LogicException("Class {$className} missing required `fromResponse` method");

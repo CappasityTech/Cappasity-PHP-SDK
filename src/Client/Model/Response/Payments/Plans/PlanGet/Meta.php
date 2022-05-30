@@ -30,7 +30,7 @@ class Meta
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -39,7 +39,7 @@ class Meta
      * @param string $id
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): Meta
     {
         $this->id = $id;
 

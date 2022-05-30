@@ -20,9 +20,9 @@ use CappasitySDK\PreviewImageSrcGenerator as Preview;
 class PreviewImageOptions implements ValidatorTypeInterface
 {
     /**
-     * @return \Respect\Validation\Validator
+     * @return V
      */
-    public static function configureValidator()
+    public static function configureValidator(): V
     {
         return V::create()
             ->setName('PreviewImageOptions')
@@ -51,7 +51,7 @@ class PreviewImageOptions implements ValidatorTypeInterface
     /**
      * @return array
      */
-    public static function getRequiredRuleNamespaces()
+    public static function getRequiredRuleNamespaces(): array
     {
         return [
             'CappasitySDK\\PreviewImageSrcGenerator\\Validator\\Rules\\',

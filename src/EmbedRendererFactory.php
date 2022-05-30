@@ -12,8 +12,7 @@
 
 namespace CappasitySDK;
 
-use Twig_Loader_Filesystem;
-use Twig_Environment;
+use Twig;
 
 class EmbedRendererFactory
 {
@@ -28,10 +27,10 @@ class EmbedRendererFactory
      *
      * @return EmbedRenderer
      */
-    public static function getRendererInstance(array $engineOptions = [])
+    public static function getRendererInstance(array $engineOptions = []): EmbedRenderer
     {
-        $loader = new Twig_Loader_Filesystem(['templates'], __DIR__.'/..');
-        $twig = new Twig_Environment($loader, $engineOptions);
+        $loader = new Twig\Loader\FilesystemLoader(['templates'], __DIR__.'/..');
+        $twig = new Twig\Environment($loader, $engineOptions);
         $validator = ValidatorWrapper::setUpInstance();
 
         return new EmbedRenderer($twig, $validator);

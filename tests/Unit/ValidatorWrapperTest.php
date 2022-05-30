@@ -19,7 +19,7 @@ class ValidatorWrapperTest extends \PHPUnit\Framework\TestCase
      */
     private $factoryMock;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->factoryMock = $this->getMockBuilder(\Respect\Validation\Factory::class)
             ->disableOriginalConstructor()

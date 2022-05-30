@@ -14,9 +14,11 @@ namespace CappasitySDK\Transport;
 
 use CappasitySDK;
 use GuzzleHttp;
+use InvalidArgumentException;
+use LogicException;
 use Psr\Http\Message\ResponseInterface;
 
-class Guzzle6 implements CappasitySDK\TransportInterface
+class Guzzle7 implements CappasitySDK\TransportInterface
 {
     /**
      * @var GuzzleHttp\ClientInterface
@@ -44,7 +46,7 @@ class Guzzle6 implements CappasitySDK\TransportInterface
     /**
      * @return self
      */
-    public static function createDefault()
+    public static function createDefault(): Guzzle7
     {
         return new self(static::createDefaultHttpClient());
     }
@@ -54,7 +56,7 @@ class Guzzle6 implements CappasitySDK\TransportInterface
      *
      * @return self
      */
-    public static function createWithConfig(array $config)
+    public static function createWithConfig(array $config): Guzzle7
     {
         return new self(static::createDefaultHttpClient(), $config);
     }
@@ -62,12 +64,14 @@ class Guzzle6 implements CappasitySDK\TransportInterface
     /**
      * @param ResponseInterface $response
      * @return Exception\RequestException
+     *
+     * @throws Exception\UnexpectedResponseFormatException
      */
-    public static function createExceptionFromErrorResponse(ResponseInterface $response)
+    public static function createExceptionFromErrorResponse(ResponseInterface $response): Exception\RequestException
     {
         if ($response->getStatusCode() < 400) {
             $className = static::class;
-            throw new \LogicException("Attempted to create instance of {$className} from a non error response");
+            throw new LogicException("Attempted to create instance of {$className} from a non error response");
         }
 
         $e = new Exception\RequestException(static::makeErrorMessage($response), $response->getStatusCode());
@@ -83,11 +87,11 @@ class Guzzle6 implements CappasitySDK\TransportInterface
      *
      * @throws Exception\UnexpectedResponseFormatException
      */
-    private static function parseResponseBody(ResponseInterface $response)
+    private static function parseResponseBody(ResponseInterface $response): array
     {
         try {
-            return GuzzleHttp\json_decode($response->getBody(), true);
-        } catch (\InvalidArgumentException $e) {
+            return GuzzleHttp\Utils::jsonDecode($response->getBody(), true);
+        } catch (InvalidArgumentException $e) {
             throw new Exception\UnexpectedResponseFormatException(
                 $e->getMessage(),
                 $e->getCode(),
@@ -128,11 +132,11 @@ class Guzzle6 implements CappasitySDK\TransportInterface
      *
      * @throws Exception\UnexpectedResponseFormatException
      */
-    private static function makeErrorMessage(ResponseInterface $response)
+    private static function makeErrorMessage(ResponseInterface $response): string
     {
         try {
             $parsedResponse = static::parseResponseBody($response);
-        } catch (\InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new Exception\UnexpectedResponseFormatException(
                 $e->getMessage(),
                 $e->getCode(),
@@ -153,8 +157,7 @@ class Guzzle6 implements CappasitySDK\TransportInterface
             return "Server responded with an error [{$statusCode}: {$error}]: {$message}";
         }
 
-        $hasValidFilesErrorStructure = !$hasValidProcessErrorStructure
-            && array_key_exists('errors', $parsedResponse)
+        $hasValidFilesErrorStructure = array_key_exists('errors', $parsedResponse)
             && is_array($parsedResponse['errors'])
             && array_reduce($parsedResponse['errors'], function ($isValid, array $errorItem) {
                 $isValid = $isValid
@@ -187,7 +190,7 @@ class Guzzle6 implements CappasitySDK\TransportInterface
     /**
      * @return GuzzleHttp\Client
      */
-    private static function createDefaultHttpClient()
+    private static function createDefaultHttpClient(): GuzzleHttp\Client
     {
         return new GuzzleHttp\Client();
     }
@@ -201,7 +204,7 @@ class Guzzle6 implements CappasitySDK\TransportInterface
      *
      * @throws Exception\RequestException
      */
-    public function makeRequest($method, $url, array $options = [])
+    public function makeRequest($method, $url, array $options = []): ResponseContainer
     {
         $request = $this->createRequest($method, $url, $options);
 
@@ -229,7 +232,7 @@ class Guzzle6 implements CappasitySDK\TransportInterface
         $query = isset($options['query']) ? http_build_query($options['query']) : '';
         $url = $query === '' ? $url : "{$url}?{$query}";
         $headers = isset($options['headers']) ? $options['headers'] : [];
-        $body = isset($options['data']) ? GuzzleHttp\json_encode($options['data']) : '';
+        $body = isset($options['data']) ? GuzzleHttp\Utils::jsonEncode($options['data']) : '';
 
         return new GuzzleHttp\Psr7\Request(
             $method,
@@ -244,7 +247,7 @@ class Guzzle6 implements CappasitySDK\TransportInterface
      *
      * @return array
      */
-    private function resolveRequestOptions(array $options)
+    private function resolveRequestOptions(array $options): array
     {
         $resolvedOptions = [];
         if (array_key_exists('timeout', $options)) {
@@ -258,7 +261,7 @@ class Guzzle6 implements CappasitySDK\TransportInterface
      * @param GuzzleHttp\Exception\GuzzleException $original
      * @return Exception\RequestException
      */
-    private function getWrappedException(GuzzleHttp\Exception\GuzzleException $original)
+    private function getWrappedException(GuzzleHttp\Exception\GuzzleException $original): Exception\RequestException
     {
         $e = new Exception\RequestException($original->getMessage(), $original->getCode(), $original->getPrevious());
 
@@ -274,8 +277,9 @@ class Guzzle6 implements CappasitySDK\TransportInterface
     /**
      * @param ResponseInterface $response
      * @return ResponseContainer
+     * @throws Exception\UnexpectedResponseFormatException
      */
-    private function transformResponse(ResponseInterface $response)
+    private function transformResponse(ResponseInterface $response): ResponseContainer
     {
         return new ResponseContainer(
             $response->getStatusCode(),

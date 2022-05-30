@@ -13,6 +13,7 @@
 namespace CappasitySDK\Client\Model\Response\Files;
 
 use CappasitySDK\Client\Model\Response;
+use CappasitySDK\Client\ResponseModelAdapter\Exception\AdapterException;
 use CappasitySDK\Client\ResponseModelAdapter\File as FileResponseModelAdapter;
 
 class InfoGet implements Response\DataInterface
@@ -40,7 +41,7 @@ class InfoGet implements Response\DataInterface
     /**
      * @return InfoGet\Meta
      */
-    public function getMeta()
+    public function getMeta(): InfoGet\Meta
     {
         return $this->meta;
     }
@@ -49,7 +50,7 @@ class InfoGet implements Response\DataInterface
      * @param InfoGet\Meta $meta
      * @return $this
      */
-    public function setMeta(InfoGet\Meta $meta)
+    public function setMeta(InfoGet\Meta $meta): InfoGet
     {
         $this->meta = $meta;
 
@@ -59,7 +60,7 @@ class InfoGet implements Response\DataInterface
     /**
      * @return Response\Files\Common\File
      */
-    public function getData()
+    public function getData(): Common\File
     {
         return $this->data;
     }
@@ -68,7 +69,7 @@ class InfoGet implements Response\DataInterface
      * @param Response\Files\Common\File $data
      * @return $this
      */
-    public function setData(Response\Files\Common\File $data)
+    public function setData(Response\Files\Common\File $data): InfoGet
     {
         $this->data = $data;
 
@@ -78,8 +79,9 @@ class InfoGet implements Response\DataInterface
     /**
      * @param array $response
      * @return InfoGet
+     * @throws AdapterException
      */
-    public static function fromResponse(array $response)
+    public static function fromResponse(array $response): InfoGet
     {
         $file = FileResponseModelAdapter::transformFile($response['data']);
 
