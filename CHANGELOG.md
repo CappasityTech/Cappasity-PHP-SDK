@@ -1,3 +1,18 @@
+# [4.0.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.11.2...v4.0.0) (2022-05-30)
+
+
+### major
+
+* 4.0.0 release ([#1](https://github.com/CappasityTech/Cappasity-PHP-SDK/issues/1)) ([c646a2d](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/c646a2d))
+
+
+### BREAKING CHANGES
+
+* Active support of PHP versions prior to 7.4 has been dropped.
+Deprecated EmbedRenderer::render($params) method params autoRotate, autoRotateTime, autoRotateDelay, autoRotateDir, hideAutoRotateOpt are no longer supported. Use autorotate, autorotateTime, autorotateDelay, autorotateDir and hideAutorotateOpt instead.
+
+* fix: md5hash file attribute is optional
+
 ## [3.11.2](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.11.1...v3.11.2) (2022-05-29)
 
 
