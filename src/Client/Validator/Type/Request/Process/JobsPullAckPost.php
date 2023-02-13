@@ -27,11 +27,11 @@ class JobsPullAckPost implements TypeInterface
         return V::create()
             ->setName('JobsPullAckPost')
             ->instance(JobsPullAckPostModel::class)
-            ->attribute('jobIds', V::allOf([
+            ->attribute('jobIds', V::allOf(
                 V::arrayType(),
                 V::each(V::stringType()),
                 V::length(1),
-            ]));
+            ));
     }
 
     /**

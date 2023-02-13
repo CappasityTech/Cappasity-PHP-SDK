@@ -16,7 +16,7 @@ use Respect\Validation\Exceptions\ValidationException;
 
 class BackgroundException extends ValidationException
 {
-    public static $defaultTemplates = [
+    protected $defaultTemplates = [
         self::MODE_DEFAULT => [
             self::STANDARD => '{{name}} must match pattern /^#[0-9a-f]{6}$/',
         ],

@@ -13,6 +13,7 @@
 namespace CappasitySDK\Tests\Unit;
 
 use Respect\Validation\Validator as v;
+use Respect\Validation\Factory;
 use Respect\Validation\Exceptions\NestedValidationException;
 
 use CappasitySDK\Client\Model\Request\Process\JobsRegisterSyncPost as JobsRegisterSyncPostModel;
@@ -42,9 +43,11 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
     {
         $params = JobsRegisterSyncPostModel::fromData(...$fromDataArgs);
 
+        $factory = new Factory();
         foreach (JobsRegisterSyncPostType::getRequiredRuleNamespaces() as $namespace) {
-            v::with($namespace);
+            $factory = $factory->withRuleNamespace($namespace);
         }
+        Factory::setDefaultInstance($factory);
 
         $validator = JobsRegisterSyncPostType::configureValidator();
 
@@ -107,7 +110,11 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     'http://somewhere.com/over/the/rainbow',
                 ],
                 false,
-                '- id must be a string',
+                join(PHP_EOL, [
+                    '- These rules must pass for JobsRegisterSyncPost',
+                    '  - All of the required rules must pass for SyncItem',
+                    '    - id must be of type string'
+                ])
             ],
             [
                 [
@@ -122,7 +129,11 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     'http://somewhere.com/over/the/rainbow',
                 ],
                 false,
-                '- "invalid-sku!!!" must match pattern /^[0-9A-Za-z_\-.]{1,50}$/'
+                join(PHP_EOL, [
+                    '- These rules must pass for JobsRegisterSyncPost',
+                    '  - All of the required rules must pass for SyncItem',
+                    '    - "invalid-sku!!!" must match pattern /^[0-9A-Za-z_\-.]{1,50}$/'
+                ])
             ],
             [
                 [
@@ -137,7 +148,10 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                 ],
                 false,
                 // TODO don't like this error message because it does not tell when it must me a URL
-                '- callbackUrl must be a URL'
+                join(PHP_EOL, [
+                    '- All of the required rules must pass for when syncType is push',
+                    '  - callbackUrl must be a URL'
+                ])
             ],
             [
                 [
@@ -153,7 +167,10 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                 ],
                 false,
                 // TODO don't like this error message because it does not tell when it must be null
-                '- callbackUrl must be null'
+                join(PHP_EOL, [
+                    '- All of the required rules must pass for When syncType is pull callbackUrl',
+                    '  - callbackUrl must be null'
+                ])
             ],
             [
                 [
@@ -170,7 +187,10 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     'http://somewhere.com/over/the/rainbow',
                 ],
                 false,
-                '- items must be valid' //:(
+                join(PHP_EOL, [
+                    '- These rules must pass for JobsRegisterSyncPost',
+                    '  - items must be valid'
+                ])
             ],
             [
                 [
@@ -189,7 +209,10 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     'http://somewhere.com/over/the/rainbow',
                 ],
                 false,
-                '- items must be valid' //:(
+                join(PHP_EOL, [
+                    '- These rules must pass for JobsRegisterSyncPost',
+                    '  - items must be valid'
+                ])
             ],
             [
                 [
@@ -205,9 +228,11 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                 ],
                 false,
                 join(PHP_EOL, [
-                    '- At least one of these rules must pass for capp',
-                    '  - capp must be null',
-                    '    - capp must be a valid UUID and therefore match pattern /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/',
+                    '- These rules must pass for JobsRegisterSyncPost',
+                    '  - All of the required rules must pass for SyncItem',
+                    '    - Only one of these rules must pass for capp',
+                    '      - capp must be null',
+                    '        - capp must be a valid UUID',
                 ]),
             ],
         ];
@@ -223,9 +248,11 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
     {
         $params = JobsPullListGetModel::fromData(...$fromDataArgs);
 
+        $factory = new Factory();
         foreach (JobsPullListGetType::getRequiredRuleNamespaces() as $namespace) {
-            v::with($namespace);
+            $factory = $factory->withRuleNamespace($namespace);
         }
+        Factory::setDefaultInstance($factory);
 
         $validator = JobsPullListGetType::configureValidator();
 
@@ -247,18 +274,20 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                 [50, null],
                 false,
                 join(PHP_EOL, [
-                    '- At least one of these rules must pass for limit',
-                    '  - limit must be null',
-                    '  - limit must be less than or equal to 40'
+                    '- These rules must pass for JobsPullListGet',
+                    '  - Only one of these rules must pass for limit',
+                    '    - limit must be null',
+                    '    - limit must be less than or equal to 40'
                 ]),
             ],
             [
                 [-100, 100],
                 false,
                 join(PHP_EOL, [
-                    '- At least one of these rules must pass for limit',
-                    '  - limit must be null',
-                    '  - limit must be greater than or equal to 1'
+                    '- These rules must pass for JobsPullListGet',
+                    '  - Only one of these rules must pass for limit',
+                    '    - limit must be null',
+                    '    - limit must be greater than or equal to 1'
                 ]),
             ],
             [
@@ -266,10 +295,10 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                 false,
                 join(PHP_EOL, [
                     '- These rules must pass for JobsPullListGet',
-                    '  - At least one of these rules must pass for limit',
+                    '  - Only one of these rules must pass for limit',
                     '    - limit must be null',
                     '    - limit must be greater than or equal to 1',
-                    '  - At least one of these rules must pass for cursor',
+                    '  - Only one of these rules must pass for cursor',
                     '    - cursor must be null',
                     '    - cursor must be greater than or equal to 0',
                 ]),
@@ -287,9 +316,11 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
     {
         $params = JobsPullResultGetModel::fromData(...$fromDataArgs);
 
+        $factory = new Factory();
         foreach (JobsPullResultGetType::getRequiredRuleNamespaces() as $namespace) {
-            v::with($namespace);
+            $factory = $factory->withRuleNamespace($namespace);
         }
+        Factory::setDefaultInstance($factory);
 
         $validator = JobsPullResultGetType::configureValidator();
 
@@ -310,14 +341,20 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     null,
                 ],
                 false,
-                '- jobId must be a string'
+                join(PHP_EOL, [
+                    '- These rules must pass for JobsPullResultGet',
+                    '  - jobId must be of type string'
+                ])
             ],
             [
                 [
                     123,
                 ],
                 false,
-                '- jobId must be a string'
+                join(PHP_EOL, [
+                    '- These rules must pass for JobsPullResultGet',
+                    '  - jobId must be of type string'
+                ])
             ]
         ];
     }
@@ -332,9 +369,11 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
     {
         $params = JobsPullAckPostModel::fromData(...$fromDataArgs);
 
+        $factory = new Factory();
         foreach (JobsPullAckPostType::getRequiredRuleNamespaces() as $namespace) {
-            v::with($namespace);
+            $factory = $factory->withRuleNamespace($namespace);
         }
+        Factory::setDefaultInstance($factory);
 
         $validator = JobsPullAckPostType::configureValidator();
 
@@ -361,15 +400,20 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     []
                 ],
                 false,
-                // TODO: upgrade respect/validation to make GTE message
-                '- jobIds must have a length greater than 1'
+                join(PHP_EOL, [
+                    '- These rules must pass for JobsPullAckPost',
+                    '  - jobIds must have a length greater than or equal to 1'
+                ])
             ],
             [
                 [
                     [123],
                 ],
                 false,
-                '- 123 must be a string'
+                join(PHP_EOL, [
+                    '- These rules must pass for JobsPullAckPost',
+                    '  - 123 must be of type string'
+                ])
             ],
         ];
     }
@@ -382,9 +426,11 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidatePreviewLinkGenerationPreviewImageOptions(array $options, $shouldBeValid, $expectedError = null)
     {
+        $factory = new Factory();
         foreach (PreviewImageOptionsType::getRequiredRuleNamespaces() as $namespace) {
-            v::with($namespace);
+            $factory = $factory->withRuleNamespace($namespace);
         }
+        Factory::setDefaultInstance($factory);
 
         $validator = PreviewImageOptionsType::configureValidator();
 
@@ -423,9 +469,9 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                     '- All of the required rules must pass for PreviewImageOptions',
                     '  - These rules must pass for modifiers',
                     '    - background must match pattern /^#[0-9a-f]{6}$/',
-                    '    - crop must be in { "fit", "fill", "cut", "pad" }',
-                    '  - format must be in { "jpeg", "jpg", "png", "webp", "gif" }',
-                    '  - overlay must be in { "3dp", "3dp@2x", "3dp@3x" }',
+                    '    - crop must be in `{ "fit", "fill", "cut", "pad" }`',
+                    '  - format must be in `{ "jpeg", "jpg", "png", "webp", "gif" }`',
+                    '  - overlay must be in `{ "3dp", "3dp@2x", "3dp@3x" }`',
                 ]),
             ]
         ];
@@ -441,9 +487,11 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
     {
         $params = InfoGetModel::fromData(...$fromDataArgs);
 
+        $factory = new Factory();
         foreach (InfoGetType::getRequiredRuleNamespaces() as $namespace) {
-            v::with($namespace);
+            $factory = $factory->withRuleNamespace($namespace);
         }
+        Factory::setDefaultInstance($factory);
 
         $validator = InfoGetType::configureValidator();
 
@@ -468,8 +516,8 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                 false,
                 join(PHP_EOL, [
                     '- These rules must pass for InfoGet',
-                    '  - userAlias must be a string',
-                    '  - viewId must be a string',
+                    '  - userAlias must be of type string',
+                    '  - viewId must be of type string',
                 ]),
             ],
         ];
@@ -485,9 +533,12 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
     {
         $params = ListGetModel::fromData(...$fromDataArgs);
 
+        $factory = new Factory();
         foreach (ListGetType::getRequiredRuleNamespaces() as $namespace) {
-            v::with($namespace);
+            $factory = $factory->withRuleNamespace($namespace);
         }
+        Factory::setDefaultInstance($factory);
+
 
         $validator = ListGetType::configureValidator();
 
@@ -597,12 +648,14 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                 ],
                 false,
                 join(PHP_EOL, [
-                    '- At least one of these rules must pass for filter',
-                    '  - filter must be null',
-                    '  - filter must be a string',
-                    '    - At least one of these rules must pass for { "unknown-filter-modifier": "1" }',
-                    '      - { "unknown-filter-modifier": "1" } must be a string',
-                    '        - Must have keys { "fields", "eq", "ne", "match", "gte", "lte" }'
+                    '- These rules must pass for ListGet',
+                    '  - Only one of these rules must pass for filter',
+                    '    - filter must be null',
+                    '    - filter must be of type string',
+                    '      - Only one of these rules must pass for `{ "unknown-filter-modifier": "1" }`',
+                    '        - `{ "unknown-filter-modifier": "1" }` must be of type string',
+                    '          - All of the required rules must pass for `{ "unknown-filter-modifier": "1" }`',
+                    '            - Must have keys `{ "fields", "eq", "ne", "match", "gte", ... }`',
                 ]),
             ],
         ];
@@ -618,9 +671,11 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
     {
         $params = $fromDataArgs;
 
+        $factory = new Factory();
         foreach (RenderType::getRequiredRuleNamespaces() as $namespace) {
-            v::with($namespace);
+            $factory = $factory->withRuleNamespace($namespace);
         }
+        Factory::setDefaultInstance($factory);
 
         $validator = RenderType::configureValidator();
 
@@ -633,12 +688,18 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
             [
                 [],
                 false,
-                '- Key viewId must be present'
+                join(PHP_EOL, [
+                    '- These rules must pass for Render',
+                    '  - viewId must be present',
+                ])
             ],
             [
                 ['viewId' => 'i am not uuid'],
                 false,
-                '- viewId must be a valid UUID and therefore match pattern /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/'
+                join(PHP_EOL, [
+                    '- These rules must pass for Render',
+                    '  - viewId must be a valid UUID',
+                ])
             ],
             [
                 [
@@ -670,29 +731,29 @@ class ValidatorTypesTest extends \PHPUnit\Framework\TestCase
                 false,
                 join(PHP_EOL, [
                     '- These rules must pass for Render',
-                    '  - viewId must be a valid UUID and therefore match pattern /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/',
+                    '  - viewId must be a valid UUID',
                     '  - height must be defined in pixels or in % of the containing element. The percentage must be between 0 and 100. Examples of valid dimension size values: \'210\', \'80%\'',
-                    '  - autoRun must be a boolean',
-                    '  - closeButton must be a boolean',
-                    '  - logo must be a boolean',
-                    '  - analytics must be a boolean',
-                    '  - autorotate must be a boolean',
+                    '  - autoRun must be of type boolean',
+                    '  - closeButton must be of type boolean',
+                    '  - logo must be of type boolean',
+                    '  - analytics must be of type boolean',
+                    '  - autorotate must be of type boolean',
                     '  - autorotateTime must be less than or equal to 60',
                     '  - autorotateDelay must be less than or equal to 10',
-                    '  - autorotateDir must be in { 1, -1 }',
-                    '  - hideFullScreen must be a boolean',
-                    '  - hideAutorotateOpt must be a boolean',
-                    '  - hideSettingsBtn must be a boolean',
-                    '  - enableImageZoom must be a boolean',
-                    '  - zoomQuality must be in { 1, 2 }',
-                    '  - hideZoomOpt must be a boolean',
-                    '  - uiPadX must be of the type integer',
-                    '  - uiPadY must be of the type integer',
-                    '  - enableStoreUrl must be a boolean',
-                    '  - storeUrl must be a string',
-                    '  - hideHints must be a boolean',
-                    '  - startHint must be a boolean',
-                    '  - arButton must be a boolean',
+                    '  - autorotateDir must be in `{ 1, -1 }`',
+                    '  - hideFullScreen must be of type boolean',
+                    '  - hideAutorotateOpt must be of type boolean',
+                    '  - hideSettingsBtn must be of type boolean',
+                    '  - enableImageZoom must be of type boolean',
+                    '  - zoomQuality must be in `{ 1, 2 }`',
+                    '  - hideZoomOpt must be of type boolean',
+                    '  - uiPadX must be of type integer',
+                    '  - uiPadY must be of type integer',
+                    '  - enableStoreUrl must be of type boolean',
+                    '  - storeUrl must be of type string',
+                    '  - hideHints must be of type boolean',
+                    '  - startHint must be of type boolean',
+                    '  - arButton must be of type boolean',
                 ]),
             ],
             [

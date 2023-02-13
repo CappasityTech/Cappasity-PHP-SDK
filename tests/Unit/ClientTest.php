@@ -1198,8 +1198,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         $this->validatorMock
             ->expects($this->once())
             ->method('assert')
-            ->with($requestParams, $typeValidatorMock)
-            ->willReturn(true);
+            ->with($requestParams, $typeValidatorMock);
     }
 
     /**

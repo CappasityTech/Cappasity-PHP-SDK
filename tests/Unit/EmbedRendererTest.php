@@ -26,7 +26,7 @@ class EmbedRendererTest extends \PHPUnit\Framework\TestCase
 
     public function testFailOnRenderingWithoutViewId()
     {
-        $this->expectExceptionMessage("- Key viewId must be present");
+        $this->expectExceptionMessage('viewId must be present');
         $this->expectException(\CappasitySDK\EmbedRenderer\Exception\InvalidParamsException::class);
         $this->renderer->render([]);
     }
