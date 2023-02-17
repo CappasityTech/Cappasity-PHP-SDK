@@ -27,14 +27,14 @@ class JobsPullListGet implements TypeInterface
         return V::create()
             ->setName('JobsPullListGet')
             ->instance(JobsPullListGetModel::class)
-            ->attribute('limit', V::oneOf([
+            ->attribute('limit', V::oneOf(
                 V::nullType(),
                 V::intType()->min(1)->max(40),
-            ]))
-            ->attribute('cursor', V::oneOf([
+            ))
+            ->attribute('cursor', V::oneOf(
                 V::nullType(),
                 V::intType()->min(0),
-            ]));
+            ));
     }
 
     /**

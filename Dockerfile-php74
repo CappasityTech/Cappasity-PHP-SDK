@@ -1,4 +1,4 @@
-FROM php:7.4-cli
+FROM php:7.4-cli-alpine
 
 # 3.0.0 fails with err: Use of undefined constant XDEBUG_CC_UNUSED - assumed 'XDEBUG_CC_UNUSED' (this will throw an Error in a future version of PHP)
 RUN pecl install xdebug-2.9.8 \

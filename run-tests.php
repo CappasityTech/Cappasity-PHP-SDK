@@ -9,7 +9,7 @@
  * @author    Cappasity Inc <info@cappasity.com>
  * @copyright 2019-2022 Cappasity Inc.
  */
-
+ 
 exec('./vendor/bin/phpunit 2>&1', $output, $cmdStatus);
 
 foreach ($output as $line) {

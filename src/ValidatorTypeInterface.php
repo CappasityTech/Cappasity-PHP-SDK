@@ -13,6 +13,7 @@
 namespace CappasitySDK;
 
 use Respect\Validation\Validator;
+use Respect\Validation\Factory;
 
 interface ValidatorTypeInterface
 {

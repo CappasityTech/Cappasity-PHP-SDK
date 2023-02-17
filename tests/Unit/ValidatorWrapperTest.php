@@ -23,7 +23,7 @@ class ValidatorWrapperTest extends \PHPUnit\Framework\TestCase
     {
         $this->factoryMock = $this->getMockBuilder(\Respect\Validation\Factory::class)
             ->disableOriginalConstructor()
-            ->setMethods(['appendRulePrefix'])
+            ->setMethods(['withRuleNamespace'])
             ->getMock();
     }
 
@@ -41,20 +41,15 @@ class ValidatorWrapperTest extends \PHPUnit\Framework\TestCase
         /** @var \Respect\Validation\Validator|\PHPUnit_Framework_MockObject_MockObject $typeValidatorMock */
         $typeValidatorMock = $this->getMockBuilder(\Respect\Validation\Validator::class)
             ->disableOriginalConstructor()
-            ->setMethods(['setFactory', 'assert'])
+            ->setMethods(['setDefaultInstance', 'assert'])
             ->getMock();
-
-        $expectedResult = true;
 
         $typeValidatorMock
             ->expects($this->once())
             ->method('assert')
-            ->with($paramsMock)
-            ->willReturn($expectedResult);
+            ->with($paramsMock);
 
-        $actualResult = $validatorWrapper->assert($paramsMock, $typeValidatorMock);
-
-        $this->assertEquals($expectedResult, $actualResult);
+        $validatorWrapper->assert($paramsMock, $typeValidatorMock);
     }
 
     public function testAssertAndThrowWrappedException()
@@ -68,7 +63,7 @@ class ValidatorWrapperTest extends \PHPUnit\Framework\TestCase
         /** @var \Respect\Validation\Validator|\PHPUnit_Framework_MockObject_MockObject $typeValidatorMock */
         $typeValidatorMock = $this->getMockBuilder(\Respect\Validation\Validator::class)
             ->disableOriginalConstructor()
-            ->setMethods(['setFactory', 'assert'])
+            ->setMethods(['setDefaultInstance', 'assert'])
             ->getMock();
 
         /** @var \Respect\Validation\Exceptions\NestedValidationException|\PHPUnit_Framework_MockObject_MockObject $exceptionMock */

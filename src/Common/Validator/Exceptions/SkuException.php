@@ -16,7 +16,7 @@ use Respect\Validation\Exceptions\ValidationException;
 
 class SkuException extends ValidationException
 {
-    public static $defaultTemplates = [
+    protected $defaultTemplates = [
         self::MODE_DEFAULT => [
             self::STANDARD => '{{name}} must match pattern /^[0-9A-Za-z_\-.]{1,50}$/',
         ],
