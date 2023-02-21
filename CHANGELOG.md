@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v4.0.0...v4.1.0) (2023-02-21)
+
+
+### Features
+
+* major upgrade ([#4](https://github.com/CappasityTech/Cappasity-PHP-SDK/issues/4)) ([a7711f9](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/a7711f9))
+
 # [4.0.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v3.11.2...v4.0.0) (2022-05-30)
 
 
