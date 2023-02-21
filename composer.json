@@ -27,20 +27,8 @@
     },
     "scripts": {
         "test": [
-            "@test-php74",
-            "@test-php80",
             "@test-php81",
             "@test-php82"
-        ],
-        "build-php74": "docker build -t cappasity-sdk-php74 -f ./Dockerfile-php74 .",
-        "test-php74": [
-            "@build-php74",
-            "docker run -i --rm --name cappasity-sdk-php74 cappasity-sdk-php74"
-        ],
-        "build-php80": "docker build -t cappasity-sdk-php80 -f ./Dockerfile-php80 .",
-        "test-php80": [
-            "@build-php80",
-            "docker run -i --rm --name cappasity-sdk-php80 cappasity-sdk-php80"
         ],
         "build-php81": "docker build -t cappasity-sdk-php81 -f ./Dockerfile-php81 .",
         "test-php81": [
