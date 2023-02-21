@@ -7,7 +7,7 @@
  * You must not modify, adapt or create derivative works of this source code
  *
  * @author    Cappasity Inc <info@cappasity.com>
- * @copyright 2019-2022 Cappasity Inc.
+ * @copyright 2019-2023 Cappasity Inc.
  */
 
 namespace CappasitySDK\Client\Model\Callback\Process;
@@ -38,7 +38,7 @@ class JobsPushResultPost implements Response\DataInterface, Iterator, ArrayAcces
         $className = self::class;
         array_walk($matches, function ($match) use ($className) {
             if (!$match instanceof JobsPushResultPost\SyncDataItem) {
-                throw new LogicException("Every sync item should be an instance of ${className}");
+                throw new LogicException("Every sync item should be an instance of {$className}");
             }
         });
 
@@ -119,7 +119,7 @@ class JobsPushResultPost implements Response\DataInterface, Iterator, ArrayAcces
     {
         if (!$value instanceof JobsPushResultPost\SyncDataItem) {
             $className = self::class;
-            throw new LogicException("Every sync item should be an instance of ${className}");
+            throw new LogicException("Every sync item should be an instance of {$className}");
         }
 
         if (is_null($offset)) {

@@ -7,12 +7,13 @@
  * You must not modify, adapt or create derivative works of this source code
  *
  * @author    Cappasity Inc <info@cappasity.com>
- * @copyright 2019-2022 Cappasity Inc.
+ * @copyright 2019-2023 Cappasity Inc.
  */
 
 namespace CappasitySDK;
 
 use Respect\Validation\Validator;
+use Respect\Validation\Factory;
 
 interface ValidatorTypeInterface
 {

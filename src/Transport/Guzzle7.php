@@ -7,7 +7,7 @@
  * You must not modify, adapt or create derivative works of this source code
  *
  * @author    Cappasity Inc <info@cappasity.com>
- * @copyright 2019-2022 Cappasity Inc.
+ * @copyright 2019-2023 Cappasity Inc.
  */
 
 namespace CappasitySDK\Transport;
@@ -170,7 +170,7 @@ class Guzzle7 implements CappasitySDK\TransportInterface
         if (!$hasValidFilesErrorStructure) {
             $message = json_encode($parsedResponse);
             throw new Exception\UnexpectedResponseFormatException(
-                "Unknown error response structure received: ${message}"
+                "Unknown error response structure received: {$essage}"
             );
         }
 

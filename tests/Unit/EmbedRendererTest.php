@@ -7,7 +7,7 @@
  * You must not modify, adapt or create derivative works of this source code
  *
  * @author    Cappasity Inc <info@cappasity.com>
- * @copyright 2019-2022 Cappasity Inc.
+ * @copyright 2019-2023 Cappasity Inc.
  */
 
 namespace CappasitySDK\Tests\Unit;
@@ -26,7 +26,7 @@ class EmbedRendererTest extends \PHPUnit\Framework\TestCase
 
     public function testFailOnRenderingWithoutViewId()
     {
-        $this->expectExceptionMessage("- Key viewId must be present");
+        $this->expectExceptionMessage('viewId must be present');
         $this->expectException(\CappasitySDK\EmbedRenderer\Exception\InvalidParamsException::class);
         $this->renderer->render([]);
     }

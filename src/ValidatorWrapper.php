@@ -7,7 +7,7 @@
  * You must not modify, adapt or create derivative works of this source code
  *
  * @author    Cappasity Inc <info@cappasity.com>
- * @copyright 2019-2022 Cappasity Inc.
+ * @copyright 2019-2023 Cappasity Inc.
  */
 
 namespace CappasitySDK;
@@ -25,6 +25,12 @@ class ValidatorWrapper
         'CappasitySDK\\Common\\Validator\\Rules',
         'CappasitySDK\\PreviewImageSrcGenerator\\Validator\\Rules',
         'CappasitySDK\\EmbedRenderer\\Validator\\Rules'
+    ];
+
+    private static $exceptionPrefixesToAppend = [
+        'CappasitySDK\\Common\\Validator\\Exceptions',
+        'CappasitySDK\\PreviewImageSrcGenerator\\Validator\\Exception',
+        'CappasitySDK\\EmbedRenderer\\Validator\\Exception'
     ];
 
     /**
@@ -54,19 +60,8 @@ class ValidatorWrapper
             throw new LogicException('Type class must have method getRequiredRuleNamespaces()');
         }
 
-        $namespacesDiff = array_diff($typeClassName::getRequiredRuleNamespaces(), $this->factory->getRulePrefixes());
-        if (count($namespacesDiff) > 0) {
-            $diffAsString = join(', ', $namespacesDiff);
-
-            throw new LogicException("Not all required rule namespaces were appended to the factory, check out the diff: ${diffAsString}");
-        }
-
-        Validator::setFactory($this->factory);
-
         /** @var Validator $validator */
-        $validator = $typeClassName::configureValidator($this->factory);
-
-        Validator::setFactory(null);
+        $validator = $typeClassName::configureValidator();
 
         return $validator;
     }
@@ -79,16 +74,12 @@ class ValidatorWrapper
      *
      * @throws ValidationException
      */
-    public function assert($input, Validator $typeValidator): bool
+    public function assert($input, Validator $typeValidator): void
     {
-        Validator::setFactory($this->factory);
-
         try {
-            return $typeValidator->assert($input);
+            $typeValidator->assert($input);
         } catch (NestedValidationException $e) {
             throw ValidationException::fromNestedValidationException($e);
-        } finally {
-            Validator::setFactory(null);
         }
     }
 
@@ -99,13 +90,7 @@ class ValidatorWrapper
      */
     public function validate($input, Validator $typeValidator): bool
     {
-        Validator::setFactory($this->factory);
-
-        try {
-            return $typeValidator->validate($input);
-        } finally {
-            Validator::setFactory(null);
-        }
+        return $typeValidator->validate($input);
     }
 
     /**
@@ -115,8 +100,12 @@ class ValidatorWrapper
     {
         $factory = new Factory();
         foreach (self::$rulePrefixesToAppend as $rulePrefix) {
-            $factory->appendRulePrefix($rulePrefix);
+            $factory = $factory->withRuleNamespace($rulePrefix);
         }
+        foreach (self::$exceptionPrefixesToAppend as $exceptionPrefix) {
+            $factory = $factory->withExceptionNamespace($exceptionPrefix);
+        }
+        Factory::setDefaultInstance($factory);
 
         return new static($factory);
     }

@@ -7,7 +7,7 @@
  * You must not modify, adapt or create derivative works of this source code
  *
  * @author    Cappasity Inc <info@cappasity.com>
- * @copyright 2019-2022 Cappasity Inc.
+ * @copyright 2019-2023 Cappasity Inc.
  */
 
 namespace CappasitySDK\Client\Validator\Type\Request\Process;
@@ -26,28 +26,27 @@ class JobsRegisterSyncPost implements TypeInterface
     public static function configureValidator(): V
     {
         return V::create()
-            ->setName('JobsRegisterSyncPost')
             ->instance(JobsRegisterSyncPostModel::class)
-            ->attribute('items', V::allOf([
+            ->attribute('items', V::allOf(
                 V::arrayType(),
                 V::each(
-                    V::allOf([
+                    V::allOf(
                         V::instance(SyncItem::class),
                         V::attribute('id', V::stringType()),
                         V::attribute('aliases', V::each(
-                            V::allOf([
+                            V::allOf(
                                 V::stringType(),
                                 V::sku(),
-                            ])
+                            )
                         )),
                         V::attribute('capp', V::oneOf(
                             V::nullType(),
-                            V::allOf([
+                            V::allOf(
                                 V::stringType(),
                                 V::uuid(),
-                            ])
+                            )
                         )),
-                    ])
+                    )->setName('SyncItem')
                 ),
                 V::callback(function (array $items) {
                     $skuCount = array_reduce($items, function ($skuCount, SyncItem $item) {
@@ -56,12 +55,12 @@ class JobsRegisterSyncPost implements TypeInterface
 
                     return $skuCount >= 1 && $skuCount <= 500;
                 }),
-            ])->setName('items'))
+            )->setName('items'))
             ->attribute('syncType', V::in(JobsRegisterSyncPostModel::$syncTypes))
             ->attribute('callbackUrl', V::oneOf(V::nullType(), V::url()))
             ->when(
                 V::attribute('syncType', V::equals(JobsRegisterSyncPostModel::SYNC_TYPE_PUSH_HTTP)),
-                V::attribute('callbackUrl', V::url()),
+                V::attribute('callbackUrl', V::url())->setName('when syncType is push'),
                 V::alwaysValid()
             )
             ->when(
@@ -70,6 +69,7 @@ class JobsRegisterSyncPost implements TypeInterface
                 V::attribute('callbackUrl', V::nullType())->setName('When syncType is pull callbackUrl'),
                 V::alwaysValid()
             )
+            ->setName('JobsRegisterSyncPost')
         ;
     }
 

@@ -6,6 +6,10 @@
          colors="true"
          bootstrap="./vendor/autoload.php"
 >
+    <extensions>
+        <extension class="Tests\Hook\BypassFinalHook" file="./tests/Hook/BypassFinalHook.php" />
+    </extensions>
+
     <testsuites>
         <testsuite name="The project's test suite">
             <directory>./tests</directory>

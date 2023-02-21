@@ -7,7 +7,7 @@
  * You must not modify, adapt or create derivative works of this source code
  *
  * @author    Cappasity Inc <info@cappasity.com>
- * @copyright 2019-2022 Cappasity Inc.
+ * @copyright 2019-2023 Cappasity Inc.
  */
 
 namespace CappasitySDK\Client\Validator\Type\Request\Process;
@@ -27,14 +27,14 @@ class JobsPullListGet implements TypeInterface
         return V::create()
             ->setName('JobsPullListGet')
             ->instance(JobsPullListGetModel::class)
-            ->attribute('limit', V::oneOf([
+            ->attribute('limit', V::oneOf(
                 V::nullType(),
                 V::intType()->min(1)->max(40),
-            ]))
-            ->attribute('cursor', V::oneOf([
+            ))
+            ->attribute('cursor', V::oneOf(
                 V::nullType(),
                 V::intType()->min(0),
-            ]));
+            ));
     }
 
     /**

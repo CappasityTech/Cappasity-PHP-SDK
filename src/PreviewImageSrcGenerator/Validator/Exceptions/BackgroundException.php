@@ -7,7 +7,7 @@
  * You must not modify, adapt or create derivative works of this source code
  *
  * @author    Cappasity Inc <info@cappasity.com>
- * @copyright 2019-2022 Cappasity Inc.
+ * @copyright 2019-2023 Cappasity Inc.
  */
 
 namespace CappasitySDK\PreviewImageSrcGenerator\Validator\Exceptions;
@@ -16,7 +16,7 @@ use Respect\Validation\Exceptions\ValidationException;
 
 class BackgroundException extends ValidationException
 {
-    public static $defaultTemplates = [
+    protected $defaultTemplates = [
         self::MODE_DEFAULT => [
             self::STANDARD => '{{name}} must match pattern /^#[0-9a-f]{6}$/',
         ],

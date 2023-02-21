@@ -13,36 +13,32 @@
         }
     },
     "require": {
-        "respect/validation": "^1.1",
-        "twig/twig": "~1.0",
+        "respect/validation": "^2.2.3",
+        "twig/twig": "^3.5.0",
         "guzzlehttp/guzzle": "^7.4.2",
         "sentry/sdk": "^3.1",
-        "ext-json": "*"
+        "ext-json": "*",
+        "psr/http-factory-implementation": "*"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "3.x.x",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "dg/bypass-finals": "^1.4.0"
     },
     "scripts": {
         "test": [
-            "@test-php74",
-            "@test-php80",
-            "@test-php81"
-        ],
-        "build-php74": "docker build -t cappasity-sdk-php74 -f ./Dockerfile-php74 .",
-        "test-php74": [
-            "@build-php74",
-            "docker run -i --rm --name cappasity-sdk-php74 cappasity-sdk-php74"
-        ],
-        "build-php80": "docker build -t cappasity-sdk-php80 -f ./Dockerfile-php80 .",
-        "test-php80": [
-            "@build-php80",
-            "docker run -i --rm --name cappasity-sdk-php80 cappasity-sdk-php80"
+            "@test-php81",
+            "@test-php82"
         ],
         "build-php81": "docker build -t cappasity-sdk-php81 -f ./Dockerfile-php81 .",
         "test-php81": [
             "@build-php81",
             "docker run -i --rm --name cappasity-sdk-php81 cappasity-sdk-php81"
+        ],
+        "build-php82": "docker build -t cappasity-sdk-php82 -f ./Dockerfile-php82 .",
+        "test-php82": [
+            "@build-php82",
+            "docker run -i --rm --name cappasity-sdk-php82 cappasity-sdk-php82"
         ]
     },
     "authors": [
@@ -50,5 +46,10 @@
             "name": "Cappasity",
             "email": "support@cappasity.com"
         }
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
 }
