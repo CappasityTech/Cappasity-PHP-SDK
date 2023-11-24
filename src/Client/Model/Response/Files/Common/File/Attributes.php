@@ -25,42 +25,42 @@ class Attributes
     private $backgroundColor;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $backgroundImage;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $bucket;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $cVer;
 
     /**
-     * @var integer
+     * @var integer|null
      */
     private $contentLength;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $owner;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $packed;
 
     /**
-     * @var integer
+     * @var integer|null
      */
     private $parts;
 
@@ -90,7 +90,7 @@ class Attributes
     private $status;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $type;
 
@@ -115,12 +115,12 @@ class Attributes
     private $uploadedAt;
 
     /**
-     * @var Attributes\Embed
+     * @var Attributes\Embed|null
      */
     private $embed;
 
     /**
-     * @var Attributes\File[]
+     * @var Attributes\File[]|null
      */
     private $files;
 
@@ -136,7 +136,7 @@ class Attributes
      * @param string|null $alias
      * @return $this
      */
-    public function setAlias($alias): Attributes
+    public function setAlias(?string $alias): Attributes
     {
         $this->alias = $alias;
 
@@ -155,7 +155,7 @@ class Attributes
      * @param string|null $backgroundColor
      * @return $this
      */
-    public function setBackgroundColor($backgroundColor): Attributes
+    public function setBackgroundColor(?string $backgroundColor): Attributes
     {
         $this->backgroundColor = $backgroundColor;
 
@@ -163,18 +163,18 @@ class Attributes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBackgroundImage(): string
+    public function getBackgroundImage(): ?string
     {
         return $this->backgroundImage;
     }
 
     /**
-     * @param string $backgroundImage
+     * @param ?string $backgroundImage
      * @return $this
      */
-    public function setBackgroundImage($backgroundImage): Attributes
+    public function setBackgroundImage(?string $backgroundImage): Attributes
     {
         $this->backgroundImage = $backgroundImage;
 
@@ -182,18 +182,18 @@ class Attributes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBucket(): string
+    public function getBucket(): ?string
     {
         return $this->bucket;
     }
 
     /**
-     * @param string $bucket
+     * @param string|null $bucket
      * @return $this
      */
-    public function setBucket($bucket): Attributes
+    public function setBucket(?string $bucket): Attributes
     {
         $this->bucket = $bucket;
 
@@ -201,18 +201,18 @@ class Attributes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCVer(): string
+    public function getCVer(): ?string
     {
         return $this->cVer;
     }
 
     /**
-     * @param string $cVer
+     * @param string|null $cVer
      * @return $this
      */
-    public function setCVer(string $cVer): Attributes
+    public function setCVer(?string $cVer): Attributes
     {
         $this->cVer = $cVer;
 
@@ -220,18 +220,18 @@ class Attributes
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getContentLength(): int
+    public function getContentLength(): ?int
     {
         return $this->contentLength;
     }
 
     /**
-     * @param int $contentLength
+     * @param int|null $contentLength
      * @return $this
      */
-    public function setContentLength($contentLength): Attributes
+    public function setContentLength(?int $contentLength): Attributes
     {
         $this->contentLength = $contentLength;
 
@@ -239,18 +239,18 @@ class Attributes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
      * @return $this
      */
-    public function setName(string $name): Attributes
+    public function setName(?string $name): Attributes
     {
         $this->name = $name;
 
@@ -258,18 +258,18 @@ class Attributes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getOwner(): string
+    public function getOwner(): ?string
     {
         return $this->owner;
     }
 
     /**
-     * @param string $owner
+     * @param string|null $owner
      * @return $this
      */
-    public function setOwner(string $owner): Attributes
+    public function setOwner(?string $owner): Attributes
     {
         $this->owner = $owner;
 
@@ -277,18 +277,18 @@ class Attributes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPacked(): string
+    public function getPacked(): ?string
     {
         return $this->packed;
     }
 
     /**
-     * @param string $packed
+     * @param string|null $packed
      * @return $this
      */
-    public function setPacked($packed): Attributes
+    public function setPacked(?string $packed): Attributes
     {
         $this->packed = $packed;
 
@@ -296,18 +296,18 @@ class Attributes
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getParts(): int
+    public function getParts(): ?int
     {
         return $this->parts;
     }
 
     /**
-     * @param int $parts
+     * @param int|null $parts
      * @return $this
      */
-    public function setParts($parts): Attributes
+    public function setParts(?int $parts): Attributes
     {
         $this->parts = $parts;
 
@@ -336,7 +336,7 @@ class Attributes
     /**
      * @return string|null
      */
-    public function getPublic(): string
+    public function getPublic(): ?string
     {
         return $this->public;
     }
@@ -345,7 +345,7 @@ class Attributes
      * @param string|null $public
      * @return $this
      */
-    public function setPublic(string $public): Attributes
+    public function setPublic(?string $public): Attributes
     {
         $this->public = $public;
 
@@ -383,7 +383,7 @@ class Attributes
      * @param int|null $startedAt
      * @return $this
      */
-    public function setStartedAt($startedAt): Attributes
+    public function setStartedAt(?int $startedAt): Attributes
     {
         $this->startedAt = $startedAt;
 
@@ -410,18 +410,18 @@ class Attributes
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
     /**
-     * @param string $type
+     * @param string|null $type
      * @return $this
      */
-    public function setType(string $type): Attributes
+    public function setType(?string $type): Attributes
     {
         $this->type = $type;
 
@@ -431,7 +431,7 @@ class Attributes
     /**
      * @return string|null
      */
-    public function getUploadId(): string
+    public function getUploadId(): ?string
     {
         return $this->uploadId;
     }
@@ -478,7 +478,7 @@ class Attributes
      * @param int|null $uploaded
      * @return $this
      */
-    public function setUploaded($uploaded): Attributes
+    public function setUploaded(?int $uploaded): Attributes
     {
         $this->uploaded = $uploaded;
 
@@ -497,7 +497,7 @@ class Attributes
      * @param int|null $uploadedAt
      * @return $this
      */
-    public function setUploadedAt($uploadedAt): Attributes
+    public function setUploadedAt(?int $uploadedAt): Attributes
     {
         $this->uploadedAt = $uploadedAt;
 
@@ -505,18 +505,18 @@ class Attributes
     }
 
     /**
-     * @return Attributes\Embed
+     * @return Attributes\Embed|null
      */
-    public function getEmbed(): Attributes\Embed
+    public function getEmbed(): ?Attributes\Embed
     {
         return $this->embed;
     }
 
     /**
-     * @param Attributes\Embed $embed
+     * @param Attributes\Embed|null $embed
      * @return $this
      */
-    public function setEmbed(Attributes\Embed $embed): Attributes
+    public function setEmbed(?Attributes\Embed $embed): Attributes
     {
         $this->embed = $embed;
 
@@ -524,18 +524,18 @@ class Attributes
     }
 
     /**
-     * @return Attributes\File[]
+     * @return Attributes\File[]|null
      */
-    public function getFiles(): array
+    public function getFiles(): ?array
     {
         return $this->files;
     }
 
     /**
-     * @param Attributes\File[] $files
+     * @param Attributes\File[]|null $files
      * @return $this
      */
-    public function setFiles(array $files): Attributes
+    public function setFiles(?array $files): Attributes
     {
         $this->files = $files;
 
