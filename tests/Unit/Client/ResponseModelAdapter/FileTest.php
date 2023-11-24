@@ -79,6 +79,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($attributesData['packed'], $attributes->getPacked());
         $this->assertEquals($attributesData['c_ver'], $attributes->getCVer());
         $this->assertEquals($attributesData['owner'], $attributes->getOwner());
+        $this->assertEquals($attributesData['backgroundImage'] ?? null, $attributes->getBackgroundImage());
         $this->assertEquals($attributesData['status'] ?? null, $attributes->getStatus());
     }
 
@@ -98,6 +99,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
                     'attributes' => [
                         'alias' => 'demo_2',
                         'backgroundColor' => '#FFFFFF',
+                        'backgroundImage' => 'url/to/backgroundImage.jpg',
                         'bucket' => 'cdn.cappasity.com',
                         'c_ver' => '4.1.0',
                         'contentLength' => '6799855',
@@ -528,7 +530,61 @@ class FileTest extends \PHPUnit\Framework\TestCase
                         'user' => 'https://3d.cappasity.com/u/cappasity',
                     ],
                 ]
-            ]
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider provideTransformWithFilteredFieldsData
+     *
+     * @param $fileTypeResponse
+     */
+    public function testTransformFileWithFilteredFields($fileTypeResponse)
+    {
+        $file = Client\ResponseModelAdapter\File::transformFile($fileTypeResponse);
+        $this->assertInstanceOf(Client\Model\Response\Files\Common\File::class, $file);
+        $this->assertEquals($fileTypeResponse['id'], $file->getId());
+        $this->assertEquals($fileTypeResponse['type'], $file->getType());
+        $attributes = $file->getAttributes();
+        $this->assertInstanceOf(Client\Model\Response\Files\Common\File\Attributes::class, $attributes);
+        $this->assertEquals($fileTypeResponse['attributes']['alias'], $attributes->getAlias());
+        $this->assertNull($attributes->getPublic());
+        $this->assertNull($attributes->getContentLength());
+        $this->assertNull($attributes->getName());
+        $this->assertNull($attributes->getFiles());
+        $this->assertNull($attributes->getParts());
+        $this->assertNull($attributes->getType());
+        $this->assertNull($attributes->getUploadedAt());
+        $this->assertNull($attributes->getEmbed());
+        $this->assertNull($attributes->getBucket());
+        $this->assertNull($attributes->getUploadType());
+        $this->assertNull($attributes->getBackgroundColor());
+        $this->assertNull($attributes->getPacked());
+        $this->assertNull($attributes->getCVer());
+        $this->assertNull($attributes->getOwner());
+        $this->assertNull($attributes->getBackgroundImage());
+        $this->assertNull($attributes->getStatus());
+    }
+
+    public function provideTransformWithFilteredFieldsData()
+    {
+        return [
+            [
+                [
+                    'type' => 'file',
+                    'id' => 'ffd3edb7-cfbc-4880-8287-a6dc7ca84579',
+                    'attributes' =>
+                        [
+                            'alias' => 'sku-goes-here',
+                        ],
+                    'links' => [
+                        'self' => 'https://api.cappasity.com/api/files/ffd3edb7-cfbc-4880-8287-a6dc7ca84579',
+                        'owner' => 'https://api.cappasity.com/api/users/cappasity',
+                        'player' => 'https://3d.cappasity.com/u/cappasity/ffd3edb7-cfbc-4880-8287-a6dc7ca84579',
+                        'user' => 'https://3d.cappasity.com/u/cappasity',
+                    ],
+                ],
+            ],
         ];
     }
 }
