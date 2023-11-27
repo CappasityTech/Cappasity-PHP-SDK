@@ -4,15 +4,31 @@ agent:
   machine:
     type: e2-standard-2
     os_image: ubuntu2004
+global_job_config:
+	prologue:
+    commands:
+      - checkout
 blocks:
-  - name: init
+  - name: test
     dependencies: []
     task:
       jobs:
-        - name: init
-          commands:
-            - php --version
-            - composer --version
         - name: test
           commands:
+          	- composer install
             - composer run-script test
+  - name: release
+    dependencies:
+      - test
+    skip:
+      when: branch != 'master'
+    task:
+      secrets:
+        - name: semantic-release-gh
+      jobs:
+        - name: release
+          commands:
+	          - set -e
+  			    - sem-version node 18
+      			- npm i -g pnpm@8
+            - pnpm run semantic-release        
