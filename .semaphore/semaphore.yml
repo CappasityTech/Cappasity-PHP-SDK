@@ -13,3 +13,6 @@ blocks:
           commands:
             - php --version
             - composer --version
+        - name: test
+          commands:
+            - composer run-script test
