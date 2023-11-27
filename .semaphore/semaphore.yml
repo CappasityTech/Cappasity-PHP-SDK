@@ -4,10 +4,9 @@ agent:
   machine:
     type: e2-standard-2
     os_image: ubuntu2004
-global_job_config:
-	prologue:
-    commands:
-      - checkout
+prologue:
+  commands:
+    - checkout
 blocks:
   - name: test
     dependencies: []
@@ -15,7 +14,7 @@ blocks:
       jobs:
         - name: test
           commands:
-          	- composer install
+            - composer install
             - composer run-script test
   - name: release
     dependencies:
@@ -28,7 +27,7 @@ blocks:
       jobs:
         - name: release
           commands:
-	          - set -e
-  			    - sem-version node 18
-      			- npm i -g pnpm@8
-            - pnpm run semantic-release        
+            - set -e
+            - sem-version node 18
+            - npm i -g pnpm@8
+            - pnpm run semantic-release
