@@ -4,9 +4,10 @@ agent:
   machine:
     type: e2-standard-2
     os_image: ubuntu2004
-prologue:
-  commands:
-    - checkout
+global_job_config:
+  prologue:
+    commands:
+      - checkout
 blocks:
   - name: test
     dependencies: []
