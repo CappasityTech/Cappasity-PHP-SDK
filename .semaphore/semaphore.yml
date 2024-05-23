@@ -20,7 +20,7 @@ blocks:
             - composer run-script test-php81
         - name: test-php82
           commands:
-            - sem-version php '8.2.14'
+            - sem-version php 8.2.14
             - composer install
             - composer run-script test-php82
   - name: release
