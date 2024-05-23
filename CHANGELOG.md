@@ -1,3 +1,10 @@
+# [6.1.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v6.0.0...v6.1.0) (2024-05-23)
+
+
+### Features
+
+* upgrade semantic-release to handle main branch ([56e693b](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/56e693b))
+
 # [6.0.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v5.0.0...v6.0.0) (2024-05-23)
 
 
