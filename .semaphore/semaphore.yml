@@ -1,0 +1,40 @@
+version: v1.0
+name: cappasity-php-sdk
+agent:
+  machine:
+    type: e2-standard-2
+    os_image: ubuntu2004
+global_job_config:
+  prologue:
+    commands:
+      - checkout
+blocks:
+  - name: test
+    dependencies: []
+    task:
+      jobs:
+        - name: test-php81
+          commands:
+            - sem-version php 8.1.27
+            - composer install
+            - composer run-script test-php81
+        - name: test-php82
+          commands:
+            - sem-version php 8.2.14
+            - composer install
+            - composer run-script test-php82
+  - name: release
+    dependencies:
+      - test
+    skip:
+      when: branch != 'master'
+    task:
+      secrets:
+        - name: semantic-release-gh
+      jobs:
+        - name: release
+          commands:
+            - set -e
+            - sem-version node 18
+            - npm i -g pnpm@8
+            - pnpm run semantic-release
