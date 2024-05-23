@@ -72,24 +72,20 @@ class File
             $attributesData = $item['attributes'];
             $linksData = $item['links'];
 
-            $embedParamsData = $attributesData['embed']['params'];
-            $embedParams = self::transformEmbedParams($embedParamsData);
-
-            $embed = (new FileModel\Attributes\Embed())
-                ->setCode($attributesData['embed']['code'])
-                ->setParams($embedParams);
+            $embed = self::transformEmbed($attributesData['embed'] ?? null);
 
             $attributes = (new FileModel\Attributes())
-                ->setType($attributesData['type'])
-                ->setName($attributesData['name'])
-                ->setBucket($attributesData['bucket'])
-                ->setContentLength($attributesData['contentLength'])
-                ->setCVer($attributesData['c_ver'] ?? '')
-                ->setOwner($attributesData['owner'])
-                ->setParts($attributesData['parts'])
+                ->setType($attributesData['type'] ?? null)
+                ->setName($attributesData['name'] ?? null)
+                ->setBucket($attributesData['bucket'] ?? null)
+                ->setContentLength($attributesData['contentLength'] ?? null)
+                ->setCVer($attributesData['c_ver'] ?? null)
+                ->setOwner($attributesData['owner'] ?? null)
+                ->setParts($attributesData['parts'] ?? null)
                 ->setPublic($attributesData['public'] ?? null)
                 ->setBackgroundColor($attributesData['backgroundColor'] ?? null)
-                ->setPacked($attributesData['packed'] ?? false)
+                ->setBackgroundImage($attributesData['backgroundImage'] ?? null)
+                ->setPacked($attributesData['packed'] ?? null)
                 ->setAlias($attributesData['alias'] ?? null)
                 ->setStatus($attributesData['status'] ?? null)
                 ->setSimple($attributesData['simple'] ?? null)
@@ -135,8 +131,24 @@ class File
         }
     }
 
-    private static function transformEmbedParams(array $embedParamsData): FileModel\Attributes\Embed\Params
+    private static function transformEmbed(array $embedData = null): ?FileModel\Attributes\Embed {
+        if ($embedData === null) {
+            return null;
+        }
+        $embedParamsData = $embedData['params'];
+        $embedParams = self::transformEmbedParams($embedParamsData);
+
+        return (new FileModel\Attributes\Embed())
+            ->setCode($embedData['code'])
+            ->setParams($embedParams);
+    }
+
+    private static function transformEmbedParams(?array $embedParamsData): ?FileModel\Attributes\Embed\Params
     {
+        if ($embedParamsData === null) {
+            return null;
+        }
+
         $embedParamsToTransform = self::$embedParamsToTransform;
         $normalizedKeys = array_map(
             function ($key) use ($embedParamsToTransform) {
