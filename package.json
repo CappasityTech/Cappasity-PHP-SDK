@@ -3,7 +3,8 @@
   "private": true,
   "repository": "git@github.com:CappasityTech/Cappasity-PHP-SDK.git",
   "scripts": {
-    "semantic-release": "yarn --frozen-lockfile; semantic-release"
+    "semantic-release": "pnpm i --frozen-lockfile; semantic-release",
+    "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
     "@makeomatic/deploy": "^13.0.7",
