@@ -1,3 +1,18 @@
+# [6.0.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v5.0.0...v6.0.0) (2024-05-23)
+
+
+### Bug Fixes
+
+* consider filtered fields in response model ([#5](https://github.com/CappasityTech/Cappasity-PHP-SDK/issues/5)) ([3e08a5d](https://github.com/CappasityTech/Cappasity-PHP-SDK/commit/3e08a5dcac0536b8132e012c0dad88a913e20d1d))
+
+
+### BREAKING CHANGES
+
+* `CappasitySDK\Client\Model\Response\Files\Common\File`,
+`CappasitySDK\Client\Model\Response\Files\Common\File\Attributes` models now consider that fields could be filtered by `filter`
+request parameter and therefore are
+nullable. Default value for `cVer` (empty `string`) and `packed` (`false`) fields have changed and also became `null`.
+
 # [5.0.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v4.1.0...v5.0.0) (2023-02-21)
 
 # [4.1.0](https://github.com/CappasityTech/Cappasity-PHP-SDK/compare/v4.0.0...v4.1.0) (2023-02-21)
